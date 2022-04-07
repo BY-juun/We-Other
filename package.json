@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/sperr7489/We-Other/issues"
   },
-  "homepage": "https://github.com/sperr7489/We-Other#readme"
+  "homepage": "https://github.com/sperr7489/We-Other#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3"
+  }
 }
