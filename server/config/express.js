@@ -14,8 +14,8 @@ module.exports = function () {
   app.get("/", (req, res) => {
     res.send("자 어서오세요");
   });
-  /* App (Android, iOS) */
-  // 도메인을 추가할 경우 이곳에 Route를 추가하세요.
+
+
 
   const userRouter = require("../src/User/userRoute")(app);
   const commentRouter = require("../src/Comment/commentRoute")(app);
