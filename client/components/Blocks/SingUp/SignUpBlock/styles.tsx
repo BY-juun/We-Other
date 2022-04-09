@@ -11,7 +11,7 @@ export const SignUpContainer = styled.div`
   ${tablet_landscape} {
     width: 35%;
   }
-  margin-top: 25px;
+  margin-top: 0;
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,20 @@ export const SignUpContainer = styled.div`
 `;
 
 export const AccountTitle = styled.div`
-  font-size: 12px;
+  font-size: 15px;
+`;
+
+export const SelectSex = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4%;
+  margin-top: 5px;
+  button {
+    cursor: pointer;
+    width: 48%;
+    border: none;
+    padding: 12px 0;
+  }
 `;
 
 export const SignUpBtn = styled.button`

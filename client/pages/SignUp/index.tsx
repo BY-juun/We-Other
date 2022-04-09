@@ -1,4 +1,4 @@
-import SignUpBlock from "components/Blocks/SignUpBlock/SingUp";
+import SignUpBlock from "components/Blocks/SingUp/SignUpBlock";
 import { ContentWrapper } from "components/Layouts/Content/styles";
 import TopLayOut from "components/Layouts/TopLayOut";
 import React from "react";

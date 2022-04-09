@@ -7,13 +7,13 @@ export const SignUpWrapper = styled.div`
   align-items: center;
   margin-top: 15%;
   ${mobile} {
-    margin-top: 60%;
+    margin-top: 40%;
   }
   ${tablet} {
-    margin-top: 50%;
+    margin-top: 20%;
   }
   ${tablet_landscape} {
-    margin-top: 20%;
+    margin-top: 15%;
   }
 `;
 
