@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
 import TopLayOut from "components/Layouts/TopLayOut";
 import { ContentWrapper } from "components/Layouts/Content/styles";
-import AjouLogo from "public/ajou.png";
-import Image from "next/image";
-import { HomeDescription, HomeWrapper, LogoWrapper } from "./styles";
-import LoginBlock from "../components/Blocks/LoginBlock";
+import { HomeDescription, HomeWrapper } from "./styles";
+import LoginBlock from "../components/Blocks/Login/LoginBlock";
 
 const Home: NextPage = () => {
   return (
