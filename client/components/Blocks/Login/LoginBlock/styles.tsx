@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile, tablet, tablet_landscape } from "../../../Utils/styles";
+import { mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const LoginWrapper = styled.div`
   ${mobile} {
@@ -16,16 +16,6 @@ export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-`;
-
-export const CustomInput = styled.input`
-  padding: 13px 20px;
-  background: #f5f5f5;
-  width: 100%;
-  border: none;
-  outline: none;
-  font-size: 15px;
-  border-radius: 4px;
 `;
 
 export const LoginBtn = styled.button`
