@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const HomeWrapper = styled.div`
   display: flex;
@@ -7,6 +8,15 @@ export const HomeWrapper = styled.div`
   margin-top: 15%;
   h1 {
     font-size: 50px;
+  }
+  ${mobile} {
+    margin-top: 70%;
+  }
+  ${tablet} {
+    margin-top: 50%;
+  }
+  ${tablet_landscape} {
+    margin-top: 20%;
   }
 `;
 

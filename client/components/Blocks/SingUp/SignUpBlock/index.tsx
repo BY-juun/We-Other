@@ -14,10 +14,6 @@ const SignUpBlock = () => {
   const [sex, setSex] = useState("");
   const router = useRouter();
 
-  const signUpFailure = useCallback((res: string) => {
-    return alert(res);
-  }, []);
-
   const signUpSuccess = useCallback(() => {
     alert("*회원가입에 성공하셨습니다!");
     return router.push("/");
@@ -32,7 +28,7 @@ const SignUpBlock = () => {
     []
   );
 
-  const Submit = useCallback(() => {
+  const validationCheck = useCallback(() => {
     if (!emailRef?.current?.value) {
       return alert("*이메일을 입력해주세요");
     }
@@ -54,17 +50,22 @@ const SignUpBlock = () => {
     if (!admissionRef?.current?.value) {
       return alert("학번을 입력해주세요");
     }
+    return true;
+  }, [sex]);
+
+  const Submit = useCallback(() => {
+    if (!validationCheck()) return;
     const reqData = {
-      email: emailRef?.current?.value,
-      password: passwordRef?.current?.value,
-      userName: usernameRef?.current?.value,
-      department: departmentRef?.current?.value,
+      email: emailRef?.current?.value!,
+      passwd: passwordRef?.current?.value!,
+      userName: usernameRef?.current?.value!,
+      department: departmentRef?.current?.value!,
       sex: sex,
-      admission: admissionRef?.current?.value,
+      admission: admissionRef?.current?.value!,
     };
 
     signupMutation.mutate(reqData);
-  }, [sex, signupMutation]);
+  }, [sex, signupMutation, validationCheck]);
 
   return (
     <SignUpContainer>
