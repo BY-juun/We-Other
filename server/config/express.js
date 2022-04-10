@@ -2,6 +2,7 @@ const express = require("express");
 const compression = require("compression");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
 module.exports = function () {
   const app = express();
 
@@ -12,10 +13,8 @@ module.exports = function () {
   app.use(cookieParser());
 
   app.get("/", (req, res) => {
-    res.send("자 어서오세요");
+    res.send("이게 맞아?");
   });
-
-
 
   const userRouter = require("../src/User/userRoute")(app);
   const commentRouter = require("../src/Comment/commentRoute")(app);
