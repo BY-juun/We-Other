@@ -3,8 +3,10 @@ import { useMutation } from "react-query";
 
 export const useSignUp = (onSuccess: () => void) => {
   return useMutation(SignUpAPI, {
-    onSuccess: (response) => {
-      console.log(response);
+    onSuccess: (res) => {
+      if (!res.isSucces) {
+        return alert(res.message);
+      }
       onSuccess();
     },
   });
