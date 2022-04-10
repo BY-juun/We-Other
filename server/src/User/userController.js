@@ -3,6 +3,8 @@ const { basicResponse } = require("../../config/response");
 const userService = require("./userService");
 const userProvider = require("./userProvider");
 const regex = require("../../config/regex");
+const jwt = require("jsonwebtoken");
+const secretJwt = require("../../config/");
 //회원가입 과정
 exports.signUpUser = async (req, res) => {
   const { email, passwd, userName, department, sex, admission } = req.body;
