@@ -6,7 +6,6 @@ const { resultResponse, basicResponse } = require("../../config/response");
 const baseResponseStatus = require("../../config/baseResponseStatus");
 const { token } = require("../../config/jwt");
 require("dotenv").config();
-
 const JWT_SECRET = process.env.JWT_SECRET;
 
 //로그인 생성.
@@ -41,18 +40,17 @@ exports.createUser = async (
     }
 
     const signUpResult = await userDao.insertUser(connection, insertUserParams);
-    console.log(signUpResult);
 
-    const newUserToken = jwt.sign(
-      { userId: signUpResult.insertId },
-      JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
-    );
-    const userId = signUpResult.insertId;
-    const userAccessToken = token().access(userId);
-    const userRefreshToken = token().refresh(userId);
+    // const newUserToken = jwt.sign(
+    //   { userId: signUpResult.insertId },
+    //   JWT_SECRET,
+    //   {
+    //     expiresIn: "1h",
+    //   }
+    // );
+    // const userId = signUpResult.insertId;
+    // const userAccessToken = token().access(userId);
+    // const userRefreshToken = token().refresh(userId);
 
     // let token = jwt.sign(
     //     {
@@ -70,12 +68,42 @@ exports.createUser = async (
     await connection.commit();
     return resultResponse(baseResponseStatus.SIGN_UP_SUCCESS, {
       userIdx: signUpResult.insertId,
-      jwt: newUserToken,
     });
   } catch (err) {
     await connection.rollback();
     console.log(err);
     return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+//로그인이 잘 되었는지 체크
+exports.signInCheck = async (email, passwd) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    await connection.beginTransaction();
+
+    const hashedPassword = await crypto
+      .createHash("sha512")
+      .update(passwd)
+      .digest("base64");
+    const signInCheckPasswd = await userDao.signInCheckPasswd(
+      connection,
+      email
+    );
+    console.log(signInCheckPasswd);
+    if (hashedPassword == signInCheckPasswd.passwd) {
+      //로그인에 성공하였을 때 jwt를 발급해주어야 한다.
+      console.log(basicResponse(baseResponseStatus.LOGIN_SUCCESS));
+      const accessToken = token().access(email);
+      const refreshToken = token().refresh(email);
+
+      await connection.commit();
+      return basicResponse(baseResponseStatus.LOGIN_SUCCESS);
+    } else return basicResponse(baseResponseStatus.PASSWD_NOT_EXACT);
+  } catch (error) {
+    await connection.rollback();
   } finally {
     connection.release();
   }

@@ -1,3 +1,5 @@
+const { email } = require("../../config/regex");
+
 exports.insertUser = async (connection, insertUserParams) => {
   const insertUserQuery = `
      INSERT INTO user (email, passwd, userName, department, sex, admission)
@@ -30,4 +32,16 @@ exports.userNameCheck = async (connection, userName) => {
     userName
   );
   return userNameCheckRow;
+};
+
+exports.signInCheckPasswd = async (connection, email) => {
+  const signInCheckPasswdQuery = `
+        select passwd from User 
+        where email = ?;
+    `;
+  const [[signInCheckPasswdRow]] = await connection.query(
+    signInCheckPasswdQuery,
+    email
+  );
+  return signInCheckPasswdRow;
 };

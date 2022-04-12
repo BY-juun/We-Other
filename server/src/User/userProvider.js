@@ -2,7 +2,9 @@ const baseResponseStatus = require("../../config/baseResponseStatus");
 const { basicResponse } = require("../../config/response");
 const userDao = require("./userDao");
 const { pool } = require("../../config/database");
+const crypto = require("crypto");
 
+// user의 email의 존재 여부 체크
 exports.emailCheck = async (email) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -16,6 +18,8 @@ exports.emailCheck = async (email) => {
     connection.release();
   }
 };
+
+// user의 이름 존재 여부 체크
 exports.userNameCheck = async (userName) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {

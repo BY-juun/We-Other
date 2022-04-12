@@ -61,7 +61,11 @@ module.exports = {
     code: 1111,
     message: "토큰 검증에 성공하였습니다.",
   },
-
+  LOGIN_SUCCESS: {
+    isSuccess: true,
+    code: 1112,
+    message: "로그인에 성공하였습니다.",
+  },
   //실패
   PARAMS_NOT_EXACT: {
     isSuccess: false,
@@ -78,21 +82,40 @@ module.exports = {
     code: 2001,
     message: " 유효하지 않은 토큰입니다.  ",
   },
-  EMAIL_EXISTS: {
+  TOKEN_EMPTY: {
     isSuccess: false,
     code: 2002,
+    message: " 토큰이 존재하지 않습니다. ",
+  },
+  EMAIL_EXISTS: {
+    isSuccess: false,
+    code: 2003,
     message: "이미 존재하는 이메일 계정입니다. ",
   },
   USERNAME_EXISTS: {
     isSuccess: false,
-    code: 2003,
+    code: 2004,
     message: "이미 존재하는 사용자 이름입니다. ",
   },
   PASSWORD_INVALID: {
     isSuccess: false,
-    code: 2004,
+    code: 2005,
     message: "최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자 ",
   },
-
+  EMAIL_INVALID: {
+    isSuccess: false,
+    code: 2006,
+    message: "올바른 이메일 형식이 아닙니다. ",
+  },
+  EMAIL_NOT_EXIST: {
+    isSuccess: false,
+    code: 2007,
+    message: "해당 이메일이 존재하지 않습니다",
+  },
+  PASSWD_NOT_EXACT: {
+    isSuccess: false,
+    code: 2008,
+    message: "패스워드가 일치하지 않습니다. ",
+  },
   DB_ERROR: { isSuccess: false, code: 4000, message: "데이터 베이스 에러" },
 };
