@@ -100,9 +100,14 @@ exports.signInCheck = async (email, passwd) => {
       const accessToken = token().access(email);
       console.log(accessToken);
       const refreshToken = token().refresh(email);
-
+      const { userIdx, userName } = await userDao.getUserInfo(
+        connection,
+        email
+      );
+      await userDao.insertRefreshToken(connection, userIdx, refreshToken);
       await connection.commit();
       return resultResponse(baseResponseStatus.LOGIN_SUCCESS, {
+        userName,
         accessToken,
         refreshToken,
       });
