@@ -9,7 +9,7 @@ exports.token = () => {
   return {
     access(email) {
       return jwt.sign({ email }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "1h",
+        expiresIn: "30s",
       });
     },
     refresh(email) {
@@ -23,17 +23,18 @@ exports.token = () => {
 // 토큰을 인증하는 것은
 exports.verifyAccessToken = (req, res, next) => {
   try {
-    const accessToken = req.header["accessToken"];
+    const accessToken = req.headers["accesstoken"];
+    console.log(accessToken);
     // 클라이언트에서 토큰을 받아온다.
     if (!accessToken)
       return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
-    const decoded = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-
-    if (!decoded) {
+    const { email } = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
+    console.log(email);
+    if (!email) {
       return res.send(basicResponse(baseResponseStatus.TOKEN_EMPTY));
     }
-    if (decoded) {
-      req.decoded = decoded;
+    if (email) {
+      req.email = email;
       next();
     }
   } catch (error) {
@@ -45,9 +46,10 @@ exports.verifyAccessToken = (req, res, next) => {
 };
 exports.verifyRefreshToken = (req, res, next) => {
   try {
-    const refreshToken = req.header["refreshToken"];
+    const refreshToken = req.header["refreshtoken"];
     if (!refreshToken)
       return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
-    const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+    const { email } = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
   } catch (error) {}
 };
+exports.jwtMiddleWare = (req, res, next) => {};

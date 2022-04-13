@@ -100,7 +100,7 @@ exports.signInCheck = async (email, passwd) => {
       const accessToken = token().access(email);
       console.log(accessToken);
       const refreshToken = token().refresh(email);
-      const { userIdx, userName } = await userDao.getUserInfo(
+      const { userIdx, userName } = await userDao.getUserShortInfo(
         connection,
         email
       );

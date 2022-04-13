@@ -1,5 +1,5 @@
 const baseResponseStatus = require("../../config/baseResponseStatus");
-const { basicResponse } = require("../../config/response");
+const { basicResponse, resultResponse } = require("../../config/response");
 const userService = require("./userService");
 const userProvider = require("./userProvider");
 const regex = require("../../config/regex");
@@ -73,6 +73,17 @@ exports.signIn = async (req, res) => {
   const signInResult = await userService.signInCheck(email, passwd);
   // console.log(signInResult, ": signInResult");
   return res.send(signInResult);
+};
+
+exports.getUserDeepInfo = async (req, res) => {
+  const { userIdx } = req.params;
+  if (!userIdx)
+    return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+  const userIdxCheck = await userProvider.userIdxCheck(userIdx);
+  if (!userIdxCheck)
+    return res.send(basicResponse(baseResponseStatus.USER_NOT_EXIST));
+  const userDeepInfo = await userProvider.getUserDeepInfo(userIdx);
+  return res.send(resultResponse(baseResponseStatus.SUCCESS, userDeepInfo));
 };
 
 exports.test = async (req, res) => {

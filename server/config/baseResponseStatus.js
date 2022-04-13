@@ -122,6 +122,11 @@ module.exports = {
     code: 2009,
     message: "토큰이 존재하지 않습니다. ",
   },
+  USER_NOT_EXIST: {
+    isSuccess: false,
+    code: 2010,
+    message: "해당 유저는 존재하지 않습니다. ",
+  },
 
   DB_ERROR: { isSuccess: false, code: 4000, message: "데이터 베이스 에러" },
 };

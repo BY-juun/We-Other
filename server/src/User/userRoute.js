@@ -8,4 +8,6 @@ module.exports = (app) => {
   app.post("/api/user/sign-in", user.signIn);
 
   app.get("/api/user/test", verifyAccessToken, user.test);
+
+  app.get("/api/user/:userIdx", user.getUserDeepInfo);
 };

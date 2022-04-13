@@ -9,6 +9,15 @@ exports.insertUser = async (connection, insertUserParams) => {
   );
   return insertUserRow;
 };
+exports.userIdxCheck = async (connection, userIdx) => {
+  const userIdxCheckQuery = `
+    select exists (
+    select * from user where userIdx = ?
+    ) as exist
+`;
+  const [userIdxCheckRow] = await connection.query(userIdxCheckQuery, userIdx);
+  return userIdxCheckRow;
+};
 exports.emailCheck = async (connection, email) => {
   const emailCheckQuery = `
     select exists (
@@ -43,7 +52,7 @@ exports.signInCheckPasswd = async (connection, email) => {
   );
   return signInCheckPasswdRow;
 };
-exports.getUserInfo = async (connection, email) => {
+exports.getUserShortInfo = async (connection, email) => {
   const getUserIdxQuery = `
     select userIdx,userName from user 
     where email = ?;
@@ -52,6 +61,18 @@ exports.getUserInfo = async (connection, email) => {
   console.log(getUserIdxRow);
   return getUserIdxRow;
 };
+exports.getUserDeepInfo = async (connection, userIdx) => {
+  const getUserDeepInfoQuery = `
+    select email, userName,department,sex,admission from user 
+    where userIdx = ?;
+  `;
+  const [getUserDeepInfoRow] = await connection.query(
+    getUserDeepInfoQuery,
+    userIdx
+  );
+  return getUserDeepInfoRow;
+};
+
 exports.insertRefreshToken = async (connection, userIdx, refreshToken) => {
   const insertRefreshTokenQuery = `
     insert into token(userIdx,refreshToken) value(?,?);
