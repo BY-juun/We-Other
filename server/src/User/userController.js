@@ -74,3 +74,8 @@ exports.signIn = async (req, res) => {
   // console.log(signInResult, ": signInResult");
   return res.send(signInResult);
 };
+
+exports.test = async (req, res) => {
+  const testResult = await userProvider.test();
+  return res.send(testResult);
+};

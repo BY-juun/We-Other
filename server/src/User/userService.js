@@ -1,12 +1,12 @@
 const { pool } = require("../../config/database");
 const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const userDao = require("./userDao");
 const { resultResponse, basicResponse } = require("../../config/response");
 const baseResponseStatus = require("../../config/baseResponseStatus");
 const { token } = require("../../config/jwt");
-require("dotenv").config();
-const JWT_SECRET = process.env.JWT_SECRET;
+// require("dotenv").config();
+// const JWT_SECRET = process.env.JWT_SECRET;
 
 //로그인 생성.
 exports.createUser = async (
@@ -77,7 +77,6 @@ exports.createUser = async (
     connection.release();
   }
 };
-
 //로그인이 잘 되었는지 체크
 exports.signInCheck = async (email, passwd) => {
   const connection = await pool.getConnection(async (conn) => conn);
@@ -88,22 +87,30 @@ exports.signInCheck = async (email, passwd) => {
       .createHash("sha512")
       .update(passwd)
       .digest("base64");
+
     const signInCheckPasswd = await userDao.signInCheckPasswd(
       connection,
       email
     );
-    console.log(signInCheckPasswd);
+    // console.log(signInCheckPasswd);
+    // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
+      console.log(signInCheckPasswd, "이것이다");
       //로그인에 성공하였을 때 jwt를 발급해주어야 한다.
-      console.log(basicResponse(baseResponseStatus.LOGIN_SUCCESS));
       const accessToken = token().access(email);
+      console.log(accessToken);
       const refreshToken = token().refresh(email);
 
       await connection.commit();
-      return basicResponse(baseResponseStatus.LOGIN_SUCCESS);
+      return resultResponse(baseResponseStatus.LOGIN_SUCCESS, {
+        accessToken,
+        refreshToken,
+      });
     } else return basicResponse(baseResponseStatus.PASSWD_NOT_EXACT);
   } catch (error) {
     await connection.rollback();
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
   }

@@ -36,3 +36,6 @@ exports.userNameCheck = async (userName) => {
     connection.release();
   }
 };
+exports.test = async () => {
+  return basicResponse(baseResponseStatus.SUCCESS);
+};

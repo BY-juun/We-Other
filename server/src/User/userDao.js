@@ -36,7 +36,7 @@ exports.userNameCheck = async (connection, userName) => {
 
 exports.signInCheckPasswd = async (connection, email) => {
   const signInCheckPasswdQuery = `
-        select passwd from User 
+        select passwd from user 
         where email = ?;
     `;
   const [[signInCheckPasswdRow]] = await connection.query(
