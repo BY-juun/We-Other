@@ -138,7 +138,6 @@ exports.signIn = async (email, passwd) => {
         userIdx,
         userName,
         accessToken,
-        refreshToken,
       });
     } else return basicResponse(baseResponseStatus.PASSWD_NOT_EXACT);
   } catch (error) {
