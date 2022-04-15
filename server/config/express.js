@@ -13,7 +13,7 @@ module.exports = function () {
   app.use(cookieParser());
 
   app.get("/", (req, res) => {
-    res.send("이게 맞아?");
+    res.send("goooood");
   });
 
   const userRouter = require("../src/User/userRoute")(app);
