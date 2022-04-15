@@ -73,14 +73,72 @@ exports.getUserDeepInfo = async (connection, userIdx) => {
   return getUserDeepInfoRow;
 };
 
-exports.insertRefreshToken = async (connection, userIdx, refreshToken) => {
+exports.insertRefreshToken = async (
+  connection,
+  userIdx,
+  refreshToken,
+  accessToken
+) => {
   const insertRefreshTokenQuery = `
-    insert into token(userIdx,refreshToken) value(?,?);
+    insert into token(userIdx,refreshToken,accessToken) value(?,?,?);
   `;
   const [insertRefreshTokenRow] = await connection.query(
     insertRefreshTokenQuery,
-    [userIdx, refreshToken]
+    [userIdx, refreshToken, accessToken]
   );
 
   return insertRefreshTokenRow;
+};
+exports.updateToken = async (
+  connection,
+  userIdx,
+  refreshToken,
+  accessToken
+) => {
+  const updateTokenQuery = `
+  update token set refreshToken= ?, accessToken = ? 
+  where userIdx = ?
+`;
+  const updateTokenRow = connection.query(updateTokenQuery, [
+    refreshToken,
+    accessToken,
+    userIdx,
+  ]);
+  return updateTokenRow;
+};
+
+exports.refreshTokenExist = async (connection, userIdx) => {
+  const refreshTokenExistQuery = `
+  select exists (
+    select * from token where userIdx = ?
+    ) as exist
+`;
+  const [[refreshTokenExistRow]] = await connection.query(
+    refreshTokenExistQuery,
+    userIdx
+  );
+  return refreshTokenExistRow;
+};
+exports.getRefreshToken = async (connection, accessToken) => {
+  const getRefreshTokenQuery = `
+    select refreshToken from token 
+    where accessToken = ?
+  `;
+  const [[getRefreshTokenRow]] = await connection.query(
+    getRefreshTokenQuery,
+    accessToken
+  );
+  return getRefreshTokenRow;
+};
+
+exports.updateAccessToken = async (connection, id, accessToken) => {
+  const updateAccessTokenQuery = `
+  update token set accessToken = ? 
+  where userIdx = ?
+`;
+  const updateAccessTokenRow = await connection.query(updateAccessTokenQuery, [
+    accessToken,
+    id,
+  ]);
+  return updateAccessTokenRow;
 };

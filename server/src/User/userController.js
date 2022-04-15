@@ -57,7 +57,7 @@ exports.signIn = async (req, res) => {
   // 이메일의 형식이 틀렸을 경우에
 
   if (!emailValid) {
-    console.log(emailValid);
+    // console.log(emailValid);
     return res.send(basicResponse(baseResponseStatus.EMAIL_INVALID));
   }
   const emailCheck = userProvider.emailCheck(email);
@@ -70,7 +70,7 @@ exports.signIn = async (req, res) => {
     return res.send(basicResponse(baseResponseStatus.PASSWORD_INVALID));
 
   //이메일과 패스워드가 제대로 되었다면 이를 제대로 되었는지 비교해 봐야겠지?
-  const signInResult = await userService.signInCheck(email, passwd);
+  const signInResult = await userService.signIn(email, passwd);
   // console.log(signInResult, ": signInResult");
   return res.send(signInResult);
 };
@@ -88,5 +88,7 @@ exports.getUserDeepInfo = async (req, res) => {
 
 exports.test = async (req, res) => {
   const testResult = await userProvider.test();
+  const { accessTokenNew } = req; //새롭게 발급받은 accessToken
+  testResult.accessTokenNew = accessTokenNew;
   return res.send(testResult);
 };

@@ -1,5 +1,5 @@
 const baseResponseStatus = require("../../config/baseResponseStatus");
-const { basicResponse } = require("../../config/response");
+const { basicResponse, resultResponse } = require("../../config/response");
 const userDao = require("./userDao");
 const { pool } = require("../../config/database");
 const crypto = require("crypto");
@@ -67,6 +67,22 @@ exports.getUserDeepInfo = async (userIdx) => {
     connection.release();
   }
 };
+
+exports.getRefreshToken = async (accessToken) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const refreshToken = await userDao.getRefreshToken(connection, accessToken);
+    // console.log(emailCheckResult);
+    return refreshToken;
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+  return;
+};
+
 exports.test = async () => {
   return basicResponse(baseResponseStatus.SUCCESS);
 };

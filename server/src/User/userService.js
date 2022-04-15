@@ -4,7 +4,11 @@ const crypto = require("crypto");
 const userDao = require("./userDao");
 const { resultResponse, basicResponse } = require("../../config/response");
 const baseResponseStatus = require("../../config/baseResponseStatus");
-const { token } = require("../../config/jwt");
+const tokenSet = require("../../config/jwt");
+const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+
+const jwt = require("jsonwebtoken");
+
 // require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -77,8 +81,8 @@ exports.createUser = async (
     connection.release();
   }
 };
-//로그인이 잘 되었는지 체크
-exports.signInCheck = async (email, passwd) => {
+//로그인
+exports.signIn = async (email, passwd) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     await connection.beginTransaction();
@@ -92,21 +96,46 @@ exports.signInCheck = async (email, passwd) => {
       connection,
       email
     );
+    const { userIdx, userName } = await userDao.getUserShortInfo(
+      connection,
+      email
+    );
     // console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
-      console.log(signInCheckPasswd, "이것이다");
       //로그인에 성공하였을 때 jwt를 발급해주어야 한다.
-      const accessToken = token().access(email);
-      console.log(accessToken);
-      const refreshToken = token().refresh(email);
-      const { userIdx, userName } = await userDao.getUserShortInfo(
+      const accessToken = tokenSet.tokenSet().access(userIdx);
+      // console.log(accessToken);
+      const refreshToken = tokenSet.tokenSet().refresh(userIdx);
+
+      const refreshTokenExist = await userDao.refreshTokenExist(
         connection,
-        email
+        userIdx
       );
-      await userDao.insertRefreshToken(connection, userIdx, refreshToken);
+      if (refreshTokenExist.exist) {
+        //refreshtoken이 존재한다면 이미 로그인한 전적이 있다는 것
+        await userDao.updateToken(
+          connection,
+          userIdx,
+          refreshToken,
+          accessToken
+        );
+      } else {
+        //refreshToken이 없다는 것은 로그인 내역이 없다는 것.
+        await userDao.insertRefreshToken(
+          connection,
+          userIdx,
+          refreshToken,
+          accessToken
+        );
+      }
+
+      // const refresh = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+      // console.log(refresh.exp);
+
       await connection.commit();
       return resultResponse(baseResponseStatus.LOGIN_SUCCESS, {
+        userIdx,
         userName,
         accessToken,
         refreshToken,
@@ -115,6 +144,21 @@ exports.signInCheck = async (email, passwd) => {
   } catch (error) {
     await connection.rollback();
     console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+exports.updateAccessToken = async (id, accessToken) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    await connection.beginTransaction();
+    await userDao.updateAccessToken(connection, id, accessToken);
+    await connection.commit();
+  } catch (error) {
+    await connection.rollback();
+
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
