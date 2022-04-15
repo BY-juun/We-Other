@@ -1,26 +1,37 @@
-import { LoginAPI, SignUpAPI } from "API/User";
-import { useMutation } from "react-query";
+import { LoginAPI, SignUpAPI, UserInfoAPI } from "API/User";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { LoginResponse } from "../../Types/User";
-import { customAxios } from "../../Utils/customAxios";
 import { setToken } from "../../Utils/TokenManager";
 
 export const useSignUp = (onSuccess: () => void) => {
-	return useMutation(SignUpAPI, {
-		onSuccess: (res) => {
-			if (!res.isSucces) {
-				return alert(res.message);
-			}
-			onSuccess();
-		},
-	});
+  return useMutation(SignUpAPI, {
+    onSuccess: (res) => {
+      if (!res.isSucces) {
+        return alert(res.message);
+      }
+      onSuccess();
+    },
+  });
 };
 
 export const useLogin = (onSuccess: () => void) => {
-	return useMutation(LoginAPI, {
-		onSuccess: (response: LoginResponse) => {
-			console.log(response);
-			setToken(response.result.accessToken, response.result.refreshToken);
-			onSuccess();
-		},
-	});
+  const queryClient = useQueryClient();
+  return useMutation(LoginAPI, {
+    onSuccess: (res: LoginResponse) => {
+      if (!res.isSuccess) return alert(res.message);
+      const { accessToken, userIdx } = res.result;
+      setToken(accessToken, userIdx);
+      queryClient.invalidateQueries("userInfo");
+      onSuccess();
+    },
+  });
+};
+
+export const useGetUserInfo = (userIdx: number) => {
+  return useQuery(["userInfo"], () => UserInfoAPI(userIdx), {
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+    refetchOnMount: false,
+    retry: false,
+  });
 };

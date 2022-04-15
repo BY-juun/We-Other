@@ -9,7 +9,7 @@ export interface SignUpData {
 
 export interface LoginData {
   email: string;
-  password: string;
+  passwd: string;
 }
 
 export interface LoginResponse {
@@ -18,7 +18,6 @@ export interface LoginResponse {
   message: string;
   result: {
     accessToken: string;
-    refreshToken: string;
     userIdx: number;
     useName: string;
   };
