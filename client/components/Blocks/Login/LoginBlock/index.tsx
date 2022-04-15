@@ -28,7 +28,7 @@ const LoginBlock: VFC = () => {
     }
     const reqData = {
       email: emailRef?.current?.value,
-      password: passwordRef?.current?.value,
+      passwd: passwordRef?.current?.value,
     };
     loginMutation.mutate(reqData);
   }, [loginMutation]);

@@ -29,8 +29,8 @@ const WeOther = ({ Component, pageProps }: AppProps) => {
 
 WeOther.getInitialProps = async (appContext: AppContext) => {
   const { ctx } = appContext;
-  console.log(ctx.req?.headers.cookie);
   const allCookies = cookies(ctx);
+  console.log(allCookies);
   const accessTokenByCookie = allCookies["accessToken"];
   if (accessTokenByCookie !== undefined) {
     const refreshTokenByCookie = allCookies["refreshToken"] || "";
