@@ -30,8 +30,6 @@ const WeOther = ({ Component, pageProps }: AppProps) => {
 WeOther.getInitialProps = async (appContext: AppContext) => {
   const { ctx } = appContext;
   const allCookies = cookies(ctx);
-  console.log(allCookies);
-
   const accessTokenByCookie = allCookies["accessToken"];
   const userIdx = allCookies["userIdx"];
   if (accessTokenByCookie !== undefined && userIdx !== undefined) {
