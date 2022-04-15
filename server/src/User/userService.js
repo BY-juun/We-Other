@@ -100,6 +100,7 @@ exports.signIn = async (email, passwd) => {
       connection,
       email
     );
+    console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
@@ -112,6 +113,7 @@ exports.signIn = async (email, passwd) => {
         connection,
         userIdx
       );
+
       if (refreshTokenExist.exist) {
         //refreshtoken이 존재한다면 이미 로그인한 전적이 있다는 것
         await userDao.updateToken(
