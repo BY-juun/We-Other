@@ -1,11 +1,13 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import type { AppContext, AppProps } from "next/app";
 import { useRef } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import Head from "next/head";
 import { ReactQueryDevtools } from "react-query/devtools";
+import cookies from "next-cookies";
+import { setToken } from "../Utils/TokenManager";
 
-function WeOther({ Component, pageProps }: AppProps) {
+const WeOther = ({ Component, pageProps }: AppProps) => {
   const queryClientRef = useRef<QueryClient>();
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();
@@ -13,7 +15,7 @@ function WeOther({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClientRef.current}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <Hydrate state={pageProps?.dehydratedState}>
         <Head>
           <meta charSet="utf-8" />
           <title>WeOther</title>
@@ -23,6 +25,18 @@ function WeOther({ Component, pageProps }: AppProps) {
       </Hydrate>
     </QueryClientProvider>
   );
-}
+};
 
+WeOther.getInitialProps = async (appContext: AppContext) => {
+  const { ctx } = appContext;
+  console.log(ctx.req?.headers.cookie);
+  const allCookies = cookies(ctx);
+  const accessTokenByCookie = allCookies["accessToken"];
+  if (accessTokenByCookie !== undefined) {
+    const refreshTokenByCookie = allCookies["refreshToken"] || "";
+    setToken(accessTokenByCookie, refreshTokenByCookie);
+  }
+
+  return {};
+};
 export default WeOther;
