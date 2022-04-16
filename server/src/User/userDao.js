@@ -66,7 +66,7 @@ exports.getUserDeepInfo = async (connection, userIdx) => {
     select email, userName,department,sex,admission from user 
     where userIdx = ?;
   `;
-  const [getUserDeepInfoRow] = await connection.query(
+  const [[getUserDeepInfoRow]] = await connection.query(
     getUserDeepInfoQuery,
     userIdx
   );
