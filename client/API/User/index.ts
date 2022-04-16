@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { LoginData, SignUpData } from "Types/User";
 import { customAxios } from "../../Utils/customAxios";
 
@@ -11,7 +12,13 @@ export const LoginAPI = async (reqData: LoginData) => {
   return data;
 };
 
-export const UserInfoAPI = async (userIdx: number) => {
+export const UserInfoAPI = async () => {
+  const userIdx = Cookies.get("userIdx");
+  console.log(userIdx);
+  if (!userIdx) return;
   const { data } = await customAxios.get(`/user/${userIdx}`);
-  return data;
+  if (data?.isSuccess) {
+    return data?.result;
+  }
+  return false;
 };

@@ -9,12 +9,16 @@ const TopLayOut: VFC = () => {
     router.push("/");
   }, [router]);
 
+  const gotoPosts = useCallback(() => {
+    router.push("/Posts");
+  }, [router]);
+
   return (
     <TopLayOutWrapper>
       <TopLayOutItems onClick={gotoHome}>Home</TopLayOutItems>
       <TopLayOutRight>
-        <TopLayOutItems>Menu1</TopLayOutItems>
-        <TopLayOutItems>Menu2</TopLayOutItems>
+        <TopLayOutItems onClick={gotoPosts}>게시판</TopLayOutItems>
+        <TopLayOutItems>마이페이지</TopLayOutItems>
       </TopLayOutRight>
     </TopLayOutWrapper>
   );

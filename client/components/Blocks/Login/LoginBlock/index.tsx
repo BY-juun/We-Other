@@ -19,22 +19,26 @@ const LoginBlock: VFC = () => {
 
   const loginMutation = useLogin(LoginSuccess);
 
-  const Submit = useCallback(() => {
-    if (!emailRef?.current?.value) {
-      return alert("*이메일을 입력해주세요");
-    }
-    if (!passwordRef?.current?.value) {
-      return alert("*비밀번호를 입력해주세요");
-    }
-    const reqData = {
-      email: emailRef?.current?.value,
-      passwd: passwordRef?.current?.value,
-    };
-    loginMutation.mutate(reqData);
-  }, [loginMutation]);
+  const Submit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!emailRef?.current?.value) {
+        return alert("*이메일을 입력해주세요");
+      }
+      if (!passwordRef?.current?.value) {
+        return alert("*비밀번호를 입력해주세요");
+      }
+      const reqData = {
+        email: emailRef?.current?.value,
+        passwd: passwordRef?.current?.value,
+      };
+      loginMutation.mutate(reqData);
+    },
+    [loginMutation]
+  );
 
   return (
-    <LoginWrapper>
+    <LoginWrapper onSubmit={Submit}>
       <div>
         <CustomInput ref={emailRef} placeholder="ID(이메일 주소)" type="email" />
       </div>
