@@ -1,4 +1,4 @@
-import cookie from "react-cookies";
+import Cookies from "js-cookie";
 import { customAxios } from "./customAxios";
 
 function setToken(accessToken: string, userIdx: number) {
@@ -7,13 +7,12 @@ function setToken(accessToken: string, userIdx: number) {
   const expires = new Date();
   expires.setDate(Date.now() + 1000 * 60 * 60 * 24);
 
-  cookie.save("accessToken", accessToken, {
+  Cookies.set("accessToken", accessToken, {
     path: "/",
     expires,
-    //httpOnly: process.env.NODE_ENV === "production" ? false : true, // dev/prod 에 따라 true / false 로 받게 했다.
   });
 
-  cookie.save("userIdx", userIdx, {
+  Cookies.set("userIdx", String(userIdx), {
     path: "/",
     expires,
   });

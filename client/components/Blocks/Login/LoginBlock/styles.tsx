@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { mobile, tablet, tablet_landscape } from "Utils/styles";
 
-export const LoginWrapper = styled.div`
+export const LoginWrapper = styled.form`
   ${mobile} {
     width: 100%;
   }

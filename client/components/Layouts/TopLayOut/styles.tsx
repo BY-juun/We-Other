@@ -10,14 +10,13 @@ export const TopLayOutWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10%;
+  padding: 0 5%;
 `;
 
 export const TopLayOutRight = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 20px;
 `;
 
 export const TopLayOutItems = styled.div`
