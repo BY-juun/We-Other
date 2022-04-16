@@ -16,10 +16,10 @@ module.exports = function () {
     res.send("goooood");
   });
 
-  const userRouter = require("../src/User/userRoute")(app);
-  const commentRouter = require("../src/Comment/commentRoute")(app);
-  const postRouter = require("../src/Post/postRoute")(app);
-  const TagRouter = require("../src/Tag/tagRoute")(app);
+  require("../src/User/userRoute")(app);
+  require("../src/Comment/commentRoute")(app);
+  require("../src/Post/postRoute")(app);
+  require("../src/Tag/tagRoute")(app);
 
   return app;
 };
