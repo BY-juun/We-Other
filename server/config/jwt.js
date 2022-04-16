@@ -10,7 +10,7 @@ exports.tokenSet = () => {
   return {
     access(id) {
       return jwt.sign({ id }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "1s",
+        expiresIn: "1d",
       });
     },
     refresh(id) {
@@ -36,6 +36,7 @@ exports.verifyAccessToken = async (req, res, next) => {
 
     if (access) {
       req.access = access;
+      req.userIdx = access.id;
       next();
     }
   } catch (error) {
@@ -48,9 +49,10 @@ exports.verifyAccessToken = async (req, res, next) => {
         console.log(id);
         if (id) {
           const accessToken = jwt.sign({ id }, ACCESS_TOKEN_SECRET, {
-            expiresIn: "1s",
+            expiresIn: "1d",
           });
           req.accessTokenNew = accessToken; //res에다가 넣어주도록 한다.
+          req.userIdx = id;
           console.log("새롭게 발급된 :", accessToken);
           // const accessToken = this.token().refresh(id);
           await userService.updateAccessToken(id, accessToken);
@@ -69,12 +71,12 @@ exports.verifyAccessToken = async (req, res, next) => {
     return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_VALID));
   }
 };
-exports.verifyRefreshToken = (req, res, next) => {
-  try {
-    const refreshToken = req.header["refreshtoken"];
-    if (!refreshToken)
-      return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
-    const access = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
-  } catch (error) {}
-};
-exports.jwtMiddleWare = (req, res, next) => {};
+// exports.verifyRefreshToken = (req, res, next) => {
+//   try {
+//     const refreshToken = req.header["refreshtoken"];
+//     if (!refreshToken)
+//       return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
+//     const access = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+//   } catch (error) {}
+// };
+// exports.jwtMiddleWare = (req, res, next) => {};
