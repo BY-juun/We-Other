@@ -22,3 +22,11 @@ export interface LoginResponse {
     useName: string;
   };
 }
+
+export interface UserInfo {
+  email: string;
+  userName: string;
+  department: string;
+  sex: string;
+  admission: number;
+}
