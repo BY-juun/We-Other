@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DummyType } from "Types/Dummy";
 import { EtcArea, EtcItem, EtcItem2, EtcLeft, PostCardRoot, PostContent, PostDate, PostWriter } from "./styles";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface Props {
   PostInfo: DummyType;
 }
 
 const PostCard = ({ PostInfo }: Props) => {
+  const router = useRouter();
+  const gotoPost = useCallback(
+    (id: number) => () => {
+      router.push(`/Post/${id}`);
+    },
+    []
+  );
   return (
-    <PostCardRoot>
-      <PostWriter>{PostInfo?.writer}</PostWriter>
+    <PostCardRoot onClick={gotoPost(PostInfo.id)}>
       <PostContent>{PostInfo.content}</PostContent>
       <PostDate>{PostInfo.date}</PostDate>
       <EtcArea>

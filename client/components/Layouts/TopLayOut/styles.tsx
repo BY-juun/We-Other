@@ -11,6 +11,7 @@ export const TopLayOutWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
+  z-index: 100;
 `;
 
 export const TopLayOutRight = styled.div`

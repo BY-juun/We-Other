@@ -6,7 +6,7 @@ import { setToken } from "../../Utils/TokenManager";
 export const useSignUp = (onSuccess: () => void) => {
   return useMutation(SignUpAPI, {
     onSuccess: (res) => {
-      if (!res.isSucces) {
+      if (!res.isSuccess) {
         return alert(res.message);
       }
       onSuccess();
