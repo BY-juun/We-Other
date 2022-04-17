@@ -1,5 +1,5 @@
 export interface DummyType {
-  writer: string;
+  id: number;
   content: string;
   date: string;
   like: number;

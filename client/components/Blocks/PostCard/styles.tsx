@@ -7,8 +7,12 @@ export const PostCardRoot = styled.div`
   border: 0.5px solid #c8c8c8;
   padding: 20px;
   box-sizing: border-box;
-  border-radius: 4px;
   font-size: 12px;
+  cursor: pointer;
+  &:hover {
+    border: 0.5px solid #fc96a5;
+    color: #fc96a5;
+  }
 `;
 
 export const PostWriter = styled.div`
@@ -19,6 +23,10 @@ export const PostContent = styled.div`
   font-size: 15px;
   line-height: 25px;
   margin-bottom: 10px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const PostDate = styled.div`
@@ -35,6 +43,7 @@ export const EtcLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  color: black;
 `;
 
 export const EtcItem = styled.div`
