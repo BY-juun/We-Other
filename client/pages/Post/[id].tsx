@@ -1,12 +1,13 @@
 import { ContentWrapper } from "components/Layouts/Content/styles";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { DummyType } from "Types/Dummy";
 import { DummyPosts } from "Utils/dummy";
 
 const Post = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [post, setPost] = useState();
+  const [post, setPost] = useState<DummyType>();
 
   useEffect(() => {
     let temp = DummyPosts.filter((value) => value.id === Number(id));
