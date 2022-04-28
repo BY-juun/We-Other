@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const PostFormWrapper = styled.div`
-  margin-top: 115px;
+  margin-top: 25%;
   padding: 0 10%;
 `;
 

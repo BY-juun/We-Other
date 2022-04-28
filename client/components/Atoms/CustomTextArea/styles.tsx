@@ -8,5 +8,5 @@ export const CustomTextArea = styled.textarea`
   outline: none;
   font-size: 15px;
   border-radius: 4px;
-  min-height: 350px;
+  min-height: 250px;
 `;
