@@ -1,6 +1,7 @@
 export const DummyPosts = [
   {
     id: 1,
+    title: "제목뭘로하지여2",
     content: "어디어디 카페에 있는데, 어디어디 앉은 사람 누군지 아시나요?...",
     date: "2020년 09월 19일",
     like: 1,
@@ -8,6 +9,7 @@ export const DummyPosts = [
   },
   {
     id: 2,
+    title: "학교축제 baam",
     content: "학교 축제 뭐시기 저시기~~~~",
     date: "2017년 05월 12일",
     like: 3,
@@ -15,6 +17,7 @@ export const DummyPosts = [
   },
   {
     id: 3,
+    title: "tetssetestsetes",
     content: "더미데이터형식 이게 맞나요?~~~~",
     date: "2020년 02월 13일",
     like: 9,
@@ -22,6 +25,7 @@ export const DummyPosts = [
   },
   {
     id: 4,
+    title: "qwersdvxcvs",
     content: "글쎄요~@! 배고파요~~~~!~!~!~!~!~1",
     date: "2022년 4월 16일",
     like: 6,
@@ -29,6 +33,7 @@ export const DummyPosts = [
   },
   {
     id: 5,
+    title: "12321352",
     content: "어디어디 카페에 있는데, 어디어디 앉은 사람 누군지 아시나요?...",
     date: "2020년 09월 19일",
     like: 1,
@@ -36,6 +41,7 @@ export const DummyPosts = [
   },
   {
     id: 123412,
+    title: "12321축제352",
     content: "학교 축제 뭐시기 저시기~~~~",
     date: "2017년 05월 12일",
     like: 3,
@@ -43,6 +49,7 @@ export const DummyPosts = [
   },
   {
     id: 6,
+    title: "12321축제352",
     content: "더미데이터형식 이게 맞나요?~~~~",
     date: "2020년 02월 13일",
     like: 9,
@@ -50,6 +57,7 @@ export const DummyPosts = [
   },
   {
     id: 123,
+    title: "12321축제352",
     content: "글쎄요~@! 배고파요~~~~!~!~!~!~!~1",
     date: "2022년 4월 16일",
     like: 6,
@@ -57,6 +65,7 @@ export const DummyPosts = [
   },
   {
     id: 1234,
+    title: "12321축제352",
     content: "어디어디 카페에 있는데, 어디어디 앉은 사람 누군지 아시나요?...",
     date: "2020년 09월 19일",
     like: 1,
@@ -64,6 +73,7 @@ export const DummyPosts = [
   },
   {
     id: 1234412,
+    title: "12321축제352",
     content: "학교 축제 뭐시기 저시기~~~~",
     date: "2017년 05월 12일",
     like: 3,
@@ -71,6 +81,7 @@ export const DummyPosts = [
   },
   {
     id: 1399321,
+    title: "더미데이터형식",
     content: "더미데이터형식 이게 맞나요?~~~~",
     date: "2020년 02월 13일",
     like: 9,
@@ -78,6 +89,7 @@ export const DummyPosts = [
   },
   {
     id: 980613,
+    title: "글쎄요",
     content: "글쎄요~@! 배고파요~~~~!~!~!~!~!~1",
     date: "2022년 4월 16일",
     like: 6,

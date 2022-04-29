@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { DummyType } from "Types/Dummy";
-import { EtcArea, EtcItem, EtcItem2, EtcLeft, PostCardRoot, PostContent, PostDate, PostWriter } from "./styles";
+import { EtcArea, EtcItem, EtcItem2, EtcLeft, PostCardRoot, PostContent, PostDate, PostTitle, PostWriter } from "./styles";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -18,23 +18,21 @@ const PostCard = ({ PostInfo }: Props) => {
   );
   return (
     <PostCardRoot onClick={gotoPost(PostInfo.id)}>
+      <PostTitle>{PostInfo.title}</PostTitle>
       <PostContent>{PostInfo.content}</PostContent>
-      <PostDate>{PostInfo.date}</PostDate>
       <EtcArea>
         <EtcLeft>
           <EtcItem>
+            <PostDate>{PostInfo.date}</PostDate>
             <Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
             <span>{PostInfo.like}</span>
           </EtcItem>
           <EtcItem2>
-            <Image src={"/comment.png"} alt="댓글" width={13} height={13} />
+            <Image src={"/comment.png"} alt="댓글" width={15} height={15} />
             <span>{PostInfo.comment}</span>
           </EtcItem2>
         </EtcLeft>
-        <div>
-          {" "}
-          <Image src={"/alarm.png"} alt="신고" width={13} height={13} />
-        </div>
+        <div></div>
       </EtcArea>
     </PostCardRoot>
   );
