@@ -16,7 +16,6 @@ const SignUpBlock = () => {
 
   const signUpSuccess = useCallback(() => {
     alert("*회원가입에 성공하셨습니다!");
-    console.log("ddddd");
     return router.push("/");
   }, [router]);
 

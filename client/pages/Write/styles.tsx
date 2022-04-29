@@ -1,8 +1,15 @@
 import styled from "@emotion/styled";
+import { mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const PostFormWrapper = styled.div`
-  margin-top: 25%;
+  margin-top: 10%;
   padding: 0 10%;
+  ${mobile} {
+    margin-top: 25%;
+  }
+  ${tablet} {
+    margin-top: 20%;
+  }
 `;
 
 export const PostFormTitle = styled.div`

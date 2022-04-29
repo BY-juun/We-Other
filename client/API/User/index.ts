@@ -14,7 +14,6 @@ export const LoginAPI = async (reqData: LoginData) => {
 
 export const UserInfoAPI = async () => {
   const userIdx = Cookies.get("userIdx");
-  console.log(userIdx);
   if (!userIdx) return;
   const { data } = await customAxios.get(`/user/${userIdx}`);
   if (data?.isSuccess) {
