@@ -6,6 +6,9 @@ export const CommentFormRoot = styled.div`
   padding: 10px 0;
   width: 100%;
   gap: 5%;
+	padding : 0 10%;
+	margin-top : 15px;
+	margin-bottom : 15px;
   input {
     width: 75%;
     padding: 10px;

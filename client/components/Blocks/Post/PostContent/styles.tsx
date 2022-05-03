@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+export const PostContentWrapper = styled.div`
+	padding : 0 10%;
+`
+
 export const PostContentTop = styled.div`
   display: flex;
   align-items: center;
