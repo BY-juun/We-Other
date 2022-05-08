@@ -1,27 +1,41 @@
 import ContentForm from "components/Blocks/WritePostForm/ContentForm";
+import RegistedImage from "components/Blocks/WritePostForm/RegistedImage";
 import TitleForm from "components/Blocks/WritePostForm/TitleForm";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useCallback, useRef, useState } from "react";
-import { useSubmitImg } from "_Query/Post";
+import { useSubmitImg, useSubmitPost } from "_Query/Post";
 import { ImageAddBtn, ImageWrapper, PostFormBottom, PostFormTitle, PostFormWrapper, SubmitBtn } from "./styles";
 
-const Write = () => {
+const Write: () => JSX.Element = () => {
+  const router = useRouter();
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const [fileImage, setFileImage] = useState<Array<string>>([]);
+  const [submitImageIdx, setSubmitImageIdx] = useState<Array<number>>([]);
 
-  const onSuccessSubmitImg = () => {
-    console.log("success");
+  const onSuccessSubmitImg = (imageIdxArr: Array<number>) => {
+    setSubmitImageIdx([...submitImageIdx].concat(imageIdxArr));
   };
 
+  const onSuccessSubmitPost = useCallback(() => {
+    alert("*게시글 등록이 완료되었습니다");
+    return router.push("/Posts");
+  }, []);
+
   const submitImgMutation = useSubmitImg(onSuccessSubmitImg);
+  const submitPostMutation = useSubmitPost(onSuccessSubmitPost);
 
   const SubmitPost = useCallback(() => {
     if (!titleRef?.current?.value) return alert("제목을 입력해주세요");
     if (!contentRef?.current?.value) return alert("내용을 입력해주세요");
-    console.log(titleRef?.current?.value);
-    console.log(contentRef?.current?.value);
+    const reqData = {
+      title: titleRef?.current?.value,
+      content: contentRef?.current?.value,
+      imgIdx: submitImageIdx,
+    };
+    submitPostMutation.mutate(reqData);
   }, []);
 
   const onClickImageUpload = useCallback(() => {
@@ -32,7 +46,6 @@ const Write = () => {
 
   const onChangeImage = useCallback(
     (e) => {
-      console.log(e.target.files);
       let temp = [...fileImage];
       for (let x of e.target.files) {
         temp.push(URL.createObjectURL(x));
@@ -46,10 +59,6 @@ const Write = () => {
     },
     [fileImage]
   );
-
-  const filterImg = useCallback((file) => {
-    setFileImage((prev) => prev?.filter((prevFile) => prevFile !== file));
-  }, []);
 
   return (
     <PostFormWrapper>
@@ -67,17 +76,7 @@ const Write = () => {
           <SubmitBtn onClick={SubmitPost}>등록</SubmitBtn>
         </div>
       </PostFormBottom>
-      <ImageWrapper>
-        {fileImage &&
-          fileImage.map((file) => {
-            return (
-              <div>
-                <img key={file} alt="sample" src={file} />
-                <button onClick={() => filterImg(file)}>삭제</button>
-              </div>
-            );
-          })}
-      </ImageWrapper>
+      <ImageWrapper>{fileImage && <RegistedImage fileImage={fileImage} setFileImage={setFileImage} setSubmitImageIdx={setSubmitImageIdx} />}</ImageWrapper>
     </PostFormWrapper>
   );
 };
