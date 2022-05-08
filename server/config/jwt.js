@@ -24,13 +24,13 @@ exports.tokenSet = () => {
 // 토큰을 인증하는 것은
 exports.verifyAccessToken = async (req, res, next) => {
   const accessToken = req.headers["accesstoken"];
-
+  console.log(req.headers);
+  console.log(accessToken);
   try {
     // console.log(accessToken);
     // 클라이언트에서 토큰을 받아온다.
-    console.log(accessToken);
-    if (!accessToken)
-      return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
+
+    if (!accessToken) return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
     const access = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
     console.log("access :", access);
 
