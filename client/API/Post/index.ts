@@ -1,5 +1,5 @@
+import { SubmitPostReqData } from "Types/Post";
 import { customAxios } from "Utils/customAxios";
-import TokenRefresh from "Utils/TokenCheck";
 
 export const GetPostsListAPI = async () => {
   const { data } = await customAxios.get("/post");
@@ -7,7 +7,11 @@ export const GetPostsListAPI = async () => {
 };
 
 export const submitImg = async (reqData: FormData) => {
-  TokenRefresh();
   const { data } = await customAxios.post("/post/image", reqData);
+  return data;
+};
+
+export const submitPost = async (reqData: SubmitPostReqData) => {
+  const { data } = await customAxios.post("/post", reqData);
   return data;
 };
