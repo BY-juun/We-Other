@@ -34,6 +34,9 @@ WeOther.getInitialProps = async (appContext: AppContext) => {
   const allCookies = cookies(ctx);
   const accessTokenByCookie = allCookies["accessToken"];
   const userIdx = allCookies["userIdx"];
+  console.log("ddddd");
+  console.log(accessTokenByCookie);
+  console.log(userIdx);
   if (accessTokenByCookie !== undefined && userIdx !== undefined) {
     setToken(accessTokenByCookie, Number(userIdx));
   }

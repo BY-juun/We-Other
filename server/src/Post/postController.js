@@ -11,14 +11,11 @@ exports.writePost = async (req, res) => {
 
   const userIdx = req.userIdx;
 
-  if (!title || !content)
-    return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+  if (!title || !content) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   //하나라도 존재하지 않으면 오류 반환
 
   const writePostResult =
-    imageIdx.length >= 1
-      ? await postService.writePostWithImage(userIdx, title, content, imageIdx)
-      : await postService.writePost(userIdx, title, content);
+    imageIdx.length >= 1 ? await postService.writePostWithImage(userIdx, title, content, imageIdx) : await postService.writePost(userIdx, title, content);
   return res.send(writePostResult);
 };
 
@@ -26,7 +23,7 @@ exports.writePost = async (req, res) => {
 exports.uploadImage = async (req, res) => {
   const image = req.files;
   let path;
-  console.log(path);
+  console.log(req);
   if (image) path = image.map((x) => x.path);
   else {
     return res.send(resultResponse(baseResponseStatus.IMAGE_NOT_EXIST));
@@ -56,10 +53,8 @@ exports.deletePost = async (req, res) => {
 
   const postUserIdx = await postProvider.getPostUserIdx(postIdx);
   //특정 postIdx의 userIdx와 동일할 때에만 해당 게시물을 삭제할 수 있도록 하여야 한다.
-  if (!postIdx)
-    return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
-  if (userIdx != postUserIdx)
-    return res.send(basicResponse(baseResponseStatus.USER_NOT_AUTH));
+  if (!postIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+  if (userIdx != postUserIdx) return res.send(basicResponse(baseResponseStatus.USER_NOT_AUTH));
   const result = await postService.deletePost(postIdx);
 
   return res.send(result);

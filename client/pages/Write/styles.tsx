@@ -38,3 +38,25 @@ export const SubmitBtn = styled.button`
   border-radius: 4px;
   cursor: pointer;
 `;
+
+export const ImageWrapper = styled.div`
+  margin-top: 20px;
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+    button {
+      cursor: pointer;
+      margin-left: 10px;
+      border: none;
+      background: #6b6869;
+      padding: 5px 10px;
+      border-radius: 4px;
+      color: white;
+    }
+  }
+`;
