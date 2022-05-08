@@ -14,6 +14,22 @@ exports.getPosts = async () => {
     connection.release();
   }
 };
+
+//단일 게시물 가져오기
+exports.getPost = async (postIdx) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const getPostResult = await postDao.getPost(connection, postIdx);
+    console.log(getPostResult);
+    return getPostResult;
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
 exports.getPostUserIdx = async (postIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
