@@ -132,5 +132,10 @@ module.exports = {
     code: 2011,
     message: "해당 유저는 해당 기능을 수행할 권한이 없습니다",
   },
+  IMAGE_NOT_EXIST: {
+    isSuccess: false,
+    code: 2012,
+    message: "이미지 파일이 존재하지 않습니다. ",
+  },
   DB_ERROR: { isSuccess: false, code: 4000, message: "데이터 베이스 에러" },
 };
