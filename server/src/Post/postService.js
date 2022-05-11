@@ -6,11 +6,9 @@ const path = require("path/posix");
 
 exports.writePost = async (userIdx, title, content) => {
   const connection = await pool.getConnection(async (conn) => conn);
-
   try {
     const insertParams = [userIdx, title, content];
     const test = await postDao.insertPost(connection, insertParams);
-    console.log(test["insertId"], "이것이 TEST");
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
     console.log(error);
@@ -54,15 +52,14 @@ exports.insertImage = async (path) => {
   try {
     const imageArray = [];
     await connection.beginTransaction();
-    await Promise.all(path).then(async (x) => {
-      //x에는 path하나에 존재하는 것.
+    
+    await Promise.all(path.map(async(x)=>{
       let insertResult = await postDao.insertImage(connection, x);
-      imageArray.push(insertResult["insertId"]);
-      // console.log(insertResult["insertId"]);
-    });
+      let pushHash = {"insertId" : insertResult["insertId"], "url":x}
+      imageArray.push(pushHash);
+    }))
     await connection.commit();
     return resultResponse(baseResponseStatus.SUCCESS, imageArray);
-
     // const insertImageResult = await postDao.insertPost(connection, path);
   } catch (error) {
     await connection.rollback();

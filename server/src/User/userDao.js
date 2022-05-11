@@ -58,7 +58,6 @@ exports.getUserShortInfo = async (connection, email) => {
     where email = ?;
   `;
   const [[getUserIdxRow]] = await connection.query(getUserIdxQuery, email);
-  console.log(getUserIdxRow);
   return getUserIdxRow;
 };
 exports.getUserDeepInfo = async (connection, userIdx) => {
