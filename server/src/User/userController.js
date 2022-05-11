@@ -15,7 +15,6 @@ exports.signUpUser = async (req, res) => {
 
   const emailCheck = await userProvider.emailCheck(email);
   //   console.log(emailCheck[0].exist);
-  console.log(emailCheck)
   if (emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_EXISTS));
 
