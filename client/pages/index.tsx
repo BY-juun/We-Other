@@ -3,6 +3,7 @@ import { ContentWrapper } from "components/Layouts/Content/styles";
 import { HomeDescription, HomeWrapper } from "./styles";
 import LoginBlock from "../components/Blocks/Login/LoginBlock";
 import { useGetUserInfo } from "_Query/User";
+import MainContent from "components/Blocks/MainContent";
 
 const Home: NextPage = () => {
   const { data, isLoading } = useGetUserInfo();
@@ -11,9 +12,9 @@ const Home: NextPage = () => {
     <>
       <ContentWrapper>
         <HomeWrapper>
-          <h1>WeOther</h1>
+          <span>WeOther</span>
           <HomeDescription>아주대학교 흥신소 프로젝트</HomeDescription>
-          {!isLoading && <>{data?.userName ? <div>안녕하세요 {data?.userName}님</div> : <LoginBlock />}</>}
+          {!isLoading && <>{data?.userName ? <MainContent userName={data?.userName} /> : <LoginBlock />}</>}
         </HomeWrapper>
       </ContentWrapper>
     </>

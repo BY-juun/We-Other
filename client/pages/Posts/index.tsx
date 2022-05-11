@@ -12,41 +12,40 @@ import ClipLoader from "react-spinners/ClipLoader";
 import PostCardLoading from "../../components/Loading/PostCardLoading";
 
 const Posts = () => {
-	const router = useRouter();
+  const router = useRouter();
 
-	const { data: PostList, isLoading } = useGetPostsList();
+  const { data: PostList, isLoading } = useGetPostsList();
 
-	console.log(PostList);
+  console.log(PostList);
 
-	const onClickWritePostBtn = useCallback(() => {
-		const userIdx = Cookies.get("userIdx");
-		if (!userIdx) return alert("*로그인 후 글을 작성할 수 있습니다");
-		router.push("/Write");
-	}, []);
+  const onClickWritePostBtn = useCallback(() => {
+    const userIdx = Cookies.get("userIdx");
+    if (!userIdx) return alert("*로그인 후 글을 작성할 수 있습니다");
+    router.push("/Write");
+  }, []);
 
-
-	return (
-		<PostWrapper>
-			<PostCardContainer>
-				{!isLoading
-					?
-					<>
-						{PostList.map((PostInfo: PostArrayType, idx: number) => {
-							return <PostCard key={idx} PostInfo={PostInfo} />;
-						})}
-					</>
-					: <>
-						{Array.from({ length: 15 }, () => 1).map(() =>
-							<PostCardLoading loading={isLoading} />
-						)}
-					</>}
-
-			</PostCardContainer>
-			<WritePostBtn onClick={onClickWritePostBtn}>
-				<Image src="/write.png" alt="글쓰기" width={25} height={25} />
-			</WritePostBtn>
-		</PostWrapper>
-	);
+  return (
+    <PostWrapper>
+      <PostCardContainer>
+        {!true ? (
+          <>
+            {PostList.map((PostInfo: PostArrayType, idx: number) => {
+              return <PostCard key={idx} PostInfo={PostInfo} />;
+            })}
+          </>
+        ) : (
+          <>
+            {Array.from({ length: 15 }, () => 1).map(() => (
+              <PostCardLoading loading={true} />
+            ))}
+          </>
+        )}
+      </PostCardContainer>
+      <WritePostBtn onClick={onClickWritePostBtn}>
+        <Image src="/write.png" alt="글쓰기" width={25} height={25} />
+      </WritePostBtn>
+    </PostWrapper>
+  );
 };
 
 export default Posts;

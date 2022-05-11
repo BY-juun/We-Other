@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 
-export const PostWrapper = styled.div`
-  margin-top: 75px;
-`;
+export const PostWrapper = styled.div``;
 
 export const PostCardContainer = styled.div`
   display: flex;
