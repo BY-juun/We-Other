@@ -10,12 +10,11 @@ exports.writePost = async (req, res) => {
   //imageIdx를 배열 형태로 전달한다.
 
   const userIdx = req.userIdx;
-
   if (!title || !content) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   //하나라도 존재하지 않으면 오류 반환
 
   const writePostResult =
-    imageIdx.length >= 1 ? await postService.writePostWithImage(userIdx, title, content, imageIdx) : await postService.writePost(userIdx, title, content);
+    imageIdx ? await postService.writePostWithImage(userIdx, title, content, imageIdx) : await postService.writePost(userIdx, title, content);
   return res.send(writePostResult);
 };
 
@@ -23,7 +22,6 @@ exports.writePost = async (req, res) => {
 exports.uploadImage = async (req, res) => {
   const image = req.files;
   let path;
-  console.log(req);
   if (image) path = image.map((x) => x.path);
   else {
     return res.send(resultResponse(baseResponseStatus.IMAGE_NOT_EXIST));

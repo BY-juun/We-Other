@@ -21,7 +21,32 @@ exports.getPost = async (postIdx) => {
   try {
     const getPostResult = await postDao.getPost(connection, postIdx);
     console.log(getPostResult);
-    return getPostResult;
+    const userIdx = getPostResult[0].userIdx;
+    const thisPostIdx = getPostResult[0].postIdx;
+    const title = getPostResult[0].title;
+    const content = getPostResult[0].content;
+    const updatedAt = getPostResult[0].updatedAt;
+
+    //게시물에 이미지가 존재하는지 파악. 
+    const checkImageNum = await postDao.checkImageNum(connection,postIdx);
+    console.log(checkImageNum);
+
+    
+
+    //만약 이미지가 해당 게시물에 존재한다면. 
+    const imageArray = [];
+    if(checkImageNum) {
+       getPostResult.map( x => imageArray.push(x.url));
+      }
+      const result = {
+        userIdx,
+        postIdx : thisPostIdx,
+        title,
+        content,
+        updatedAt,
+        imageArray 
+      }
+    return result;
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);

@@ -23,6 +23,7 @@ module.exports = (app) => {
   //모든 게시물 가져오기
   app.get("/api/post", post.getPosts);
 
+  // 단일 게시물 가져오기
   app.get("/api/post/:postIdx", post.getPost);
   app.delete("/api/post/delete", verifyAccessToken, post.deletePost);
 };

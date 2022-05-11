@@ -100,7 +100,6 @@ exports.signIn = async (email, passwd) => {
       connection,
       email
     );
-    console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
