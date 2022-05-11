@@ -15,8 +15,13 @@ const Write: () => JSX.Element = () => {
   const [fileImage, setFileImage] = useState<Array<string>>([]);
   const [submitImageIdx, setSubmitImageIdx] = useState<Array<number>>([]);
 
-  const onSuccessSubmitImg = (imageIdxArr: Array<number>) => {
-    setSubmitImageIdx([...submitImageIdx].concat(imageIdxArr));
+  const onSuccessSubmitImg = (imageIdxArr: Array<any>) => {
+    const arr = [];
+    imageIdxArr.forEach((imageInfo) => {
+      arr.push(imageInfo.insertId);
+    })
+    console.log(arr);
+    setSubmitImageIdx([...submitImageIdx].concat(arr));
   };
 
   const onSuccessSubmitPost = useCallback(() => {
@@ -33,10 +38,10 @@ const Write: () => JSX.Element = () => {
     const reqData = {
       title: titleRef?.current?.value,
       content: contentRef?.current?.value,
-      imgIdx: submitImageIdx,
+      imageIdx: submitImageIdx,
     };
     submitPostMutation.mutate(reqData);
-  }, []);
+  }, [submitImageIdx]);
 
   const onClickImageUpload = useCallback(() => {
     if (imageRef?.current) {
