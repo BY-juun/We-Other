@@ -2,8 +2,8 @@ import Cookies from "js-cookie";
 import { customAxios } from "./customAxios";
 
 function setToken(accessToken: string, userIdx: number) {
-  customAxios.defaults.headers.common["Authorization"] = accessToken;
-
+  customAxios.defaults.headers.common["accesstoken"] = accessToken;
+  console.log(customAxios.defaults.headers);
   const expires = new Date();
   expires.setDate(Date.now() + 1000 * 60 * 60 * 24);
 

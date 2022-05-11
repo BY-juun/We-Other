@@ -1,20 +1,47 @@
 import ContentForm from "components/Blocks/WritePostForm/ContentForm";
+import RegistedImage from "components/Blocks/WritePostForm/RegistedImage";
 import TitleForm from "components/Blocks/WritePostForm/TitleForm";
 import Image from "next/image";
-import React, { useCallback, useRef } from "react";
-import { ImageAddBtn, PostFormBottom, PostFormTitle, PostFormWrapper, SubmitBtn } from "./styles";
+import { useRouter } from "next/router";
+import React, { useCallback, useRef, useState } from "react";
+import { useSubmitImg, useSubmitPost } from "_Query/Post";
+import { ImageAddBtn, ImageWrapper, PostFormBottom, PostFormTitle, PostFormWrapper, SubmitBtn } from "./styles";
 
-const Write = () => {
+const Write: () => JSX.Element = () => {
+  const router = useRouter();
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  const [fileImage, setFileImage] = useState<Array<string>>([]);
+  const [submitImageIdx, setSubmitImageIdx] = useState<Array<number>>([]);
+
+  const onSuccessSubmitImg = (imageIdxArr: Array<any>) => {
+    const arr = [];
+    imageIdxArr.forEach((imageInfo) => {
+      arr.push(imageInfo.insertId);
+    })
+    console.log(arr);
+    setSubmitImageIdx([...submitImageIdx].concat(arr));
+  };
+
+  const onSuccessSubmitPost = useCallback(() => {
+    alert("*게시글 등록이 완료되었습니다");
+    return router.push("/Posts");
+  }, []);
+
+  const submitImgMutation = useSubmitImg(onSuccessSubmitImg);
+  const submitPostMutation = useSubmitPost(onSuccessSubmitPost);
 
   const SubmitPost = useCallback(() => {
     if (!titleRef?.current?.value) return alert("제목을 입력해주세요");
     if (!contentRef?.current?.value) return alert("내용을 입력해주세요");
-    console.log(titleRef?.current?.value);
-    console.log(contentRef?.current?.value);
-  }, []);
+    const reqData = {
+      title: titleRef?.current?.value,
+      content: contentRef?.current?.value,
+      imageIdx: submitImageIdx,
+    };
+    submitPostMutation.mutate(reqData);
+  }, [submitImageIdx]);
 
   const onClickImageUpload = useCallback(() => {
     if (imageRef?.current) {
@@ -22,14 +49,21 @@ const Write = () => {
     }
   }, []);
 
-  const onChangeImage = useCallback((e) => {
-    const imgArr: never[] = [];
-    [].forEach.call(e.target.files, (f) => {
-      console.log(f);
-      imgArr.push(f);
-    });
-    console.log(imgArr);
-  }, []);
+  const onChangeImage = useCallback(
+    (e) => {
+      let temp = [...fileImage];
+      for (let x of e.target.files) {
+        temp.push(URL.createObjectURL(x));
+      }
+      setFileImage(temp);
+      const imgData = new FormData();
+      [].forEach.call(e.target.files, (f) => {
+        imgData.append("image", f);
+      });
+      submitImgMutation.mutate(imgData);
+    },
+    [fileImage]
+  );
 
   return (
     <PostFormWrapper>
@@ -47,6 +81,7 @@ const Write = () => {
           <SubmitBtn onClick={SubmitPost}>등록</SubmitBtn>
         </div>
       </PostFormBottom>
+      <ImageWrapper>{fileImage && <RegistedImage fileImage={fileImage} setFileImage={setFileImage} setSubmitImageIdx={setSubmitImageIdx} />}</ImageWrapper>
     </PostFormWrapper>
   );
 };

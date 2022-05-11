@@ -5,7 +5,7 @@ export const PostCardRoot = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 1px 7px #333d4b26;
   border: 0.5px solid #c8c8c8;
-  padding: 20px;
+  padding: 15px 20px;
   box-sizing: border-box;
   font-size: 12px;
   cursor: pointer;
@@ -19,14 +19,24 @@ export const PostWriter = styled.div`
   margin-bottom: 5px;
 `;
 
+export const PostTitle = styled.div`
+  font-size: 17px;
+  height: 23px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 5px;
+`;
+
 export const PostContent = styled.div`
-  font-size: 15px;
+  font-size: 13px;
   line-height: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 7.5px;
   height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #929292;
 `;
 
 export const PostDate = styled.div`
@@ -50,13 +60,9 @@ export const EtcItem = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
-  span {
-    margin-top: 3px;
-  }
 `;
 
 export const EtcItem2 = styled.div`
-  margin-top: 3px;
   display: flex;
   align-items: center;
   gap: 3px;

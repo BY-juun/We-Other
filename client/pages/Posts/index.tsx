@@ -13,7 +13,6 @@ const Posts = () => {
   const router = useRouter();
 
   const { data: PostList } = useGetPostsList();
-  console.log(PostList);
 
   const onClickWritePostBtn = useCallback(() => {
     const userIdx = Cookies.get("userIdx");
