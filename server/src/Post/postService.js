@@ -4,11 +4,12 @@ const baseResponseStatus = require("../../config/baseResponseStatus");
 const postDao = require("./postDao");
 const path = require("path/posix");
 
+// 게시물 작성
 exports.writePost = async (userIdx, title, content) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const insertParams = [userIdx, title, content];
-    const test = await postDao.insertPost(connection, insertParams);
+    await postDao.insertPost(connection, insertParams);
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
     console.log(error);
@@ -17,6 +18,8 @@ exports.writePost = async (userIdx, title, content) => {
     connection.release();
   }
 };
+
+//이미지 포함된 게시물 작성
 exports.writePostWithImage = async (userIdx, title, content, imageIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -47,6 +50,8 @@ exports.writePostWithImage = async (userIdx, title, content, imageIdx) => {
     connection.release();
   }
 };
+
+//이미지 등록하기 api
 exports.insertImage = async (path) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -69,12 +74,26 @@ exports.insertImage = async (path) => {
     connection.release();
   }
 };
-exports.deletePost = async (postIdx) => {
+
+//게시물 삭제
+
+exports.deletePost = async (postIdx ,imgOfPosts) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
-    const deletePostResult = await postDao.deletePost(connection, postIdx);
+    await connection.beginTransaction();
+    if(imgOfPosts){
+      //이미지가 존재하면 해당 게시물에 해당하는 postIdx들을 먼저 null 처리를 해주고 삭제해주어야한다. 
+      await Promise.all(imgOfPosts.map( async (x)=>{
+        //x에는 imgIdx가 있을 것이다. 
+        await postDao.breakImgToPost(connection,x);
+      })) 
+    }
+    // 잠시 대기
+    await postDao.deletePost(connection, postIdx);
+    await connection.commit();
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
+    await connection.rollback();
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {

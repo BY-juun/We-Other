@@ -2,6 +2,8 @@ const baseResponseStatus = require("../../config/baseResponseStatus");
 const { basicResponse, resultResponse } = require("../../config/response");
 const { pool } = require("../../config/database");
 const postDao = require("./postDao");
+
+//전체 게시물 가져오기
 exports.getPosts = async () => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -29,9 +31,6 @@ exports.getPost = async (postIdx) => {
 
     //게시물에 이미지가 존재하는지 파악. 
     const checkImageNum = await postDao.checkImageNum(connection,postIdx);
-    console.log(checkImageNum);
-
-    
 
     //만약 이미지가 해당 게시물에 존재한다면. 
     const imageArray = [];
@@ -55,6 +54,7 @@ exports.getPost = async (postIdx) => {
   }
 };
 
+// 게시물의 작성자 userIdx 가져오기
 exports.getPostUserIdx = async (postIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -62,7 +62,7 @@ exports.getPostUserIdx = async (postIdx) => {
       connection,
       postIdx
     );
-    return getPostUserIdxResult;
+    return getPostUserIdxResult.userIdx;
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
@@ -70,3 +70,26 @@ exports.getPostUserIdx = async (postIdx) => {
     connection.release();
   }
 };
+
+// 게시물의 image 존재여부 판단하고 이미지 인덱스들 가져오기 
+exports.checkImageExist = async (postIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const imageExist = await postDao.checkImageNum(connection,postIdx);
+
+    if(!imageExist) return 0; // 이미지가 존재하지 않으면 0을 반환.
+    else{ // 이미지가 존재하면 게시물에 해당하는 imageIdx 들의 인덱스들을 배열로서 가져온다. 
+      let imagesOfPost = await postDao.getImageIdxs(connection,postIdx);
+      const imageIdxs = [];
+      imagesOfPost.map((x) => imageIdxs.push(x.imageIdx));
+      console.log("imagesOfPost : " , imagesOfPost)
+      console.log("imageIdxs : ",imageIdxs)
+      return imageIdxs;
+    }
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
