@@ -11,3 +11,4 @@ config/easyelec.pem
 node_modules
 test
 *.pem
+./public
