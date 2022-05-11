@@ -8,8 +8,8 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
     const connection = await pool.getConnection(async (conn) => conn);
     try {
     //   const insertParams = [userIdx, postIdx, content];
-      const test = await commentDao.insertCommentOfPost(connection, userIdx, postIdx, content);
-      console.log(test)
+      const insertCommentOfPostResult= await commentDao.insertCommentOfPost(connection, userIdx, postIdx, content);
+      console.log(insertCommentOfPostResult);
       return basicResponse(baseResponseStatus.SUCCESS);
     } catch (error) {
       console.log(error);
@@ -17,6 +17,4 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
     } finally {
       connection.release();
     }
-
-
 }
