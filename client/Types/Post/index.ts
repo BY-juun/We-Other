@@ -1,23 +1,29 @@
 export interface SubmitPostReqData {
-  title: string;
-  content: string;
-  imgIdx: Array<number>;
+	title: string;
+	content: string;
+	imageIdx: Array<number>;
 }
 
 export interface PostArrayType {
-  postIdx: number;
-  userIdx: number;
-  title: string;
-  content: string;
-  createdAt: Date;
-  updatedAt: Date;
+	userIdx: number;
+	postIdx: number;
+	title: string;
+	content: string;
+	url: string;
+	updatedAt: Date;
 }
 
 export interface PostType {
-  userIdx: number;
-  title: string;
-  content: string;
-  imageIdx: number;
-  url: Array<string>;
-  createdAt: Date;
+	userIdx: number;
+	postIdx: number;
+	title: string;
+	content: string;
+	imageArray: Array<string | null>;
+	updatedAt: Date;
+}
+
+
+export interface GetImageType {
+	insertId: number;
+	url: string;
 }

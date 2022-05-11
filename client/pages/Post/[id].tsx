@@ -5,20 +5,26 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DummyType } from "Types/Dummy";
 import { DummyPosts } from "Utils/dummy";
+import PostLoading from "../../components/Loading/PostLoading";
+import { useGetPost } from "../../_Query/Post";
 import { CommentListWrapper, PostWrapper } from "./styles";
 
 const Post = () => {
 	const router = useRouter();
 	const { id } = router.query;
-	const [post, setPost] = useState<DummyType>();
 
-	useEffect(() => {
-		let temp = DummyPosts.filter((value) => value.id === Number(id));
-		setPost(temp[0]);
-	}, []);
+	const { data: post, isLoading } = useGetPost(Number(id));
+
+	console.log(post);
+
 	return (
 		<PostWrapper>
-			<PostContent post={post} id={Number(id)} />
+			{!isLoading
+				?
+				<>
+					<PostContent post={post} id={Number(id)} />
+				</>
+				: <PostLoading loading={isLoading} />}
 			<CommentForm />
 			<CommentListWrapper></CommentListWrapper>
 			{[1, 2, 3, 4, 5].map((value) => {

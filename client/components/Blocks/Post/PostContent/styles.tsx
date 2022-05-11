@@ -9,6 +9,7 @@ export const PostContentTop = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+	font-size : 13px;
 `;
 
 export const PostId = styled.span`
@@ -30,7 +31,17 @@ export const PostContentArea = styled.div`
   margin-bottom: 15px;
 `;
 
-export const ReportBtn = styled.div`
+export const DeleteBtn = styled.button`
+	border : none;
+	background : #fc96a5;
+	cursor : pointer;
+	color : white;
+	border-radius : 4px;
+	padding : 5px 10px;
+`
+
+export const ReportBtn = styled.button`
   border: none;
   cursor: pointer;
+	background : none;
 `;
