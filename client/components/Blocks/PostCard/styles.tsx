@@ -9,6 +9,9 @@ export const PostCardRoot = styled.div`
   box-sizing: border-box;
   font-size: 12px;
   cursor: pointer;
+	height : 105px;
+	display : flex;
+	justify-content : space-between;
   &:hover {
     border: 0.5px solid #fc96a5;
     color: #fc96a5;
@@ -26,6 +29,7 @@ export const PostTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 5px;
+	width : 200px;
 `;
 
 export const PostContent = styled.div`
@@ -37,6 +41,7 @@ export const PostContent = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #929292;
+	width : 200px;
 `;
 
 export const PostDate = styled.div`

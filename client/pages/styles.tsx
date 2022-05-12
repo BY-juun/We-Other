@@ -5,12 +5,11 @@ export const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15%;
+  margin-top: 20%;
   h1 {
     font-size: 50px;
   }
   ${mobile} {
-    margin-top: 30%;
   }
   ${tablet} {
     margin-top: 50%;
@@ -18,9 +17,14 @@ export const HomeWrapper = styled.div`
   ${tablet_landscape} {
     margin-top: 20%;
   }
+
+  span {
+    font-size: 40px;
+    font-weight: 600;
+  }
 `;
 
 export const HomeDescription = styled.div`
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 500;
 `;
