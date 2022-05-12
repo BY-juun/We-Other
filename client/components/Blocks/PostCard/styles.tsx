@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const PostCardRoot = styled.div`
   width: 100%;
@@ -16,6 +17,16 @@ export const PostCardRoot = styled.div`
     border: 0.5px solid #fc96a5;
     color: #fc96a5;
   }
+	${desktop} {
+		width : 48%;
+		border-radius : 4px;
+		margin-bottom : 15px;
+	}
+	${mobile} {
+		width : 99%;
+		margin : 0 auto;
+		border-radius : 4px;
+	}
 `;
 
 export const PostWriter = styled.div`

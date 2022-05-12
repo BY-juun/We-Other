@@ -7,7 +7,7 @@ import { DummyType } from "Types/Dummy";
 import { DummyPosts } from "Utils/dummy";
 import PostLoading from "../../components/Loading/PostLoading";
 import { useGetPost } from "../../_Query/Post";
-import { CommentListWrapper, PostWrapper } from "./styles";
+import { CommentListWrapper, PostWrapper, CommentWrapper } from "./styles";
 
 const Post = () => {
 	const router = useRouter();
@@ -25,13 +25,14 @@ const Post = () => {
 					<PostContent post={post} id={Number(id)} />
 				</>
 				: <PostLoading loading={isLoading} />}
-			<CommentForm />
-			<CommentListWrapper></CommentListWrapper>
-			{[1, 2, 3, 4, 5].map((value) => {
-				return <CommentList />
-			})}
-
-		</PostWrapper>
+			<CommentWrapper>
+				<CommentForm />
+				<CommentListWrapper></CommentListWrapper>
+				{[1, 2, 3, 4, 5].map((value) => {
+					return <CommentList />
+				})}
+			</CommentWrapper>
+		</PostWrapper >
 	);
 };
 
