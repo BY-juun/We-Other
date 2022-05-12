@@ -48,6 +48,7 @@ exports.signUpUser = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
+  console.log("테스트")
   const { email, passwd } = req.body;
 
   if (!email || !passwd)
