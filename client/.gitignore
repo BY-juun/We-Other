@@ -34,4 +34,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-./Utils/ServerURL.ts
+/Utils/ServerURL.ts
