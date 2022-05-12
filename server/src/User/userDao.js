@@ -24,8 +24,8 @@ exports.emailCheck = async (connection, email) => {
     select * from user where email = ?
     ) as exist
 `;
-  const [emailCheckRow] = await connection.query(emailCheckQuery, email);
-  return emailCheckRow;
+  const [[emailCheckRow]] = await connection.query(emailCheckQuery, email);
+  return emailCheckRow.exist;
 };
 
 exports.userNameCheck = async (connection, userName) => {
@@ -53,12 +53,12 @@ exports.signInCheckPasswd = async (connection, email) => {
   return signInCheckPasswdRow;
 };
 exports.getUserShortInfo = async (connection, email) => {
-  const getUserIdxQuery = `
-    select userIdx,userName from user 
+  const getUserShortInfoQuery = `
+    select userIdx, userName from user 
     where email = ?;
   `;
-  const [[getUserIdxRow]] = await connection.query(getUserIdxQuery, email);
-  return getUserIdxRow;
+  const [[getUserShortInfoRow]] = await connection.query(getUserShortInfoQuery, email);
+  return getUserShortInfoRow;
 };
 exports.getUserDeepInfo = async (connection, userIdx) => {
   const getUserDeepInfoQuery = `

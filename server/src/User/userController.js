@@ -15,7 +15,7 @@ exports.signUpUser = async (req, res) => {
 
   const emailCheck = await userProvider.emailCheck(email);
   //   console.log(emailCheck[0].exist);
-  if (emailCheck[0].exist)
+  if (emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_EXISTS));
 
   const emailValid = regex.email(email);
@@ -60,7 +60,7 @@ exports.signIn = async (req, res) => {
     // console.log(emailValid);
     return res.send(basicResponse(baseResponseStatus.EMAIL_INVALID));
   }
-  const emailCheck = userProvider.emailCheck(email);
+  const emailCheck = await userProvider.emailCheck(email);
   // 해당 이메일이 존재하지 않을 때
   if (!emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_NOT_EXIST));

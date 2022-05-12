@@ -13,6 +13,5 @@ module.exports = (app) => {
   app.get("/api/user/:userIdx", user.getUserDeepInfo);
 
   //
-
   app.get("/api/user/test", verifyAccessToken, user.test);
 };

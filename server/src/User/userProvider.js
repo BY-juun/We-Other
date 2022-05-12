@@ -23,6 +23,7 @@ exports.emailCheck = async (email) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const emailCheckResult = await userDao.emailCheck(connection, email);
+    console.log("emailCheckResult : ", emailCheckResult)
     // console.log(emailCheckResult);
     return emailCheckResult;
   } catch (error) {
