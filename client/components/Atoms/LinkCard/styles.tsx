@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
+
 
 export const LinkCardRoot = styled.div`
   width: 100%;
@@ -11,7 +13,14 @@ export const LinkCardRoot = styled.div`
   text-align: start;
   padding: 3vh;
   overflow: hidden;
-
+	${desktop} {
+		width : 48%;
+		height : 200px;
+	}
+	${tablet_landscape} {
+		width : 48%;
+		height : 150px;
+	}
   div {
     font-weight: 700;
     font-size: 18px;
@@ -25,5 +34,10 @@ export const LinkCardRoot = styled.div`
     right: 0;
     top: 20%;
     opacity: 0.5;
+		${desktop} {
+			width: 200px;
+			height: 200px;
+			opacity : 0.4;
+		}
   }
 `;
