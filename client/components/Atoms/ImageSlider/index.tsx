@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ImageSlider = ({ images }: { images: Array<string | null> }) => {
 
-	const sliderRef = useRef();
 	const settings = {
 		dots: true,
 		infinite: true,

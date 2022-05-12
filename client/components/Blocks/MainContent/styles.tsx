@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const LogOutBtn = styled.button`
   border: none;
@@ -8,6 +9,7 @@ export const LogOutBtn = styled.button`
   border-radius: 4px;
   margin-top: 15px;
   margin-bottom: 15px;
+	cursor : pointer;
 `;
 
 export const MainContentWrapper = styled.div`
@@ -17,3 +19,4 @@ export const MainContentWrapper = styled.div`
   align-items: center;
   width: 100%;
 `;
+

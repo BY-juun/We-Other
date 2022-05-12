@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const SliderImg = styled.img`
 	width : 100%;	
 	min-width : 400px;
 	height : 200px;
-	
+	${desktop} {
+		height : 400px;
+	}
 `
 
 export const SlideWrapper = styled.div`
