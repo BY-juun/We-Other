@@ -1,7 +1,7 @@
 const { verifyAccessToken } = require("../../config/jwt");
+const user = require("./userController");
 
 module.exports = (app) => {
-  const user = require("./userController");
 
   //회원가입
   app.post("/api/user/sign-up", user.signUpUser);
@@ -12,6 +12,8 @@ module.exports = (app) => {
   //사용자 정보 가져오기
   app.get("/api/user/:userIdx", user.getUserDeepInfo);
 
-  //
-  app.get("/api/user/test", verifyAccessToken, user.test);
+  // 게시물 좋아요 누르기
+  app.patch("/api/user/like/:postIdx", verifyAccessToken, user.pushLikeToPost);
+
+
 };

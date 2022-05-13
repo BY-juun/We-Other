@@ -28,4 +28,5 @@ module.exports = (app) => {
 
   //게시물 삭제
   app.delete("/api/post/delete", verifyAccessToken, post.deletePost);
+
 };

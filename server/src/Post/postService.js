@@ -57,10 +57,10 @@ exports.insertImage = async (path) => {
   try {
     const imageArray = [];
     await connection.beginTransaction();
-    
-    await Promise.all(path.map(async(x)=>{
+
+    await Promise.all(path.map(async (x) => {
       let insertResult = await postDao.insertImage(connection, x);
-      let pushHash = {"insertId" : insertResult["insertId"], "url":x}
+      let pushHash = { "insertId": insertResult["insertId"], "url": x }
       imageArray.push(pushHash);
     }))
     await connection.commit();
@@ -77,16 +77,16 @@ exports.insertImage = async (path) => {
 
 //게시물 삭제
 
-exports.deletePost = async (postIdx ,imgOfPosts) => {
+exports.deletePost = async (postIdx, imgOfPosts) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     await connection.beginTransaction();
-    if(imgOfPosts){
+    if (imgOfPosts) {
       //이미지가 존재하면 해당 게시물에 해당하는 postIdx들을 먼저 null 처리를 해주고 삭제해주어야한다. 
-      await Promise.all(imgOfPosts.map( async (x)=>{
+      await Promise.all(imgOfPosts.map(async (x) => {
         //x에는 imgIdx가 있을 것이다. 
-        await postDao.breakImgToPost(connection,x);
-      })) 
+        await postDao.breakImgToPost(connection, x);
+      }))
     }
     // 잠시 대기
     await postDao.deletePost(connection, postIdx);

@@ -77,29 +77,30 @@ exports.deletePost = async (connection, postIdx) => {
 
 
 //게시물의 이미지의 존재여부 파악
-exports.checkImageNum  = async (connection,postIdx)=>{
-  const checkImageNumQuery =`
+exports.checkImageNum = async (connection, postIdx) => {
+  const checkImageNumQuery = `
     select exists (select count(*) from image where postIdx = ? ) as exist;
   `;
-  const [[checkImageNumRow]] = await connection.query(checkImageNumQuery,postIdx);
-    return checkImageNumRow.exist;
+  const [[checkImageNumRow]] = await connection.query(checkImageNumQuery, postIdx);
+  return checkImageNumRow.exist;
 }
 
 // 특정 게시물의 이미지 인덱스들을 반환.
-exports.getImageIdxs = async (connection,postIdx)=>{
+exports.getImageIdxs = async (connection, postIdx) => {
 
   const getImageIdxsQuery = ` 
     select imageIdx from image where postIdx = ? 
   `
-  const [getImageIdxsRow]  = await connection.query(getImageIdxsQuery,postIdx);
+  const [getImageIdxsRow] = await connection.query(getImageIdxsQuery, postIdx);
   return getImageIdxsRow;
 }
 
 // 게시물의 imgIdx와 게시물의 맵핑을 끊기.
-exports.breakImgToPost = async(connection,imageIdx) =>{
-  const breakImgToPostQuery =`
+exports.breakImgToPost = async (connection, imageIdx) => {
+  const breakImgToPostQuery = `
   UPDATE image SET postIdx = '' WHERE imageIdx = ?;
   `
-  const [breakImgToPostRow]  = await connection.query(breakImgToPostQuery,imageIdx);
+  const [breakImgToPostRow] = await connection.query(breakImgToPostQuery, imageIdx);
   return breakImgToPostRow;
 }
+

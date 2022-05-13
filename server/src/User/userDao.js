@@ -141,3 +141,19 @@ exports.updateAccessToken = async (connection, id, accessToken) => {
   ]);
   return updateAccessTokenRow;
 };
+
+//게시물에 좋아요 누르기
+exports.insertLikeToPost = async (connection, userIdx, postIdx) => {
+  const insertLikeToPostQuery = `
+  INSERT INTO recommend (userIdx, postIdx)
+  VALUES (?,?)
+  `
+  console.log('userIdx : ', userIdx);
+  console.log('postIdx : ', Number(postIdx));
+
+  const [insertLikeToPostRow] = await connection.query(insertLikeToPostQuery, [userIdx, postIdx]);
+  return insertLikeToPostRow;
+}
+exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
+
+}

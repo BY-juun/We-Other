@@ -47,14 +47,14 @@ exports.getPost = async (req, res) => {
 //게시물 삭제
 exports.deletePost = async (req, res) => {
   const { postIdx } = req.query;
-
   const userIdx = req.userIdx;
-  const imgOfPosts =  await postProvider.checkImageExist(postIdx);
+  const imgOfPosts = await postProvider.checkImageExist(postIdx);
   const postUserIdx = await postProvider.getPostUserIdx(postIdx);
   //특정 postIdx의 userIdx와 동일할 때에만 해당 게시물을 삭제할 수 있도록 하여야 한다.
   if (!postIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   if (userIdx != postUserIdx) return res.send(basicResponse(baseResponseStatus.USER_NOT_AUTH));
 
-  const result = await postService.deletePost(postIdx,imgOfPosts);
+  const result = await postService.deletePost(postIdx, imgOfPosts);
   return res.send(result);
 };
+
