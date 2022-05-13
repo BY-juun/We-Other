@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
 import { ServerURL } from "./ServerURL";
 
+console.log(ServerURL)
 export const customAxios: AxiosInstance = axios.create({
-
 	baseURL: `${ServerURL}/api`,
 	//withCredentials: true,
 	headers: {
