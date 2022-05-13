@@ -1,36 +1,25 @@
 import SignUpBlock from "components/Blocks/SingUp/SignUpBlock";
 import { ContentWrapper } from "components/Layouts/Content/styles";
-import { GetServerSidePropsContext } from "next";
-import cookies from "next-cookies";
+import Cookies from "js-cookie";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 import { SignUpTitle, SignUpWrapper } from "./styles";
 
-const SignUp = () => {
-	return (
-		<>
-			<ContentWrapper>
-				<SignUpWrapper>
-					<SignUpTitle>회원가입</SignUpTitle>
-					<SignUpBlock />
-				</SignUpWrapper>
-			</ContentWrapper>
-		</>
-	);
-};
+const SignUp: NextPage = () => {
+  const router = useRouter();
+  if (Cookies.get("userIdx")) router.push("/");
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-	const userIdx = cookies(context)["userIdx"] ? cookies(context)["userIdx"] : "";
-	if (userIdx) {
-		return {
-			redirect: {
-				destination: "/",
-				permanent: true,
-			},
-		};
-	}
-	return {
-		props: {},
-	};
+  return (
+    <>
+      <ContentWrapper>
+        <SignUpWrapper>
+          <SignUpTitle>회원가입</SignUpTitle>
+          <SignUpBlock />
+        </SignUpWrapper>
+      </ContentWrapper>
+    </>
+  );
 };
 
 export default SignUp;
