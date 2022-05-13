@@ -13,21 +13,15 @@ const LoginBlock: VFC = () => {
     router.push("/SignUp");
   }, [router]);
 
-  const LoginSuccess = useCallback(() => {
-    return alert("로그인 성공!");
-  }, []);
-
-  const loginMutation = useLogin(LoginSuccess);
+  const loginMutation = useLogin();
 
   const Submit = useCallback(
     (e) => {
       e.preventDefault();
-      if (!emailRef?.current?.value) {
-        return alert("*이메일을 입력해주세요");
-      }
-      if (!passwordRef?.current?.value) {
-        return alert("*비밀번호를 입력해주세요");
-      }
+      if (!emailRef?.current?.value) return alert("*이메일을 입력해주세요");
+
+      if (!passwordRef?.current?.value) return alert("*비밀번호를 입력해주세요");
+
       const reqData = {
         email: emailRef?.current?.value,
         passwd: passwordRef?.current?.value,

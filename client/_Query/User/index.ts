@@ -1,20 +1,23 @@
 import { LoginAPI, SignUpAPI, UserInfoAPI } from "API/User";
+import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { LoginResponse, UserInfo } from "../../Types/User";
 import { setToken } from "../../Utils/TokenManager";
 
-export const useSignUp = (onSuccess: () => void) => {
+export const useSignUp = () => {
+  const router = useRouter();
   return useMutation(SignUpAPI, {
     onSuccess: (res) => {
       if (!res.isSuccess) {
         return alert(res.message);
       }
-      onSuccess();
+      alert("*회원가입에 성공하셨습니다!");
+      return router.push("/");
     },
   });
 };
 
-export const useLogin = (onSuccess: () => void) => {
+export const useLogin = () => {
   const queryClient = useQueryClient();
   return useMutation(LoginAPI, {
     onSuccess: (res: LoginResponse) => {
@@ -22,7 +25,7 @@ export const useLogin = (onSuccess: () => void) => {
       const { accessToken, userIdx } = res.result;
       setToken(accessToken, userIdx);
       queryClient.invalidateQueries(["userInfo"]);
-      onSuccess();
+      return alert("로그인 성공!");
     },
   });
 };
