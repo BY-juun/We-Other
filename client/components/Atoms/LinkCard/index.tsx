@@ -5,7 +5,7 @@ const LinkCard = ({ content }: { content: string }) => {
   return (
     <LinkCardRoot>
       <div>{content}</div>
-      <img src="/couple.png" />
+      {/* <img src="/couple.png" /> */}
     </LinkCardRoot>
   );
 };
