@@ -12,7 +12,7 @@ export const LoginWrapper = styled.form`
     width: 35%;
   }
   margin-top: 25px;
-  width: 25%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 15px;
