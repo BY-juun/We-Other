@@ -166,11 +166,20 @@ exports.updateAccessToken = async (id, accessToken) => {
   }
 };
 
-// 게시물에 좋아요 등록하기 
-exports.pushLikeToPost = async (userIdx, postIdx) => {
+// 좋아요 등록 
+exports.pushLike = async (userIdx, postIdx, commentIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
-    const pushLikeResult = await userDao.insertLikeToPost(connection, userIdx, postIdx);
+    // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다. 
+
+
+    if (postIdx) {
+      await userDao.insertLikeToPost(connection, userIdx, postIdx);
+    }
+    else {
+      await userDao.insertLikeToComment(connection, userIdx, commentIdx)
+    }
+
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
     console.log(error);

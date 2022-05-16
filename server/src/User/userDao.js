@@ -148,12 +148,17 @@ exports.insertLikeToPost = async (connection, userIdx, postIdx) => {
   INSERT INTO recommend (userIdx, postIdx)
   VALUES (?,?)
   `
-  console.log('userIdx : ', userIdx);
-  console.log('postIdx : ', Number(postIdx));
-
   const [insertLikeToPostRow] = await connection.query(insertLikeToPostQuery, [userIdx, postIdx]);
   return insertLikeToPostRow;
 }
+
+// 댓글에 좋아요 누르기
 exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
+  const insertLikeToCommentQuery = `
+  INSERT INTO recommend (userIdx, commentIdx)
+  VALUES (?,?)
+  `
+  const [insertLikeToCommentRow] = await connection.query(insertLikeToCommentQuery, [userIdx, commentIdx]);
+  return insertLikeToCommentRow;
 
 }
