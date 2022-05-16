@@ -35,3 +35,21 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
       connection.release();
     }
 }
+
+// 댓글에 대댓 달기. 
+exports.insertCommentOfComment= async (userIdx,commentIdx,content)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+  const insertCommentOfCommentResult = await commentDao.insertCommentOfComment(connection, userIdx, commentIdx, content); 
+  console.log(insertCommentOfCommentResult);
+  // 코멘트를 달았을 때 해당 익명에 대한 순서를 가져올 수 있어야한다. 
+    return resultResponse(baseResponseStatus.SUCCESS,insertCommentOfCommentResult);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+
+}
