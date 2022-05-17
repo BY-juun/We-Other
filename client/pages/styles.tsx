@@ -9,7 +9,7 @@ export const HomeWrapper = styled.div`
     font-size: 50px;
   }
   ${mobile} {
-    margin-top: 10%;
+    margin-top: 15%;
   }
   ${tablet} {
     margin-top: 30%;

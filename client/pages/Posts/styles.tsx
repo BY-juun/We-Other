@@ -13,7 +13,6 @@ export const PostCardContainer = styled.div`
 		gap : 4%;
 	}
 	${mobile} {
-		margin-top : 10px;
 		margin-bottom : 100px;
 	}
 `;
@@ -51,52 +50,5 @@ export const SerachOpenBtn = styled.button`
 	cursor: pointer;
 	${desktop} {
 		top: 2%;
-	}
-`
-
-export const SearchInput = styled.input`
-	position: fixed;
-	z-index: 100;
-	height : 40px;
-	top: 6%;
-	left: 5%;
-	border: none;
-	border-radius: 4px;
-	width : 0;
-	background: #f5f5f5;
-	padding : 0;
-	transition : width 0.35s ease;
-	&:focus {
-		outline : none;
-		border : 1px solid rgb(252, 150, 165);
-	}
-	${desktop} {
-		top: 3%;
-		left : 15%;
-	}
-`
-
-export const SearchBtn = styled.input`
-	cursor : pointer;
-	position: fixed;
-	z-index: 100;
-	opacity : 1;
-	height : 40px;
-	top: 6%;
-	left: 60%;
-	border: none;
-	border-radius: 4px;
-	width : 0;
-	background: rgb(252, 150, 165);
-	padding : 0;
-	transition : width 0.35s ease;
-
-	&::placeholder {
-		color : white;
-		text-align : center;
-	}
-	${desktop} {
-		top: 3%;
-		left : 67%;
 	}
 `

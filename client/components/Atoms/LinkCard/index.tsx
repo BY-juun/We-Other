@@ -1,13 +1,14 @@
 import React from "react";
 import { LinkCardRoot } from "./styles";
 
-const LinkCard = ({ content }: { content: string }) => {
-  return (
-    <LinkCardRoot>
-      <div>{content}</div>
-      {/* <img src="/couple.png" /> */}
-    </LinkCardRoot>
-  );
+const LinkCard = ({ title, description }: { title: string, description: string }) => {
+	return (
+		<LinkCardRoot>
+			<div>{title}</div>
+			<span>{description}</span>
+			{/* <img src="/couple.png" /> */}
+		</LinkCardRoot>
+	);
 };
 
 export default LinkCard;

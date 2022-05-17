@@ -12,6 +12,10 @@ export const LinkCardRoot = styled.div`
   text-align: start;
   padding: 3vh;
   overflow: hidden;
+	${mobile} {
+		height : 75px;
+		padding : 10px 15px;
+	}
   &:before {
     z-index: 2;
     content: "";
@@ -67,9 +71,12 @@ export const LinkCardRoot = styled.div`
   div {
     font-weight: 700;
     font-size: 18px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
-
+	span {
+		font-size : 13px;
+		opacity : 0.5;
+	}
   img {
     position: absolute;
     width: 100px;
