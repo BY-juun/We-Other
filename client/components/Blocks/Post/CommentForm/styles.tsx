@@ -1,14 +1,19 @@
 import styled from "@emotion/styled";
 
 export const CommentFormRoot = styled.div`
-  display: flex;
-  align-items: center;
+
   padding: 10px 0;
   width: 100%;
-  gap: 5%;
+
 	padding : 0 10%;
 	margin-top : 15px;
 	margin-bottom : 15px;
+	form {
+		width : 100%;
+		display: flex;
+		align-items: center;
+		gap: 5%;
+	}
   input {
     width: 75%;
     padding: 10px;

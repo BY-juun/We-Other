@@ -8,4 +8,5 @@ export const customAxios: AxiosInstance = axios.create({
 	headers: {
 		accesstoken: Cookies.get("accessToken") || "",
 	},
+
 }); //로컬에 연결할 때

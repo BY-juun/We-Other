@@ -15,7 +15,7 @@ exports.signUpUser = async (req, res) => {
 
   const emailCheck = await userProvider.emailCheck(email);
   //   console.log(emailCheck[0].exist);
-  if (emailCheck[0].exist)
+  if (emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_EXISTS));
 
   const emailValid = regex.email(email);
@@ -48,6 +48,7 @@ exports.signUpUser = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
+  console.log("테스트")
   const { email, passwd } = req.body;
 
   if (!email || !passwd)
@@ -60,7 +61,7 @@ exports.signIn = async (req, res) => {
     // console.log(emailValid);
     return res.send(basicResponse(baseResponseStatus.EMAIL_INVALID));
   }
-  const emailCheck = userProvider.emailCheck(email);
+  const emailCheck = await userProvider.emailCheck(email);
   // 해당 이메일이 존재하지 않을 때
   if (!emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_NOT_EXIST));
@@ -75,6 +76,7 @@ exports.signIn = async (req, res) => {
   return res.send(signInResult);
 };
 
+// 유저의 상세 정보 가져오기
 exports.getUserDeepInfo = async (req, res) => {
   const { userIdx } = req.params;
   if (!userIdx)
@@ -92,3 +94,13 @@ exports.test = async (req, res) => {
   testResult.accessTokenNew = accessTokenNew;
   return res.send(testResult);
 };
+
+// 게시물에 좋아요 등록하기
+exports.pushLikeToPost = async (req, res) => {
+  const { postIdx } = req.params;
+  const userIdx = req.userIdx // 좋아요를 이미 한 유저의 경우에는 한 번 더 좋아요를 할 수 없자나!
+  if (!postIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const pushLikeResult = await userService.pushLikeToPost(userIdx, postIdx);
+  return res.send(pushLikeResult);
+}

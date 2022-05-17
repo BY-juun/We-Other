@@ -6,21 +6,18 @@ import { useRouter } from "next/router";
 import { PostArrayType } from "../../../Types/Post";
 import { dateForm } from "../../../Utils/dateForm";
 import { ServerURL } from "../../../Utils/ServerURL";
+import useGotoPage from "../../../Utils/Hooks/useGotoPage";
 
 interface Props {
 	PostInfo: PostArrayType;
 }
 
-const PostCard = ({ PostInfo }: Props) => {
+const PostCard: (props: Props) => JSX.Element = ({ PostInfo }) => {
 	const router = useRouter();
-	const gotoPost = useCallback(
-		(id: number) => () => {
-			router.push(`/Post/${id}`);
-		},
-		[]
-	);
+	const gotoPage = useGotoPage();
+
 	return (
-		<PostCardRoot onClick={gotoPost(PostInfo.postIdx)}>
+		<PostCardRoot onClick={gotoPage(`/Post/${PostInfo.postIdx}`)}>
 			<div>
 				<PostTitle>{PostInfo.title}</PostTitle>
 				<PostContent>{PostInfo.content}</PostContent>
@@ -39,9 +36,7 @@ const PostCard = ({ PostInfo }: Props) => {
 					<div></div>
 				</EtcArea>
 			</div>
-			<div>
-				{PostInfo.url && <img src={`${ServerURL}/${PostInfo.url}`} width={125} height={75} />}
-			</div>
+			<div>{PostInfo.url && <img src={`${ServerURL}/${PostInfo.url}`} width={125} height={75} />}</div>
 		</PostCardRoot>
 	);
 };

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const FooterWrapper = styled.div`
   display: flex;
@@ -9,10 +10,13 @@ export const FooterWrapper = styled.div`
   bottom: 0;
   min-height: 50px;
   background: white;
+  ${desktop} {
+    display: none;
+  }
 `;
 
 export const FooterContent = styled.div`
-	cursor : pointer;
+  cursor: pointer;
   width: 33.3%;
   text-align: center;
   color: black;

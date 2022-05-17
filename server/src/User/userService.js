@@ -100,6 +100,7 @@ exports.signIn = async (email, passwd) => {
       connection,
       email
     );
+
     // console.log(signInCheckPasswd);
     // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
@@ -164,3 +165,17 @@ exports.updateAccessToken = async (id, accessToken) => {
     connection.release();
   }
 };
+
+// 게시물에 좋아요 등록하기 
+exports.pushLikeToPost = async (userIdx, postIdx) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const pushLikeResult = await userDao.insertLikeToPost(connection, userIdx, postIdx);
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}

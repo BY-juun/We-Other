@@ -1,11 +1,15 @@
 import SignUpBlock from "components/Blocks/SingUp/SignUpBlock";
 import { ContentWrapper } from "components/Layouts/Content/styles";
-import { GetServerSidePropsContext } from "next";
-import cookies from "next-cookies";
+import Cookies from "js-cookie";
+import { NextPage } from "next";;
 import React from "react";
+import useGotoPage from "../../Utils/Hooks/useGotoPage";
 import { SignUpTitle, SignUpWrapper } from "./styles";
 
-const SignUp = () => {
+const SignUp: NextPage = () => {
+	const gotoPage = useGotoPage();
+	if (Cookies.get("userIdx")) gotoPage('/');
+
 	return (
 		<>
 			<ContentWrapper>
@@ -16,21 +20,6 @@ const SignUp = () => {
 			</ContentWrapper>
 		</>
 	);
-};
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-	const userIdx = cookies(context)["userIdx"] ? cookies(context)["userIdx"] : "";
-	if (userIdx) {
-		return {
-			redirect: {
-				destination: "/",
-				permanent: true,
-			},
-		};
-	}
-	return {
-		props: {},
-	};
 };
 
 export default SignUp;

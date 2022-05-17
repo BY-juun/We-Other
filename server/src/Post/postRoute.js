@@ -25,5 +25,8 @@ module.exports = (app) => {
 
   // 단일 게시물 가져오기
   app.get("/api/post/:postIdx", post.getPost);
+
+  //게시물 삭제
   app.delete("/api/post/delete", verifyAccessToken, post.deletePost);
+
 };

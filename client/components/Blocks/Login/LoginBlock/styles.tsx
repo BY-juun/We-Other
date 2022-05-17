@@ -4,6 +4,7 @@ import { mobile, tablet, tablet_landscape } from "Utils/styles";
 export const LoginWrapper = styled.form`
   ${mobile} {
     width: 100%;
+		margin-bottom : 25px;
   }
   ${tablet} {
     width: 50%;
@@ -12,7 +13,7 @@ export const LoginWrapper = styled.form`
     width: 35%;
   }
   margin-top: 25px;
-  width: 25%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 15px;

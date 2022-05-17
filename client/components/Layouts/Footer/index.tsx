@@ -3,18 +3,12 @@ import { FooterContent, FooterWrapper } from "./styles";
 import { CgClipboard } from "react-icons/cg";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { useRouter } from "next/router";
+import useGotoPage from "../../../Utils/Hooks/useGotoPage";
 
 const Footer = () => {
 	const router = useRouter();
+	const gotoPage = useGotoPage();
 	const [path, setPath] = useState("");
-
-	const gotoPosts = useCallback(() => {
-		router.push("/Posts");
-	}, [router]);
-
-	const gotoHome = useCallback(() => {
-		router.push('/');
-	}, [])
 
 	useEffect(() => {
 		setPath(router.pathname);
@@ -22,11 +16,11 @@ const Footer = () => {
 
 	return (
 		<FooterWrapper>
-			<FooterContent style={{ color: path === "/Posts" ? "#fc96a5" : "black" }} onClick={gotoPosts}>
+			<FooterContent style={{ color: path === "/Posts" ? "#fc96a5" : "black" }} onClick={gotoPage("/Posts")}>
 				<CgClipboard />
 				<div>게시판</div>
 			</FooterContent>
-			<FooterContent style={{ color: path === "/" ? "#fc96a5" : "black" }} onClick={gotoHome}>
+			<FooterContent style={{ color: path === "/" ? "#fc96a5" : "black" }} onClick={gotoPage('/')}>
 				<AiOutlineHome />
 				<div>홈</div>
 			</FooterContent>
