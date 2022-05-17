@@ -19,13 +19,11 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
         { order: 3, userIdx: 9 }
       ]
  */
-      let orderOfComment;
-     orderResult.map(x=>{
-       if(x.userIdx == userIdx){
-        orderOfComment = x.order;
-       }
+     let {order} = orderResult.find(x=>{
+       return x.userIdx == userIdx;
      })
-     const result = {"orderOfComment" : orderOfComment}
+     const result = {"orderOfComment" : order}
+     console.log("result: " ,result)
       return resultResponse(baseResponseStatus.SUCCESS,result);
     } catch (error) {
       console.log(error);
