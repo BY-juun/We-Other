@@ -4,6 +4,7 @@ import { mobile, tablet, tablet_landscape } from "Utils/styles";
 export const LoginWrapper = styled.form`
   ${mobile} {
     width: 100%;
+		margin-bottom : 25px;
   }
   ${tablet} {
     width: 50%;

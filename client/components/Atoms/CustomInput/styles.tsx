@@ -5,7 +5,10 @@ export const CustomInput = styled.input`
   background: #f5f5f5;
   width: 100%;
   border: none;
-  outline: none;
   font-size: 15px;
   border-radius: 4px;
+	&:focus {
+		outline : none;
+		border : 2px solid #fc96a5;
+	}
 `;
