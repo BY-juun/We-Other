@@ -21,12 +21,15 @@ exports.getOrderOfComment = async (connection,postIdx)=>{
     const [getOrderOfCommentRow] = await connection.query(getOrderOfCommentQuery,postIdx);
     return getOrderOfCommentRow;
 }
-exports.insertCommentOfComment = async (connection, userIdx, commentIdx, content) =>{
+exports.insertCommentOfComment = async (connection, insertParams) =>{
+    const [userIdx,postIdx,commentIdx,content] = insertParams;
     const insertCommentOfCommentQuery = `
-
+        insert into comment(commentRef,userIdx,postIdx,content) 
+        values(?,?,?,?)
+        ;   
     `
-    const [insertCommentOfCommentRow] = await connection.query(insertCommentOfCommentQuery);
-    return 
+    const [insertCommentOfCommentRow] = await connection.query(insertCommentOfCommentQuery,[commentIdx,userIdx,postIdx,content]);
+    return insertCommentOfCommentRow;
 
 
 }

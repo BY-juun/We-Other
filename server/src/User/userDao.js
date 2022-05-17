@@ -160,5 +160,7 @@ exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
   `
   const [insertLikeToCommentRow] = await connection.query(insertLikeToCommentQuery, [userIdx, commentIdx]);
   return insertLikeToCommentRow;
-
 }
+
+//
+exports.selectLikes

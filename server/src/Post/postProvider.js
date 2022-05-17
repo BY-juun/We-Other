@@ -22,7 +22,6 @@ exports.getPost = async (postIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getPostResult = await postDao.getPost(connection, postIdx);
-    console.log(getPostResult);
     const userIdx = getPostResult[0].userIdx;
     const thisPostIdx = getPostResult[0].postIdx;
     const title = getPostResult[0].title;

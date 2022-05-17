@@ -19,7 +19,7 @@ exports.getCommentOfPost=async(req,res)=>{
 
 //특정 게시물에 댓글 작성.
 exports.writeCommentOfPost  =async(req,res)=>{
-    const {postIdx} = req.body;
+    const {postIdx} = req.query;
     const {content}=req.body;
     const userIdx = req.userIdx;   
     if(!postIdx || !userIdx || !content){
@@ -31,13 +31,14 @@ exports.writeCommentOfPost  =async(req,res)=>{
 }
 // 특정 댓글에 대한 대댓 작성.
 exports.writeCommentOfComment = async (req,res)=>{
-  const {commentIdx}= req.params;
+  const {commentIdx,postIdx}= req.query;
   const {content} = req.body;
   const userIdx = req.userIdx;  
-  if(!commentIdx || !userIdx || !content){
+  
+  if(!commentIdx || !userIdx || !content || !postIdx){
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   }
 
-  const writeCommentOfCommentResult = await commentService.insertCommentOfComment(userIdx,commentIdx,content);
-
+  const writeCommentOfCommentResult = await commentService.insertCommentOfComment(userIdx,postIdx,commentIdx,content);
+  return res.send(writeCommentOfCommentResult);
 }
