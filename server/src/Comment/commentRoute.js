@@ -11,4 +11,5 @@ module.exports = (app) => {
 
     // 댓글에 댓글 등록
     app.post("/api/comment/test",verifyAccessToken,comment.writeCommentOfComment);
+    
 };

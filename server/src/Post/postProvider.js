@@ -2,6 +2,7 @@ const baseResponseStatus = require("../../config/baseResponseStatus");
 const { basicResponse, resultResponse } = require("../../config/response");
 const { pool } = require("../../config/database");
 const postDao = require("./postDao");
+const commentDao = require('../Comment/commentDao');
 
 //전체 게시물 가져오기
 exports.getPosts = async () => {
@@ -31,6 +32,44 @@ exports.getPost = async (postIdx) => {
     //게시물에 이미지가 존재하는지 파악. 
     const checkImageNum = await postDao.checkImageNum(connection,postIdx);
 
+    // 단일 댓글을 가져오기 
+    const getCommentOfPost = await commentDao.getCommentOfPost(connection,postIdx);
+    const getCommentOfComment = await commentDao.getCommentOfcomment(connection,postIdx);
+
+    const commentRefList = getCommentOfComment.map(x=>{
+      return x.commentRef
+    })
+
+    console.log("commentRefList : ",commentRefList );
+    console.log("getCommentOfComment: ",getCommentOfComment)
+    // 이 게시물의 댓글 등록 순서. 
+    const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
+      // console.log("getCommentOfPost: ",getCommentOfPost);
+      await Promise.all(getCommentOfPost.map(async(x)=>{
+        let orderOfComment;     
+        let {order} = orderResult.find( y=>{
+          return y.userIdx == x.userIdx
+        });
+        //각 댓글이 몇번째 댓글인지 확인하는 것.
+        x["orderOfComment"] = order;
+        
+        let ccList; // 대댓글들의 리스트
+        if(commentRefList.includes(x.commentIdx)){
+          //만약 해당 댓글에 대한 대댓이 있다면 대댓에 대한 데이터들도 전달해주어야만 한다.   
+          let commentOfComment = await commentDao.getCommentOfCommmentContent(connection,postIdx,x.commentIdx);
+          console.log("commentOfComment : ",commentOfComment)
+          await Promise.all(commentOfComment.map(async(z)=>{
+            let orderOfCc = orderResult.find(p=>{
+              return p.userIdx == z.userIdx
+            })
+            z["orderOfComment"] = orderOfCc.order;   
+          }))
+          ccList=commentOfComment;
+        }
+        x["commentOfComment"] = ccList;
+      }))
+
+
     //만약 이미지가 해당 게시물에 존재한다면. 
     const imageArray = [];
     if(checkImageNum) {
@@ -42,7 +81,8 @@ exports.getPost = async (postIdx) => {
         title,
         content,
         updatedAt,
-        imageArray 
+        imageArray,
+        "CommentOfPost":getCommentOfPost
       }
     return result;
   } catch (error) {
