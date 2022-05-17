@@ -171,8 +171,6 @@ exports.pushLike = async (userIdx, postIdx, commentIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다. 
-
-
     if (postIdx) {
       await userDao.insertLikeToPost(connection, userIdx, postIdx);
     }

@@ -100,6 +100,7 @@ exports.pushLike = async (req, res) => {
 
   // 게시물이나 댓글 둘중에 하나 받아와서 게시물을 좋아요 한것인지 댓글을 좋아요 한것인지 판단한다. 
   // 댓글에 대한 좋아요는 게시물에 대한 좋아요가 이미 있는 경우에 insert 가 아닌 update를 해주는 방향으로 진행되어야 한다. 
+  // 한 게시물에 
   const { postIdx, commentIdx } = req.body;
   const userIdx = req.userIdx // 좋아요를 이미 한 유저의 경우에는 한 번 더 좋아요를 할 수 없자나!
   if (!postIdx && !commentIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));

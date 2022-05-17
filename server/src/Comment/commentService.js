@@ -21,7 +21,6 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
  */
       let orderOfComment;
      orderResult.map(x=>{
-       console.log(x.userIdx)
        if(x.userIdx == userIdx){
         orderOfComment = x.order;
        }
@@ -34,4 +33,30 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
     } finally {
       connection.release();
     }
+}
+
+// 댓글에 대댓 달기. 
+exports.insertCommentOfComment= async (userIdx,postIdx,commentIdx,content)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+  const insertParams = [userIdx,postIdx,commentIdx,content];
+  const insertCommentOfCommentResult = await commentDao.insertCommentOfComment(connection,insertParams); 
+  const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
+  let orderOfComment;
+  orderResult.map(x=>{
+    if(x.userIdx == userIdx){
+     orderOfComment = x.order;
+    }
+  })
+  const result = {"orderOfComment" : orderOfComment}
+
+  // 코멘트를 달았을 때 해당 익명에 대한 순서를 가져올 수 있어야한다. 
+    return resultResponse(baseResponseStatus.SUCCESS,result);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+  
 }
