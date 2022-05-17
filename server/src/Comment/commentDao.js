@@ -15,6 +15,16 @@ exports.getCommentOfPost = async (connection,postIdx)=>{
     const [getCommentOfPostRow]= await connection.query(getCommentOfPostQuery,postIdx);
     return getCommentOfPostRow;
 }
+// 댓글의 생성(업데이트로) 날짜 조회하기
+exports.getCommentCreatedAt = async(connection,commentIdx)=>{
+    const getCommentCreatedAtQuery = `
+    select updatedAt as createdAt from comment where commentIdx = ?;
+    `
+    const [getCommentCreatedAtRow]  = await connection.query(getCommentCreatedAtQuery,commentIdx);
+    return getCommentCreatedAtRow;  
+
+}
+
 
 //대댓글의 댓글 대상 조회하기
 exports.getCommentOfcomment = async(connection,postIdx) =>{
