@@ -40,13 +40,11 @@ exports.getPost = async (postIdx) => {
       return x.commentRef
     })
 
-    console.log("commentRefList : ",commentRefList );
-    console.log("getCommentOfComment: ",getCommentOfComment)
     // 이 게시물의 댓글 등록 순서. 
     const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
       // console.log("getCommentOfPost: ",getCommentOfPost);
       await Promise.all(getCommentOfPost.map(async(x)=>{
-        let orderOfComment;     
+        // let orderOfComment;     
         let {order} = orderResult.find( y=>{
           return y.userIdx == x.userIdx
         });
@@ -57,7 +55,6 @@ exports.getPost = async (postIdx) => {
         if(commentRefList.includes(x.commentIdx)){
           //만약 해당 댓글에 대한 대댓이 있다면 대댓에 대한 데이터들도 전달해주어야만 한다.   
           let commentOfComment = await commentDao.getCommentOfCommmentContent(connection,postIdx,x.commentIdx);
-          console.log("commentOfComment : ",commentOfComment)
           await Promise.all(commentOfComment.map(async(z)=>{
             let orderOfCc = orderResult.find(p=>{
               return p.userIdx == z.userIdx
