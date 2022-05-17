@@ -9,7 +9,11 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
     try {
     //   const insertParams = [userIdx, postIdx, content];
       //게시물 등록하기
-    await commentDao.insertCommentOfPost(connection, userIdx, postIdx, content);
+    
+      //insertId는 commentIdx와 직결된다. 
+      const {insertId} =  await commentDao.insertCommentOfPost(connection, userIdx, postIdx, content);
+      const [{createdAt}] = await commentDao.getCommentCreatedAt(connection,insertId);
+
       const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
       // console.log("orderResult : ",orderResult);
 /** orderResult
@@ -22,7 +26,9 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
      let {order} = orderResult.find(x=>{
        return x.userIdx == userIdx;
      })
-     const result = {"orderOfComment" : order}
+     const result = {"orderOfComment" : order,
+     "createdAt" : createdAt 
+    }
      console.log("result: " ,result)
       return resultResponse(baseResponseStatus.SUCCESS,result);
     } catch (error) {
@@ -38,7 +44,9 @@ exports.insertCommentOfComment= async (userIdx,postIdx,commentIdx,content)=>{
   const connection = await pool.getConnection(async (conn) => conn);
   try {
   const insertParams = [userIdx,postIdx,commentIdx,content];
-  const insertCommentOfCommentResult = await commentDao.insertCommentOfComment(connection,insertParams); 
+  const {insertId} = await commentDao.insertCommentOfComment(connection,insertParams); 
+  const [{createdAt}] = await commentDao.getCommentCreatedAt(connection,insertId);
+
   const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
   let orderOfComment;
   orderResult.map(x=>{
@@ -46,7 +54,10 @@ exports.insertCommentOfComment= async (userIdx,postIdx,commentIdx,content)=>{
      orderOfComment = x.order;
     }
   })
-  const result = {"orderOfComment" : orderOfComment}
+  const result = {
+    "orderOfComment" : orderOfComment,
+    "createdAt" : createdAt 
+  }
 
   // 코멘트를 달았을 때 해당 익명에 대한 순서를 가져올 수 있어야한다. 
     return resultResponse(baseResponseStatus.SUCCESS,result);

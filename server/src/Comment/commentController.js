@@ -26,7 +26,6 @@ exports.writeCommentOfPost  =async(req,res)=>{
       return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
     }
     const writeCommentOfPostResult = await commentService.insertCommentOfPost(userIdx,postIdx,content);
-    console.log(writeCommentOfPostResult)
     return res.send(writeCommentOfPostResult) ;
 
 }
