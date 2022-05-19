@@ -14,7 +14,6 @@ exports.signUpUser = async (req, res) => {
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
 
   const emailCheck = await userProvider.emailCheck(email);
-  //   console.log(emailCheck[0].exist);
   if (emailCheck)
     return res.send(basicResponse(baseResponseStatus.EMAIL_EXISTS));
 
@@ -48,7 +47,6 @@ exports.signUpUser = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
-  console.log("테스트")
   const { email, passwd } = req.body;
 
   if (!email || !passwd)
@@ -106,6 +104,5 @@ exports.pushLike = async (req, res) => {
   if (!postIdx && !commentIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
 
   const pushLikeResult = await userService.pushLike(userIdx, postIdx, commentIdx);
-  console.log(pushLikeResult)
   return res.send(pushLikeResult);
 }

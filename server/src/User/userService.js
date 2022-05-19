@@ -103,12 +103,9 @@ exports.signIn = async (email, passwd) => {
       email
     );
 
-    // console.log(signInCheckPasswd);
-    // console.log(signInCheckPasswd);
     if (hashedPassword == signInCheckPasswd.passwd) {
       //로그인에 성공하였을 때 jwt를 발급해주어야 한다.
       const accessToken = tokenSet.tokenSet().access(userIdx);
-      // console.log(accessToken);
       const refreshToken = tokenSet.tokenSet().refresh(userIdx);
 
       const refreshTokenExist = await userDao.refreshTokenExist(
@@ -133,10 +130,6 @@ exports.signIn = async (email, passwd) => {
           accessToken
         );
       }
-
-      // const refresh = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
-      // console.log(refresh.exp);
-
       await connection.commit();
       return resultResponse(baseResponseStatus.LOGIN_SUCCESS, {
         userIdx,
@@ -195,7 +188,6 @@ exports.pushLike = async (userIdx, postIdx, commentIdx) => {
       }else{
         await userDao.deleteLikeComment(connection,userIdx,postIdx);
         likeResult = 0; // 좋아요를 취소함
-
       }
     }
     return resultResponse(baseResponseStatus.SUCCESS,likeResult);

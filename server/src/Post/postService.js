@@ -33,11 +33,7 @@ exports.writePostWithImage = async (userIdx, title, content, imageIdx) => {
         await postDao.mappingPostImg(connection, postIdx, x);
       })
     );
-    // await Promise.all(imageIdx).then(async (x) => {
-    //   //x에는 path하나에 존재하는 것.
-    //   await postDao.mappingPostImg(connection, postIdx, x);
-    //   // console.log(insertResult["insertId"]);
-    // });
+
     await connection.commit();
     return basicResponse(baseResponseStatus.SUCCESS);
 

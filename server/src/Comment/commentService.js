@@ -30,7 +30,6 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
      "createdAt" : createdAt,
      "commentIdx" : insertId
     }
-     console.log("result: " ,result)
       return resultResponse(baseResponseStatus.SUCCESS,result);
     } catch (error) {
       console.log(error);
