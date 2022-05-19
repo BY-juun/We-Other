@@ -3,7 +3,7 @@ import { FooterContent, FooterWrapper } from "./styles";
 import { CgClipboard } from "react-icons/cg";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { useRouter } from "next/router";
-import useGotoPage from "../../../Utils/Hooks/useGotoPage";
+import useGotoPage from "../../../Hooks/useGotoPage";
 
 const Footer = () => {
 	const router = useRouter();

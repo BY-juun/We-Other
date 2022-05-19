@@ -1,6 +1,8 @@
+import { AddLikeAPI } from './../../API/Post/index';
 import { deletePostAPI, GetPostAPI, GetPostsListAPI, submitImg, submitPost } from "API/Post";
 import { useRouter } from "next/router";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { PostType } from '../../Types/Post';
 
 export const useGetPostsList = () => {
 	return useQuery(["Posts"], () => GetPostsListAPI(), { retry: false });
@@ -10,6 +12,8 @@ export const useGetPost = (postId: number) => {
 	return useQuery(["Post", postId], () => GetPostAPI(postId), {
 		retry: false,
 		refetchOnWindowFocus: false,
+		staleTime: Infinity,
+		refetchOnMount: false
 	});
 };
 
@@ -47,3 +51,23 @@ export const useDeletePost = () => {
 		},
 	});
 };
+
+export const useAddLike = () => {
+	const queryClient = useQueryClient();
+	return useMutation(AddLikeAPI, {
+		onSuccess: (res, variable) => {
+			if (variable.type === "post") {
+				let countChangeValue: number = 0;
+				if (res.result === 1) countChangeValue = 1;
+				else {
+					countChangeValue = -1;
+					alert("* 좋아요가 취소되었습니다");
+				}
+				queryClient.setQueryData(["Post", variable.postIdx], (prevData: any) => {
+					return { ...prevData as Object, likeCount: prevData?.likeCount + countChangeValue }
+				})
+			}
+
+		}
+	})
+}

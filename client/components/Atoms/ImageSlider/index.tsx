@@ -23,8 +23,8 @@ const ImageSlider = ({ images }: { images: Array<string | null> }) => {
 	return (
 		<SlideWrapper>
 			<Slider {...settings} >
-				{images?.map((image) => {
-					return <div><SliderImg src={`${ServerURL}/${image}` || ""} /></div>
+				{images?.map((image, idx) => {
+					return <div key={idx + 1000} ><SliderImg src={`${ServerURL}/${image}` || ""} /></div>
 				})}
 			</Slider>
 		</SlideWrapper>

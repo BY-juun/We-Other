@@ -4,6 +4,7 @@ import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 export const HeaderWrapper = styled.div`
   display: none;
   ${desktop} {
+		z-index : 100;
     display: flex;
     width: 100%;
     justify-content: space-between;

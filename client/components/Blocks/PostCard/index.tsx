@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { PostArrayType } from "../../../Types/Post";
 import { dateForm } from "../../../Utils/dateForm";
 import { ServerURL } from "../../../Utils/ServerURL";
-import useGotoPage from "../../../Utils/Hooks/useGotoPage";
+import useGotoPage from "../../../Hooks/useGotoPage";
 
 interface Props {
 	PostInfo: PostArrayType;
@@ -26,11 +26,11 @@ const PostCard: (props: Props) => JSX.Element = ({ PostInfo }) => {
 						<EtcItem>
 							<PostDate>{dateForm(PostInfo.updatedAt)}</PostDate>
 							<Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
-							{/* <span>{PostInfo.like}</span> */}
+							<span>{PostInfo.likeCount}</span>
 						</EtcItem>
 						<EtcItem2>
 							<Image src={"/comment.png"} alt="댓글" width={15} height={15} />
-							{/* <span>{PostInfo.comment}</span> */}
+							<span>{PostInfo.commentCount}</span>
 						</EtcItem2>
 					</EtcLeft>
 					<div></div>

@@ -28,3 +28,12 @@ export const deletePostAPI = async (id: number) => {
 	const { data } = await customAxios.delete(`/post/delete?postIdx=${id}`);
 	return data;
 }
+
+export const AddLikeAPI = async ({ postIdx, commentIdx, type }: { postIdx?: number, commentIdx?: number, type: string }) => {
+	let body;
+	if (type === "comment") body = { commentIdx: commentIdx };
+	else if (type === "post") body = { postIdx: postIdx }
+
+	const { data } = await customAxios.patch(`/user/like`, body);
+	return data;
+}

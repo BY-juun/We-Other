@@ -1,6 +1,6 @@
 import LinkCard from "components/Atoms/LinkCard";
 import React from "react";
-import useLogout from "../../../Utils/Hooks/useLogout";
+import useLogout from "../../../Hooks/useLogout";
 import { LogOutBtn, MainContentWrapper } from "./styles";
 
 const MainContent = ({ userName }: { userName: string | undefined }) => {

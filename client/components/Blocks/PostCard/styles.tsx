@@ -23,7 +23,7 @@ export const PostCardRoot = styled.div`
 		margin-bottom : 15px;
 	}
 	${mobile} {
-		width : 99%;
+		width : 100%;
 		margin : 0 auto;
 		border-radius : 4px;
 	}
@@ -73,13 +73,20 @@ export const EtcLeft = styled.div`
 `;
 
 export const EtcItem = styled.div`
+	cursor:pointer;
   display: flex;
   align-items: center;
   gap: 3px;
+	span { 
+		font-size : 12px;
+	}
 `;
 
 export const EtcItem2 = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
+	span { 
+		font-size : 12px;
+	}
 `;
