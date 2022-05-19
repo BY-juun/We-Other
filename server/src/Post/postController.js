@@ -39,7 +39,9 @@ exports.getPosts = async (req, res) => {
 //단일 게시물 가져오는 api
 exports.getPost = async (req, res) => {
   const { postIdx } = req.params;
+
   const getPostResult = await postProvider.getPost(postIdx);
+  
 
   return res.send(resultResponse(baseResponseStatus.SUCCESS, getPostResult));
 };

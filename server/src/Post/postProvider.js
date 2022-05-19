@@ -36,9 +36,13 @@ exports.getPost = async (postIdx) => {
     const getCommentOfPost = await commentDao.getCommentOfPost(connection,postIdx);
     const getCommentOfComment = await commentDao.getCommentOfcomment(connection,postIdx);
 
+    console.log("getCommentOfComment : ",getCommentOfComment)
     const commentRefList = getCommentOfComment.map(x=>{
       return x.commentRef
     })
+
+    console.log("commentRefList : ", commentRefList);
+
 
     // 이 게시물의 댓글 등록 순서. 
     const orderResult = await commentDao.getOrderOfComment(connection,postIdx);

@@ -29,7 +29,7 @@ exports.getCommentCreatedAt = async(connection,commentIdx)=>{
 //대댓글의 댓글 대상 조회하기
 exports.getCommentOfcomment = async(connection,postIdx) =>{
     const getCommentOfcommentQuery =`
-     select commentRef from comment  where postIdx =10 and commentRef is not null group by commentRef;
+     select commentRef from comment  where postIdx = ?  and commentRef is not null group by commentRef;
     `
     const [getCommentOfcommentRow]  = await connection.query(getCommentOfcommentQuery,postIdx);
     return getCommentOfcommentRow;
