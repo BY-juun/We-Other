@@ -76,7 +76,15 @@ exports.insertCommentOfComment = async (connection, insertParams) =>{
 }
 
 //
+//댓글의 좋아요 존재 여부 판단.
+exports.checkLikeComment = async (connection,userIdx,commentIdx)=>{
+    const checkLikeCommentQuery = `
+      select exists ( select * from recommend where userIdx = ? and commentIdx =?) as exist;
+    `
+    const [[checkLikeCommentRow]] = await connection.query(checkLikeCommentQuery,[userIdx,commentIdx]);
+    return checkLikeCommentRow;
 
+}
 
 //대댓의 존재 여부. 
 exports.checkCommentOfCommentExist  = async (connection)=>{

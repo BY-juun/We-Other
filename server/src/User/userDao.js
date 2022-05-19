@@ -152,6 +152,15 @@ exports.insertLikeToPost = async (connection, userIdx, postIdx) => {
   return insertLikeToPostRow;
 }
 
+// 게시물에 좋아요 취소하기
+exports.deleteLikePost = async(connection,userIdx,postIdx)=>{
+  const deleteLikePostQuery = `
+    DELETE FROM recommend WHERE userIdx = ? and postIdx =?;
+  `
+  const [deleteLikePostRow] = await connection.query(deleteLikePostQuery,[userIdx,postIdx]);
+  return deleteLikePostRow;
+}
+
 // 댓글에 좋아요 누르기
 exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
   const insertLikeToCommentQuery = `
@@ -163,4 +172,11 @@ exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
 }
 
 //
-exports.selectLikes
+exports.deleteLikeComment = async(connection,userIdx,commentIdx) =>{
+
+  const deleteLikeCommentQuery =`
+  DELETE FROM recommend WHERE userIdx = ? and commentIdx =?;
+  `
+  const [deleteLikeCommentRow]  = await connection.query(deleteLikeCommentQuery,[userIdx,commentIdx]);
+  return deleteLikeCommentRow;
+}

@@ -121,3 +121,13 @@ exports.getLikeCount = async (connection,postIdx)=>{
   const [[getLikeCountRow]] = await connection.query(getLikeCountQuery,postIdx);
   return getLikeCountRow;
 }
+
+//게시물의 좋아요 존재 여부 판단.
+exports.checkLikePost = async (connection,userIdx,postIdx)=>{
+    const checkLikePostQuery = `
+      select exists ( select * from recommend where userIdx = ? and postIdx =?) as exist;
+    `
+    const [[checkLikePostRow]] = await connection.query(checkLikePostQuery,[userIdx,postIdx]);
+    return checkLikePostRow;
+
+}

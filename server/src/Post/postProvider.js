@@ -47,6 +47,9 @@ exports.getPost = async (postIdx) => {
     const getCommentOfPost = await commentDao.getCommentOfPost(connection,postIdx);
     const getCommentOfComment = await commentDao.getCommentOfcomment(connection,postIdx);
 
+    const {commentCount} = await postDao.getCommentCount(connection,postIdx);
+    const {likeCount} = await postDao.getLikeCount(connection,postIdx);
+
     console.log("getCommentOfComment : ",getCommentOfComment)
     const commentRefList = getCommentOfComment.map(x=>{
       return x.commentRef
@@ -92,8 +95,10 @@ exports.getPost = async (postIdx) => {
         postIdx : thisPostIdx,
         title,
         content,
-        updatedAt,
+        commentCount,
+        likeCount,
         imageArray,
+        updatedAt,        
         "CommentOfPost":getCommentOfPost
       }
     return result;

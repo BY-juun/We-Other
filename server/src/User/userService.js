@@ -5,6 +5,8 @@ const userDao = require("./userDao");
 const { resultResponse, basicResponse } = require("../../config/response");
 const baseResponseStatus = require("../../config/baseResponseStatus");
 const tokenSet = require("../../config/jwt");
+const postDao = require('../Post/postDao');
+const commentDao = require('../Comment/commentDao');
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const jwt = require("jsonwebtoken");
@@ -172,10 +174,27 @@ exports.pushLike = async (userIdx, postIdx, commentIdx) => {
   try {
     // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다. 
     if (postIdx) {
-      await userDao.insertLikeToPost(connection, userIdx, postIdx);
+      
+      const {exist} =await postDao.checkLikePost(connection,userIdx,postIdx);
+      if(!exist){
+      // 좋아요를 눌렀던 적이 없을 때는 좋아요를 넣어줘야겠지;
+        await userDao.insertLikeToPost(connection, userIdx, postIdx);
+        console.log("test: ",test)
+      }else{
+        // 좋아요를 눌렀던 적이 있을 때는 없애줘야 한다. 
+        await userDao.deleteLikePost(connection,userIdx,postIdx);
+      }
+   
+  
     }
     else {
-      await userDao.insertLikeToComment(connection, userIdx, commentIdx)
+      const {exist} =await commentDao.checkLikeComment(connection,userIdx,commentIdx);
+      if(!exist){
+        await userDao.insertLikeToComment(connection, userIdx, commentIdx)
+      }else{
+        await userDao.deleteLikeComment(connection,userIdx,postIdx);
+        
+      }
     }
 
     return basicResponse(baseResponseStatus.SUCCESS);
