@@ -50,13 +50,9 @@ exports.getPost = async (postIdx) => {
     const {commentCount} = await postDao.getCommentCount(connection,postIdx);
     const {likeCount} = await postDao.getLikeCount(connection,postIdx);
 
-    console.log("getCommentOfComment : ",getCommentOfComment)
     const commentRefList = getCommentOfComment.map(x=>{
       return x.commentRef
     })
-
-    console.log("commentRefList : ", commentRefList);
-
 
     // 이 게시물의 댓글 등록 순서. 
     const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
@@ -138,8 +134,7 @@ exports.checkImageExist = async (postIdx)=>{
       let imagesOfPost = await postDao.getImageIdxs(connection,postIdx);
       const imageIdxs = [];
       imagesOfPost.map((x) => imageIdxs.push(x.imageIdx));
-      console.log("imagesOfPost : " , imagesOfPost)
-      console.log("imageIdxs : ",imageIdxs)
+
       return imageIdxs;
     }
   } catch (error) {
