@@ -3,9 +3,9 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
+import { useAddLike, useDeletePost } from "../../../../Hooks/Post";
 import { PostType } from "../../../../Types/Post";
 import { dateForm } from "../../../../Utils/dateForm";
-import { useDeletePost } from "../../../../_Query/Post";
 import ImageSlider from "../../../Atoms/ImageSlider";
 import ReportBox from "../ReportBox";
 import { DeleteBtn, PostContentArea, PostContentTop, PostContentWrapper, PostDate, PostId, PostTitleArea, ReportBtn } from "./styles";
@@ -20,6 +20,8 @@ const PostContent = ({ id, post }: Props) => {
 
 	const [openReport, setOpenReport] = useState<boolean>(false);
 
+	const AddLikeMutation = useAddLike();
+
 	const deletePost = useCallback(() => {
 		if (post.userIdx !== Number(Cookies.get("userIdx"))) return;
 		if (window.confirm("* 해당 게시글을 삭제하시겠습니까?")) deleteMutation.mutate(id);
@@ -27,6 +29,15 @@ const PostContent = ({ id, post }: Props) => {
 
 	const onClickOpenReport = useCallback(() => {
 		setOpenReport(true);
+	}, [])
+
+	const onClickLikeBtn = useCallback(() => {
+		if (Cookies.get("userIdx") === undefined) return alert("* 로그인 후 이용가능합니다");
+		const reqData = {
+			postIdx: Number(id),
+			type: "post"
+		}
+		AddLikeMutation.mutate(reqData);
 	}, [])
 
 	return (
@@ -48,13 +59,13 @@ const PostContent = ({ id, post }: Props) => {
 				<PostContentArea>{post?.content}</PostContentArea>
 				<EtcArea>
 					<EtcLeft>
-						<EtcItem>
+						<EtcItem onClick={onClickLikeBtn}>
 							<Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
-							{/* <span>{post?.like}</span> */}
+							<span>{post.likeCount}</span>
 						</EtcItem>
 						<EtcItem2>
 							<Image src={"/comment.png"} alt="댓글" width={15} height={15} />
-							{/* <span>{post?.comment}</span> */}
+							<span>{post.commentCount}</span>
 						</EtcItem2>
 					</EtcLeft>
 					<div></div>

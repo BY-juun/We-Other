@@ -3,7 +3,7 @@ import { ContentWrapper } from "components/Layouts/Content/styles";
 import Cookies from "js-cookie";
 import { NextPage } from "next";;
 import React from "react";
-import useGotoPage from "../../Utils/Hooks/useGotoPage";
+import useGotoPage from "../../Hooks/useGotoPage";
 import { SignUpTitle, SignUpWrapper } from "./styles";
 
 const SignUp: NextPage = () => {

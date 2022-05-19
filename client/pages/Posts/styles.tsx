@@ -49,6 +49,6 @@ export const SerachOpenBtn = styled.button`
 	padding-top : 5px;
 	cursor: pointer;
 	${desktop} {
-		top: 2%;
+		top: 10%;
 	}
 `

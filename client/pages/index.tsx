@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { ContentWrapper } from "components/Layouts/Content/styles";
 import { HomeDescription, HomeLeft, HomeWrapper, LinkCardWrapper, Title } from "./styles";
 import LoginBlock from "../components/Blocks/Login/LoginBlock";
-import { useGetUserInfo } from "_Query/User";
 import MainContent from "components/Blocks/MainContent";
 import LinkCard from "../components/Atoms/LinkCard";
+import { useGetUserInfo } from "../Hooks/User";
 
 const Home: NextPage = () => {
 	const { data, isLoading } = useGetUserInfo();
@@ -19,8 +19,8 @@ const Home: NextPage = () => {
 						{!isLoading && <>{data?.userName ? <MainContent userName={data?.userName} /> : <LoginBlock />}</>}
 					</HomeLeft>
 					<LinkCardWrapper>
-						{contents.map((content) => {
-							return <LinkCard title={content.title} description={content.description} />;
+						{contents.map((content, idx) => {
+							return <LinkCard key={idx} title={content.title} description={content.description} />;
 						})}
 					</LinkCardWrapper>
 				</HomeWrapper>

@@ -1,13 +1,14 @@
 import CommentForm from "components/Blocks/Post/CommentForm";
 import CommentList from "components/Blocks/Post/CommentList";
 import PostContent from "components/Blocks/Post/PostContent";
-import Cookies from "js-cookie";
 import { NextPage } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import PostLoading from "../../components/Loading/PostLoading";
-import { useGetPost } from "../../_Query/Post";
+import { useGetPost } from "../../Hooks/Post";
+import useIsLoggedIn from "../../Hooks/useIsLoggedIn";
+import { CommentType } from "../../Types/Post";
+
 import { CommentListWrapper, PostWrapper, CommentWrapper, GoBackBtn } from "./styles";
 
 const Post: NextPage = () => {
@@ -16,6 +17,7 @@ const Post: NextPage = () => {
 
 	const { data: post, isLoading } = useGetPost(Number(id));
 
+	const isLoggedIn = useIsLoggedIn();
 
 	return (
 		<>
@@ -26,18 +28,25 @@ const Post: NextPage = () => {
 				{!isLoading ? (
 					<>
 						<PostContent post={post} id={Number(id)} />
+						<CommentWrapper>
+							<CommentForm id={Number(id)} />
+							<CommentListWrapper style={{ filter: !isLoggedIn ? "blur(4px)" : "" }}>
+								{post.CommentOfPost.length !== 0
+									?
+									<>
+										{post.CommentOfPost.map((comment: CommentType) => {
+											return <CommentList key={comment.commentIdx} comment={comment} postIdx={Number(id)} />
+										})}
+									</>
+									:
+									<div>댓글이없습니다</div>}
+							</CommentListWrapper>
+						</CommentWrapper>
 					</>
 				) : (
 					<PostLoading loading={isLoading} />
 				)}
-				<CommentWrapper>
-					<CommentForm id={Number(id)} />
-					<CommentListWrapper style={{ filter: !Cookies.get("userIdx") ? "blur(4px)" : "" }}>
-						{[1, 2, 3, 4, 5].map((value) => {
-							return <CommentList />;
-						})}
-					</CommentListWrapper>
-				</CommentWrapper>
+
 			</PostWrapper>
 		</>
 	);

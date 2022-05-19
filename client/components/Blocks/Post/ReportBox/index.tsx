@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useCallback, useRef } from 'react'
-import useOpenBox from '../../../../Utils/Hooks/useOpenBox';
-import { OverLay, SlidingBoxTop, SlidingBoxWrapper } from '../../../Atoms/SlidingBox/styles';
+import useOpenBox from '../../../../Hooks/useOpenBox';
+import { OverLay, SlidingBoxContent, SlidingBoxTop, SlidingBoxWrapper } from '../../../Atoms/SlidingBox/styles';
 
 interface Props {
 	openReport: boolean;
@@ -25,6 +25,13 @@ const ReportBox = ({ openReport, setOpenReport }: Props) => {
 						<Image src="/close_btn.png" width={35} height={35} />
 					</button>
 				</SlidingBoxTop>
+				<SlidingBoxContent>
+					<div>
+						<span>내용을 입력해주세요!</span>
+						<button>제출</button>
+					</div>
+					<textarea />
+				</SlidingBoxContent>
 			</SlidingBoxWrapper>
 		</>
 	)

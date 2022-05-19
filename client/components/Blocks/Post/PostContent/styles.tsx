@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
+import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const PostContentWrapper = styled.div`
 	padding : 0 10%;
+	${desktop} {
+		padding: 0 25%;
+	}
 `
 
 export const PostContentTop = styled.div`
