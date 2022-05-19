@@ -104,3 +104,20 @@ exports.breakImgToPost = async (connection, imageIdx) => {
   return breakImgToPostRow;
 }
 
+//게시물의 댓글 갯수가져오기
+exports.getPostCount = async (connection,postIdx)=>{
+  const getPostCountQuery = `
+  select count(*) postCount from comment where postIdx =?;
+  `
+  const [[getPostCountRow]] = await connection.query(getPostCountQuery,postIdx);
+  return getPostCountRow;
+}
+
+//게시물의 좋아요 갯수가져오기
+exports.getLikeCount = async (connection,postIdx)=>{
+  const getLikeCountQuery = `
+  select count(*) likeCount from recommend where postIdx = ?;
+  `
+  const [[getLikeCountRow]] = await connection.query(getLikeCountQuery,postIdx);
+  return getLikeCountRow;
+}

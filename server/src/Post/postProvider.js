@@ -9,6 +9,17 @@ exports.getPosts = async () => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getPostsResult = await postDao.getPosts(connection);
+
+    await Promise.all(
+      getPostsResult.map(async(v)=>{
+        let {postCount} = await postDao.getPostCount(connection,v.postIdx)
+
+        v["postCount"] = postCount;
+        let {likeCount} = await postDao.getLikeCount(connection,v.postIdx);
+        v["likeCount"] = likeCount;
+      })
+    )
+
     return getPostsResult;
   } catch (error) {
     console.log(error);
