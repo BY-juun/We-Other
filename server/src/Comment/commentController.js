@@ -42,3 +42,9 @@ exports.writeCommentOfComment = async (req,res)=>{
   const writeCommentOfCommentResult = await commentService.insertCommentOfComment(userIdx,postIdx,commentIdx,content);
   return res.send(writeCommentOfCommentResult);
 }
+exports.deleteComment = async(req,res)=>{
+  // 지우고자 하는 댓글의 userIdx와 그 댓글의 commentIdx를 request로 받아온다. 
+  const {userIdx, commentIdx} = req.query;
+
+
+}

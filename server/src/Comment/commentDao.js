@@ -29,7 +29,7 @@ exports.getCommentCreatedAt = async(connection,commentIdx)=>{
 //대댓글의 댓글 대상 조회하기
 exports.getCommentOfcomment = async(connection,postIdx) =>{
     const getCommentOfcommentQuery =`
-     select commentRef from comment  where postIdx =10 and commentRef is not null group by commentRef;
+     select commentRef from comment  where postIdx = ?  and commentRef is not null group by commentRef;
     `
     const [getCommentOfcommentRow]  = await connection.query(getCommentOfcommentQuery,postIdx);
     return getCommentOfcommentRow;
@@ -76,7 +76,15 @@ exports.insertCommentOfComment = async (connection, insertParams) =>{
 }
 
 //
+//댓글의 좋아요 존재 여부 판단.
+exports.checkLikeComment = async (connection,userIdx,commentIdx)=>{
+    const checkLikeCommentQuery = `
+      select exists ( select * from recommend where userIdx = ? and commentIdx =?) as exist;
+    `
+    const [[checkLikeCommentRow]] = await connection.query(checkLikeCommentQuery,[userIdx,commentIdx]);
+    return checkLikeCommentRow;
 
+}
 
 //대댓의 존재 여부. 
 exports.checkCommentOfCommentExist  = async (connection)=>{

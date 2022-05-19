@@ -98,9 +98,36 @@ exports.getImageIdxs = async (connection, postIdx) => {
 // 게시물의 imgIdx와 게시물의 맵핑을 끊기.
 exports.breakImgToPost = async (connection, imageIdx) => {
   const breakImgToPostQuery = `
-  UPDATE image SET postIdx = '' WHERE imageIdx = ?;
+  UPDATE image SET postIdx = null WHERE imageIdx = ?;
   `
   const [breakImgToPostRow] = await connection.query(breakImgToPostQuery, imageIdx);
   return breakImgToPostRow;
 }
 
+//게시물의 댓글 갯수가져오기
+exports.getCommentCount= async (connection,postIdx)=>{
+  const getcommentCountQuery = `
+  select count(*) commentCount from comment where postIdx =?;
+  `
+  const [[getcommentCountRow]] = await connection.query(getcommentCountQuery,postIdx);
+  return getcommentCountRow;
+}
+
+//게시물의 좋아요 갯수가져오기
+exports.getLikeCount = async (connection,postIdx)=>{
+  const getLikeCountQuery = `
+  select count(*) likeCount from recommend where postIdx = ?;
+  `
+  const [[getLikeCountRow]] = await connection.query(getLikeCountQuery,postIdx);
+  return getLikeCountRow;
+}
+
+//게시물의 좋아요 존재 여부 판단.
+exports.checkLikePost = async (connection,userIdx,postIdx)=>{
+    const checkLikePostQuery = `
+      select exists ( select * from recommend where userIdx = ? and postIdx =?) as exist;
+    `
+    const [[checkLikePostRow]] = await connection.query(checkLikePostQuery,[userIdx,postIdx]);
+    return checkLikePostRow;
+
+}

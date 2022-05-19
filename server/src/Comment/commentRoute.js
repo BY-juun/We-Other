@@ -10,6 +10,10 @@ module.exports = (app) => {
     app.post("/api/comment/post",verifyAccessToken,comment.writeCommentOfPost);
 
     // 댓글에 댓글 등록
-    app.post("/api/comment/test",verifyAccessToken,comment.writeCommentOfComment);
-    
+    app.post("/api/comment/comment",verifyAccessToken,comment.writeCommentOfComment);
+
+    // 댓글 삭제
+    app.patch("/api/comment",verifyAccessToken,comment.deleteComment);
+
+
 };

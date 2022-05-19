@@ -27,7 +27,8 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
        return x.userIdx == userIdx;
      })
      const result = {"orderOfComment" : order,
-     "createdAt" : createdAt 
+     "createdAt" : createdAt,
+     "commentIdx" : insertId
     }
      console.log("result: " ,result)
       return resultResponse(baseResponseStatus.SUCCESS,result);
@@ -56,7 +57,8 @@ exports.insertCommentOfComment= async (userIdx,postIdx,commentIdx,content)=>{
   })
   const result = {
     "orderOfComment" : orderOfComment,
-    "createdAt" : createdAt 
+    "createdAt" : createdAt,
+    "commentIdx" : insertId 
   }
 
   // 코멘트를 달았을 때 해당 익명에 대한 순서를 가져올 수 있어야한다. 

@@ -9,6 +9,17 @@ exports.getPosts = async () => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getPostsResult = await postDao.getPosts(connection);
+
+    await Promise.all(
+      getPostsResult.map(async(v)=>{
+        let {commentCount} = await postDao.getCommentCount(connection,v.postIdx)
+
+        v["commentCount"] = commentCount;
+        let {likeCount} = await postDao.getLikeCount(connection,v.postIdx);
+        v["likeCount"] = likeCount;
+      })
+    )
+
     return getPostsResult;
   } catch (error) {
     console.log(error);
@@ -36,9 +47,16 @@ exports.getPost = async (postIdx) => {
     const getCommentOfPost = await commentDao.getCommentOfPost(connection,postIdx);
     const getCommentOfComment = await commentDao.getCommentOfcomment(connection,postIdx);
 
+    const {commentCount} = await postDao.getCommentCount(connection,postIdx);
+    const {likeCount} = await postDao.getLikeCount(connection,postIdx);
+
+    console.log("getCommentOfComment : ",getCommentOfComment)
     const commentRefList = getCommentOfComment.map(x=>{
       return x.commentRef
     })
+
+    console.log("commentRefList : ", commentRefList);
+
 
     // 이 게시물의 댓글 등록 순서. 
     const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
@@ -77,8 +95,10 @@ exports.getPost = async (postIdx) => {
         postIdx : thisPostIdx,
         title,
         content,
-        updatedAt,
+        commentCount,
+        likeCount,
         imageArray,
+        updatedAt,        
         "CommentOfPost":getCommentOfPost
       }
     return result;
