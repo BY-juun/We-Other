@@ -198,7 +198,6 @@ exports.pushLike = async (userIdx, postIdx, commentIdx) => {
 
       }
     }
-    
     return resultResponse(baseResponseStatus.SUCCESS,likeResult);
   } catch (error) {
     console.log(error);

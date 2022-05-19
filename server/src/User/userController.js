@@ -106,5 +106,6 @@ exports.pushLike = async (req, res) => {
   if (!postIdx && !commentIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
 
   const pushLikeResult = await userService.pushLike(userIdx, postIdx, commentIdx);
+  console.log(pushLikeResult)
   return res.send(pushLikeResult);
 }
