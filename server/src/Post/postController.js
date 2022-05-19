@@ -41,7 +41,6 @@ exports.getPost = async (req, res) => {
   const { postIdx } = req.params;
 
   const getPostResult = await postProvider.getPost(postIdx);
-  
 
   return res.send(resultResponse(baseResponseStatus.SUCCESS, getPostResult));
 };

@@ -172,32 +172,34 @@ exports.updateAccessToken = async (id, accessToken) => {
 exports.pushLike = async (userIdx, postIdx, commentIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
+    let likeResult;
     // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다. 
     if (postIdx) {
-      
       const {exist} =await postDao.checkLikePost(connection,userIdx,postIdx);
       if(!exist){
       // 좋아요를 눌렀던 적이 없을 때는 좋아요를 넣어줘야겠지;
         await userDao.insertLikeToPost(connection, userIdx, postIdx);
-        console.log("test: ",test)
+        likeResult = 1 ; // 좋아요를 누름
       }else{
         // 좋아요를 눌렀던 적이 있을 때는 없애줘야 한다. 
         await userDao.deleteLikePost(connection,userIdx,postIdx);
+        likeResult = 0; // 좋아요를 취소함
       }
-   
   
     }
     else {
       const {exist} =await commentDao.checkLikeComment(connection,userIdx,commentIdx);
       if(!exist){
         await userDao.insertLikeToComment(connection, userIdx, commentIdx)
+        likeResult = 1 ; // 좋아요를 누름
       }else{
         await userDao.deleteLikeComment(connection,userIdx,postIdx);
-        
+        likeResult = 0; // 좋아요를 취소함
+
       }
     }
-
-    return basicResponse(baseResponseStatus.SUCCESS);
+    
+    return resultResponse(baseResponseStatus.SUCCESS,likeResult);
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
