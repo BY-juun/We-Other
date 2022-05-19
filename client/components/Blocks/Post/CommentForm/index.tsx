@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { isObject } from "util";
-import { useSubmitComment } from "_Query/Comment";
+import { useSubmitComment } from "Hooks/Comment";
 import { CustomInput } from "../../../Atoms/CustomInput/styles";
 import { CommentFormRoot } from "./styles";
 
@@ -9,7 +9,6 @@ const CommentForm = ({ id }: { id: number }) => {
 
 	const submitSuccess = useCallback(() => {
 		if (commentRef.current) commentRef.current.value = "";
-		return alert("댓글 등록 성공! >> 이후 처리 해야함.");
 	}, []);
 
 	const submitCommentMutation = useSubmitComment(submitSuccess);

@@ -1,8 +1,8 @@
 import { CustomInput } from "components/Atoms/CustomInput/styles";
 import { useRouter } from "next/router";
 import React, { useCallback, useRef, VFC } from "react";
-import { useLogin } from "_Query/User";
-import useGotoPage from "../../../../Utils/Hooks/useGotoPage";
+import useGotoPage from "../../../../Hooks/useGotoPage";
+import { useLogin } from "../../../../Hooks/User";
 import { EtcWrapper, LoginBtn, LoginWrapper } from "./styles";
 
 const LoginBlock: VFC = () => {

@@ -5,12 +5,17 @@ import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 export const PostWrapper = styled.div`
 	margin-top: 10px;
 	margin-bottom : 150px;
+	${desktop} {
+		margin-top : 100px;
+	}
 `
 
 export const CommentListWrapper = styled.div`
 		width: 90%;
 		margin: 0 auto;
-		border-top : 0.5px solid #C8C8C8;
+		${desktop} {
+			width : 50%;
+		}
 `
 
 export const CommentWrapper = styled.div`

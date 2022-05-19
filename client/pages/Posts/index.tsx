@@ -3,12 +3,12 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
-import { useGetPostsList } from "_Query/Post";
 import { PostArrayType } from "../../Types/Post";
 import { PostCardContainer, PostWrapper, SerachOpenBtn, WritePostBtn } from "./styles";
 import PostCardLoading from "../../components/Loading/PostCardLoading";
 import { NextPage } from "next";
-import SearchBox from "../../components/Blocks/Post/SeacrhBox";
+import SearchModal from "../../components/Blocks/Post/SearchModal";
+import { useGetPostsList } from "../../Hooks/Post";
 
 const Posts: NextPage = () => {
 	const router = useRouter();
@@ -40,8 +40,8 @@ const Posts: NextPage = () => {
 					</>
 				) : (
 					<>
-						{Array.from({ length: 15 }, () => 1).map(() => (
-							<PostCardLoading loading={isLoading} />
+						{Array.from({ length: 15 }, () => 1).map((_, idx) => (
+							<PostCardLoading key={idx + 100} loading={isLoading} />
 						))}
 					</>
 				)}
@@ -49,7 +49,7 @@ const Posts: NextPage = () => {
 			<WritePostBtn onClick={onClickWritePostBtn}>
 				<Image src="/write.png" alt="글쓰기" width={25} height={25} />
 			</WritePostBtn>
-			<SearchBox openSearch={openSearch} setOpenSearch={setOpenSearch} />
+			{openSearch && <SearchModal setOpenSearch={setOpenSearch} />}
 		</PostWrapper>
 	);
 };
