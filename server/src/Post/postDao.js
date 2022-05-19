@@ -98,19 +98,19 @@ exports.getImageIdxs = async (connection, postIdx) => {
 // 게시물의 imgIdx와 게시물의 맵핑을 끊기.
 exports.breakImgToPost = async (connection, imageIdx) => {
   const breakImgToPostQuery = `
-  UPDATE image SET postIdx = '' WHERE imageIdx = ?;
+  UPDATE image SET postIdx = null WHERE imageIdx = ?;
   `
   const [breakImgToPostRow] = await connection.query(breakImgToPostQuery, imageIdx);
   return breakImgToPostRow;
 }
 
 //게시물의 댓글 갯수가져오기
-exports.getPostCount = async (connection,postIdx)=>{
-  const getPostCountQuery = `
-  select count(*) postCount from comment where postIdx =?;
+exports.getCommentCount= async (connection,postIdx)=>{
+  const getcommentCountQuery = `
+  select count(*) commentCount from comment where postIdx =?;
   `
-  const [[getPostCountRow]] = await connection.query(getPostCountQuery,postIdx);
-  return getPostCountRow;
+  const [[getcommentCountRow]] = await connection.query(getcommentCountQuery,postIdx);
+  return getcommentCountRow;
 }
 
 //게시물의 좋아요 갯수가져오기

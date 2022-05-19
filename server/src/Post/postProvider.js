@@ -12,9 +12,9 @@ exports.getPosts = async () => {
 
     await Promise.all(
       getPostsResult.map(async(v)=>{
-        let {postCount} = await postDao.getPostCount(connection,v.postIdx)
+        let {commentCount} = await postDao.getCommentCount(connection,v.postIdx)
 
-        v["postCount"] = postCount;
+        v["commentCount"] = commentCount;
         let {likeCount} = await postDao.getLikeCount(connection,v.postIdx);
         v["likeCount"] = likeCount;
       })
