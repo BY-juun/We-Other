@@ -10,23 +10,23 @@ export const PostCardRoot = styled.div`
   box-sizing: border-box;
   font-size: 12px;
   cursor: pointer;
-	height : 105px;
-	display : flex;
-	justify-content : space-between;
+  height: 105px;
+  display: flex;
+  justify-content: space-between;
   &:hover {
     border: 0.5px solid #fc96a5;
     color: #fc96a5;
   }
-	${desktop} {
-		width : 48%;
-		border-radius : 4px;
-		margin-bottom : 15px;
-	}
-	${mobile} {
-		width : 100%;
-		margin : 0 auto;
-		border-radius : 4px;
-	}
+  ${desktop} {
+    width: 33%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  ${mobile} {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
 `;
 
 export const PostWriter = styled.div`
@@ -40,7 +40,7 @@ export const PostTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 5px;
-	width : 200px;
+  width: 200px;
 `;
 
 export const PostContent = styled.div`
@@ -52,7 +52,7 @@ export const PostContent = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #929292;
-	width : 200px;
+  width: 200px;
 `;
 
 export const PostDate = styled.div`
@@ -73,20 +73,20 @@ export const EtcLeft = styled.div`
 `;
 
 export const EtcItem = styled.div`
-	cursor:pointer;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 3px;
-	span { 
-		font-size : 12px;
-	}
+  span {
+    font-size: 12px;
+  }
 `;
 
 export const EtcItem2 = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
-	span { 
-		font-size : 12px;
-	}
+  span {
+    font-size: 12px;
+  }
 `;

@@ -9,36 +9,35 @@ import { ServerURL } from "../../../Utils/ServerURL";
 import useGotoPage from "../../../Hooks/useGotoPage";
 
 interface Props {
-	PostInfo: PostArrayType;
+  PostInfo: PostArrayType;
 }
 
 const PostCard: (props: Props) => JSX.Element = ({ PostInfo }) => {
-	const router = useRouter();
-	const gotoPage = useGotoPage();
+  const gotoPage = useGotoPage();
 
-	return (
-		<PostCardRoot onClick={gotoPage(`/Post/${PostInfo.postIdx}`)}>
-			<div>
-				<PostTitle>{PostInfo.title}</PostTitle>
-				<PostContent>{PostInfo.content}</PostContent>
-				<EtcArea>
-					<EtcLeft>
-						<EtcItem>
-							<PostDate>{dateForm(PostInfo.updatedAt)}</PostDate>
-							<Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
-							<span>{PostInfo.likeCount}</span>
-						</EtcItem>
-						<EtcItem2>
-							<Image src={"/comment.png"} alt="댓글" width={15} height={15} />
-							<span>{PostInfo.commentCount}</span>
-						</EtcItem2>
-					</EtcLeft>
-					<div></div>
-				</EtcArea>
-			</div>
-			<div>{PostInfo.url && <img src={`${ServerURL}/${PostInfo.url}`} width={125} height={75} />}</div>
-		</PostCardRoot>
-	);
+  return (
+    <PostCardRoot onClick={gotoPage(`/Post/${PostInfo.postIdx}`)}>
+      <div>
+        <PostTitle>{PostInfo.title}</PostTitle>
+        <PostContent>{PostInfo.content}</PostContent>
+        <EtcArea>
+          <EtcLeft>
+            <EtcItem>
+              <PostDate>{dateForm(PostInfo.updatedAt)}</PostDate>
+              <Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
+              <span>{PostInfo.likeCount}</span>
+            </EtcItem>
+            <EtcItem2>
+              <Image src={"/comment.png"} alt="댓글" width={15} height={15} />
+              <span>{PostInfo.commentCount}</span>
+            </EtcItem2>
+          </EtcLeft>
+          <div></div>
+        </EtcArea>
+      </div>
+      <div>{PostInfo.url && <img src={`${ServerURL}/${PostInfo.url}`} width={125} height={75} />}</div>
+    </PostCardRoot>
+  );
 };
 
 export default PostCard;
