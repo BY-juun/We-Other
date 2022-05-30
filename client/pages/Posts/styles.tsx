@@ -7,7 +7,7 @@ export const PostCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   ${desktop} {
-    margin-top: 100px;
+    margin-top: 80px;
     flex-flow: wrap;
     padding: 0% 10%;
     gap: 0.5%;
