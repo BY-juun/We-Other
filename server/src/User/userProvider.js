@@ -79,9 +79,21 @@ exports.getRefreshToken = async (accessToken) => {
   } finally {
     connection.release();
   }
-  return;
 };
 
-exports.test = async () => {
-  return basicResponse(baseResponseStatus.SUCCESS);
+// 유저의 아이디 찾기
+exports.findUserId = async (userName, admission ) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const userId = await userDao.getUserId(connection, userName, admission);
+    console.log(userId)
+    return resultResponse(baseResponseStatus.SUCCESS, userId);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
 };
+
+

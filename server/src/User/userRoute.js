@@ -9,6 +9,12 @@ module.exports = (app) => {
   //로그인
   app.post("/api/user/sign-in", user.signIn);
 
+  // 아이디 찾기 
+  app.get("/api/user/find/id", user.findUserId);
+
+  // 비밀번호 찾기 - 및 재설정.
+  app.get("api/user/find/passwd" ,user.findUserPasswd);
+
   //사용자 정보 가져오기
   app.get("/api/user/:userIdx", user.getUserDeepInfo);
 

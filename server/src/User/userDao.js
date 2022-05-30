@@ -171,7 +171,7 @@ exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
   return insertLikeToCommentRow;
 }
 
-//
+// 좋아요를 취소함
 exports.deleteLikeComment = async(connection,userIdx,commentIdx) =>{
 
   const deleteLikeCommentQuery =`
@@ -179,4 +179,14 @@ exports.deleteLikeComment = async(connection,userIdx,commentIdx) =>{
   `
   const [deleteLikeCommentRow]  = await connection.query(deleteLikeCommentQuery,[userIdx,commentIdx]);
   return deleteLikeCommentRow;
+}
+
+// user의 id 찾기 (이메일)
+exports.getUserId = async ( connection, userName, admission)=>{
+ const getUserIdQuery = `
+ select email from user 
+ where userName = ? and admission= ?
+ `
+ const [[getUserId]] = await connection.query(getUserIdQuery,[userName,admission])
+  return getUserId
 }
