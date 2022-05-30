@@ -106,3 +106,18 @@ exports.pushLike = async (req, res) => {
   const pushLikeResult = await userService.pushLike(userIdx, postIdx, commentIdx);
   return res.send(pushLikeResult);
 }
+
+//유저 아이디 찾기
+exports.findUserId = async (req,res)=>{
+  const {userName, admission } = req.query;
+
+  if (!userName || !admission) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const findUserIdResult = await userProvider.findUserId(userName, admission);
+  return res.send(findUserIdResult);
+
+}
+exports.findUserPasswd = async(req,res)=>{
+
+
+}
