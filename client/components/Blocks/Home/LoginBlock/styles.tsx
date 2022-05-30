@@ -4,7 +4,6 @@ import { mobile, tablet, tablet_landscape } from "Utils/styles";
 export const LoginWrapper = styled.form`
   ${mobile} {
     width: 100%;
-		margin-bottom : 25px;
   }
   ${tablet} {
     width: 50%;
@@ -34,9 +33,18 @@ export const EtcWrapper = styled.div`
   align-items: center;
   justify-content: center;
   color: #c8c8c8;
+  margin-top: 15px;
   font-size: 15px;
   gap: 25px;
-  div {
+  margin-bottom: 25px;
+  ${mobile} {
+    margin-top: 15px;
+    margin-bottom: 25px;
+  }
+  button {
+    border: none;
+    color: black;
+    background: none;
     cursor: pointer;
     &:hover {
       color: #fc96a5;
