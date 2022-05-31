@@ -7,7 +7,7 @@ interface Props {
 	setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SearchBox = ({ setOpenSearch }: Props) => {
+const SearchModal = ({ setOpenSearch }: Props) => {
 
 	const closeSearchBox = useCallback(() => {
 		setOpenSearch(false);
@@ -16,7 +16,7 @@ const SearchBox = ({ setOpenSearch }: Props) => {
 
 	return (
 		<>
-			<Modal onClose={closeSearchBox} title="게시글 검색">
+			<Modal onClose={closeSearchBox} title="검색">
 				<>
 					<SearchFormWrapper>
 						<CustomInput placeholder='검색어를 입력해주세요.' />
@@ -28,4 +28,4 @@ const SearchBox = ({ setOpenSearch }: Props) => {
 	)
 }
 
-export default SearchBox
+export default SearchModal
