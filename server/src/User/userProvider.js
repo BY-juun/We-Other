@@ -67,7 +67,6 @@ exports.getUserDeepInfo = async (userIdx) => {
     connection.release();
   }
 };
-
 exports.getRefreshToken = async (accessToken) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
