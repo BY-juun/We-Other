@@ -1,13 +1,12 @@
 import { EtcArea, EtcItem, EtcItem2, EtcLeft } from "components/Blocks/PostCard/styles";
 import Cookies from "js-cookie";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { useAddLike, useDeletePost } from "../../../../Hooks/Post";
 import { PostType } from "../../../../Types/Post";
 import { dateForm } from "../../../../Utils/dateForm";
 import ImageSlider from "../../../Atoms/ImageSlider";
-import ReportBox from "../ReportBox";
+import ReportModal from "../../_Modal/ReportModal";
 import { DeleteBtn, PostContentArea, PostContentTop, PostContentWrapper, PostDate, PostId, PostTitleArea, ReportBtn } from "./styles";
 
 interface Props {
@@ -72,7 +71,7 @@ const PostContent = ({ id, post }: Props) => {
 				</EtcArea>
 				{post.imageArray[0] !== null && <ImageSlider images={post.imageArray} />}
 			</PostContentWrapper>
-			<ReportBox openReport={openReport} setOpenReport={setOpenReport} />
+			{openReport && <ReportModal setOpenReport={setOpenReport} />}
 		</>
 	);
 };
