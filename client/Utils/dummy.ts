@@ -96,3 +96,11 @@ export const DummyPosts = [
     comment: 2,
   },
 ];
+
+export const dummyPartner = {
+  userIdx: -1,
+  department: "",
+  name: "",
+  MBTI: "",
+  description: "",
+};
