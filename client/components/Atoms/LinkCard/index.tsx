@@ -1,9 +1,11 @@
 import React from "react";
+import useGotoPage from "../../../Hooks/useGotoPage";
 import { LinkCardRoot } from "./styles";
 
-const LinkCard = ({ title, description }: { title: string, description: string }) => {
+const LinkCard = ({ title, description, url }: { title: string, description: string, url: string }) => {
+	const gotoPage = useGotoPage();
 	return (
-		<LinkCardRoot>
+		<LinkCardRoot onClick={gotoPage(url)}>
 			<div>{title}</div>
 			<span>{description}</span>
 			{/* <img src="/couple.png" /> */}

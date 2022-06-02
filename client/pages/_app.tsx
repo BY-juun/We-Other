@@ -1,15 +1,15 @@
 import "../styles/global.css";
 import type { AppContext, AppProps } from "next/app";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import Head from "next/head";
 import { ReactQueryDevtools } from "react-query/devtools";
 import cookies from "next-cookies";
 import { setToken } from "../Utils/TokenManager";
-import Footer from "components/Layouts/Footer";
 import Header from "components/Layouts/Header";
 import useSetProgressState from "Hooks/useSetProgressState";
 import PageLoading from "Utils/PageLoading";
+import { Wrapper } from "./styles";
 
 const WeOther = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -27,8 +27,9 @@ const WeOther = ({ Component, pageProps }: AppProps) => {
               <meta charSet="utf-8" />
               <title>WeOther</title>
             </Head>
-            <Component {...pageProps} />
-            <Footer />
+            <Wrapper>
+              <Component {...pageProps} />
+            </Wrapper>
             <ReactQueryDevtools initialIsOpen={false} />
           </Hydrate>
         </QueryClientProvider>
@@ -42,7 +43,6 @@ WeOther.getInitialProps = async (appContext: AppContext) => {
   const allCookies = cookies(ctx);
   const accessTokenByCookie = allCookies["accessToken"];
   const userIdx = allCookies["userIdx"];
-
   if (accessTokenByCookie !== undefined && userIdx !== undefined) {
     setToken(accessTokenByCookie, Number(userIdx));
   }

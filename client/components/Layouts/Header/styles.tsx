@@ -2,8 +2,6 @@ import styled from "@emotion/styled";
 import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const HeaderWrapper = styled.div`
-  display: none;
-  ${desktop} {
 		z-index : 100;
     display: flex;
     width: 100%;
@@ -15,7 +13,9 @@ export const HeaderWrapper = styled.div`
     background: white;
     border-bottom: 1px solid #d6d6d6;
     padding: 0 10%;
-  }
+		${mobile} {
+			height : 60px;
+		}
 `;
 
 export const HeaderTitle = styled.span`
@@ -27,8 +27,8 @@ export const HeaderTitle = styled.span`
   cursor: pointer;
 `;
 
-export const HeaderItems = styled.div`
-  display: flex;
+export const DesktopItems = styled.div`
+	display : none;
   gap: 20px;
   div {
     cursor: pointer;
@@ -39,4 +39,18 @@ export const HeaderItems = styled.div`
       border-bottom: 5px solid #fc96a5;
     }
   }
+	${desktop} {
+		display : flex;
+	}
 `;
+
+export const MobileMenu = styled.div`
+	${desktop} {
+		display : none;
+	}
+	button {
+		border : none;
+		background : none;
+
+	}
+`
