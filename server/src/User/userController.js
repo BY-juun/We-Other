@@ -123,19 +123,4 @@ exports.findUserId = async (req,res)=>{
 // 먼저 이메일로 인증을 먼저 하고 그 뒤에 userRoute에서 해당 계정에 대해 초기화한 비밀번호를 입력하는 형식으로 모듈화
 exports.findUserPasswd = async (req,res)=>{
   const {email } =req.body;
-
-  const mailConfig = {
-    from: sendId,
-    to : email,
-    subject : '비밀번호 찾기 테스트',
-    text : "비밀번호 찾기 테스트 본문",
-    html:`<p>비밀번호 초기화를 위해서는 아래의 URL을 클릭하여 주세요.<p>`
-  }
-  transporter.sendMail(mailConfig,(err,info)=>{
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  })
 }

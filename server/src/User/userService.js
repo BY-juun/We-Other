@@ -198,3 +198,21 @@ exports.pushLike = async (userIdx, postIdx, commentIdx) => {
     connection.release();
   }
 }
+
+// 비밀번호 초기화시에 token을 부여하기 하기 위함. 
+exports.insertUserPasswdToken = async (email,token)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    
+    const insertUserPasswdTokenResult = await userDao.insertUserPasswdToken(connection,email,token);
+    
+
+    return resultResponse(baseResponseStatus.SUCCESS,likeResult);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+}

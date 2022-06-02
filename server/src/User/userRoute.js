@@ -1,8 +1,8 @@
 const { verifyAccessToken } = require("../../config/jwt");
 const user = require("./userController");
+const {findUserPassWd} = require("../../config/email");
 
 module.exports = (app) => {
-
   //회원가입
   app.post("/api/user/sign-up", user.signUpUser);
 
@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.get("/api/user/find/id", user.findUserId);
 
   // 비밀번호 찾기 - 및 재설정.
-  app.get("api/user/find/passwd" ,user.findUserPasswd);
+  app.get("/api/user/find/passwd", findUserPassWd, user.findUserPasswd);
 
   //사용자 정보 가져오기
   app.get("/api/user/:userIdx", user.getUserDeepInfo);

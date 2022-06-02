@@ -3,7 +3,7 @@ const { basicResponse } = require("../config/response");
 const baseResponseStatus = require("../config/baseResponseStatus");
 // const JWT_SECRET = process.env.JWT_SECRET;
 // require("dotenv").config();
-const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET,PASSWD_TOKEN_SECRET } = process.env;
 const userProvider = require("../src/User/userProvider");
 const userService = require("../src/User/userService");
 exports.tokenSet = () => {
@@ -16,6 +16,11 @@ exports.tokenSet = () => {
     refresh(id) {
       return jwt.sign({ id }, REFRESH_TOKEN_SECRET, {
         expiresIn: "30d",
+      });
+    },
+    passwd(email){
+      return jwt.sign({ email }, PASSWD_TOKEN_SECRET, {
+        expiresIn: "5m",
       });
     },
   };

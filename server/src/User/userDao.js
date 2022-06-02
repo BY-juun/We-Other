@@ -40,6 +40,15 @@ exports.userNameCheck = async (connection, userName) => {
   );
   return userNameCheckRow;
 };
+exports.userCheck = async ( connection,userName,email,admission) =>{
+  const userCheckQuery =`
+  select exists (
+    select * from user where email = ? and userName = ? and admission = ?
+    ) as exist
+  `
+   const [[userCheckRow]] = await connection.query(userCheckQuery,[userName,email,admission]) 
+   return userCheckRow;
+}
 
 exports.signInCheckPasswd = async (connection, email) => {
   const signInCheckPasswdQuery = `
@@ -189,4 +198,10 @@ exports.getUserId = async ( connection, userName, admission)=>{
  `
  const [[getUserId]] = await connection.query(getUserIdQuery,[userName,admission])
   return getUserId
+}
+exports.insertUserPasswdToken = async(connection,email,token)=>{
+  const insertUserPasswdTokenQuery = `
+  UPDATE user SET token = ? WHERE email = ?;
+  `
+
 }

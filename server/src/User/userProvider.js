@@ -51,6 +51,23 @@ exports.userNameCheck = async (userName) => {
   }
 };
 
+// user의 존재 여부 체크 이메일 이름 학번
+exports.userCheck = async (userName, email,admission) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const userCheckResult = await userDao.userCheck(
+      connection,
+      userName,email,admission
+    );
+    return userCheckResult;
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
 exports.getUserDeepInfo = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
