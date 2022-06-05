@@ -5,12 +5,10 @@ import { PartnerType } from "Types/Meeting";
 
 interface Props {
   partner: PartnerType[];
-  setPartner: React.Dispatch<React.SetStateAction<PartnerType[]>>;
-
   idx: number;
 }
 
-const PartnerCard = ({ partner, setPartner, idx }: Props) => {
+const PartnerCard = ({ partner, idx }: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const onClickOpen = useCallback(() => {
     setOpenModal(true);
@@ -22,7 +20,7 @@ const PartnerCard = ({ partner, setPartner, idx }: Props) => {
   return (
     <>
       <PartnerCardRoot>{isRegist(partner[idx].name) ? <span>{partner[idx].name}</span> : <button onClick={onClickOpen}>아이디 검색</button>}</PartnerCardRoot>
-      {openModal && <FindPartnerModal partner={partner} setPartner={setPartner} onClose={onClose} idx={idx} />}
+      {openModal && <FindPartnerModal partner={partner} onClose={onClose} idx={idx} />}
     </>
   );
 };
