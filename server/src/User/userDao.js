@@ -40,15 +40,19 @@ exports.userNameCheck = async (connection, userName) => {
   );
   return userNameCheckRow;
 };
-exports.userCheck = async ( connection,userName,email,admission) =>{
-  const userCheckQuery =`
+exports.userCheck = async (connection, userName, email, admission) => {
+  const userCheckQuery = `
   select exists (
     select * from user where email = ? and userName = ? and admission = ?
     ) as exist
-  `
-   const [[userCheckRow]] = await connection.query(userCheckQuery,[userName,email,admission]) 
-   return userCheckRow;
-}
+  `;
+  const [[userCheckRow]] = await connection.query(userCheckQuery, [
+    userName,
+    email,
+    admission,
+  ]);
+  return userCheckRow;
+};
 
 exports.signInCheckPasswd = async (connection, email) => {
   const signInCheckPasswdQuery = `
@@ -66,7 +70,10 @@ exports.getUserShortInfo = async (connection, email) => {
     select userIdx, userName from user 
     where email = ?;
   `;
-  const [[getUserShortInfoRow]] = await connection.query(getUserShortInfoQuery, email);
+  const [[getUserShortInfoRow]] = await connection.query(
+    getUserShortInfoQuery,
+    email
+  );
   return getUserShortInfoRow;
 };
 exports.getUserDeepInfo = async (connection, userIdx) => {
@@ -156,52 +163,70 @@ exports.insertLikeToPost = async (connection, userIdx, postIdx) => {
   const insertLikeToPostQuery = `
   INSERT INTO recommend (userIdx, postIdx)
   VALUES (?,?)
-  `
-  const [insertLikeToPostRow] = await connection.query(insertLikeToPostQuery, [userIdx, postIdx]);
+  `;
+  const [insertLikeToPostRow] = await connection.query(insertLikeToPostQuery, [
+    userIdx,
+    postIdx,
+  ]);
   return insertLikeToPostRow;
-}
+};
 
 // 게시물에 좋아요 취소하기
-exports.deleteLikePost = async(connection,userIdx,postIdx)=>{
+exports.deleteLikePost = async (connection, userIdx, postIdx) => {
   const deleteLikePostQuery = `
     DELETE FROM recommend WHERE userIdx = ? and postIdx =?;
-  `
-  const [deleteLikePostRow] = await connection.query(deleteLikePostQuery,[userIdx,postIdx]);
+  `;
+  const [deleteLikePostRow] = await connection.query(deleteLikePostQuery, [
+    userIdx,
+    postIdx,
+  ]);
   return deleteLikePostRow;
-}
+};
 
 // 댓글에 좋아요 누르기
 exports.insertLikeToComment = async (connection, userIdx, commentIdx) => {
   const insertLikeToCommentQuery = `
   INSERT INTO recommend (userIdx, commentIdx)
   VALUES (?,?)
-  `
-  const [insertLikeToCommentRow] = await connection.query(insertLikeToCommentQuery, [userIdx, commentIdx]);
+  `;
+  const [insertLikeToCommentRow] = await connection.query(
+    insertLikeToCommentQuery,
+    [userIdx, commentIdx]
+  );
   return insertLikeToCommentRow;
-}
+};
 
 // 좋아요를 취소함
-exports.deleteLikeComment = async(connection,userIdx,commentIdx) =>{
-
-  const deleteLikeCommentQuery =`
+exports.deleteLikeComment = async (connection, userIdx, commentIdx) => {
+  const deleteLikeCommentQuery = `
   DELETE FROM recommend WHERE userIdx = ? and commentIdx =?;
-  `
-  const [deleteLikeCommentRow]  = await connection.query(deleteLikeCommentQuery,[userIdx,commentIdx]);
+  `;
+  const [deleteLikeCommentRow] = await connection.query(
+    deleteLikeCommentQuery,
+    [userIdx, commentIdx]
+  );
   return deleteLikeCommentRow;
-}
+};
 
 // user의 id 찾기 (이메일)
-exports.getUserId = async ( connection, userName, admission)=>{
- const getUserIdQuery = `
+exports.getUserId = async (connection, userName, admission) => {
+  const getUserIdQuery = `
  select email from user 
  where userName = ? and admission= ?
- `
- const [[getUserId]] = await connection.query(getUserIdQuery,[userName,admission])
-  return getUserId
-}
-exports.insertUserPasswdToken = async(connection,email,token)=>{
+ `;
+  const [[getUserId]] = await connection.query(getUserIdQuery, [
+    userName,
+    admission,
+  ]);
+  return getUserId;
+};
+exports.insertUserPasswdToken = async (connection, email, token) => {
   const insertUserPasswdTokenQuery = `
   UPDATE user SET token = ? WHERE email = ?;
-  `
-
-}
+  `;
+  const [insertUserPasswdTokenRow] = await connection.query(
+    insertUserPasswdTokenQuery,
+    [token, email]
+  );
+  return insertUserPasswdTokenRow;
+};
