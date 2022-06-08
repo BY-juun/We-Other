@@ -3,7 +3,7 @@ const { basicResponse, resultResponse } = require("../../config/response");
 const userDao = require("./userDao");
 const { pool } = require("../../config/database");
 const crypto = require("crypto");
-const { email } = require("../../config/regex");
+const { email, passwd } = require("../../config/regex");
 const jwt = require("jsonwebtoken")
 
 require("dotenv").config();
@@ -106,6 +106,7 @@ exports.findUserId = async (userName, admission ) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const userId = await userDao.getUserId(connection, userName, admission);
+    if (!userId) return basicResponse(baseResponseStatus.USER_NOT_EXIST)
     console.log(userId)
     return resultResponse(baseResponseStatus.SUCCESS, userId);
   } catch (error) {
@@ -123,6 +124,7 @@ exports.verifyPasswdToken = async(token) =>{
 
     //발급된 토큰이 제기능을 한다면 userIdx를 넘겨준다. 
     if(jwt.verify(token,PASSWD_TOKEN_SECRET)) return resultResponse(baseResponseStatus.SUCCESS,{userIdx});
+
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.TOKEN_NOT_VERIFIED);
@@ -130,5 +132,35 @@ exports.verifyPasswdToken = async(token) =>{
     connection.release();
   }
 }
+exports.verifyPasswd = async(email,passwd)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+
+    const hashedPassword = await crypto
+    .createHash("sha512")
+    .update(passwd)
+    .digest("base64");
+    
+    let exist;
+  const signInCheckPasswd = await userDao.signInCheckPasswd(
+    connection,
+    email
+  );
+  if (hashedPassword == signInCheckPasswd.passwd){
+    exist =1;
+    return resultResponse(baseResponseStatus.SUCCESS,{exist})
+  }
+  else{
+    exist = 0;
+    return resultResponse(baseResponseStatus.SUCCESS,{exist})
+  }
 
 
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+}

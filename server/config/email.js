@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 exports.findUserPassWd = async (req, res) => {
   //3개에 대해서 body로 그 값을 받아와준다.
-  const { email, userName, admission } = req.body;
+  const { email, userName, admission } = req.query;
   if (!email || !userName || !admission) {
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   }

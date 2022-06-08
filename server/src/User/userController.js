@@ -144,3 +144,19 @@ exports.resetUserPasswd = async (req,res)=>{
 
   return res.send(resetUserPasswd);
 }
+
+exports.verifyPasswd = async(req,res)=>{
+  const {email, passwd} = req.query;
+
+  if(!email || !passwd) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const {result} = await userProvider.verifyPasswd(email,passwd);
+  console.log(result);
+
+  if(result.exist){
+    return res.send("비밀번호 확인 성공")
+  }
+  else{
+    return res.send("비밀번호 확인 실패");
+  }
+}

@@ -21,6 +21,9 @@ module.exports = (app) => {
   // 비밀전호 재설정
   app.put("/api/user/reset/passwd", user.resetUserPasswd);
 
+  // 비밀번호 확인
+  app.get("/api/user/passwd/verify",user.verifyPasswd)
+
   //사용자 정보 가져오기
   app.get("/api/user/:userIdx", user.getUserDeepInfo);
 
