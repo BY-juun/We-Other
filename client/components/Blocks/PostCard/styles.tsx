@@ -111,7 +111,6 @@ export const EtcArea = styled.div`
   align-items: center;
   justify-content: space-between;
 	${desktop}  {
-		margin-left : 2%;
 		width : 18%;
 	}
 	${tablet_landscape}  {
@@ -127,6 +126,23 @@ export const EtcItem = styled.div`
   span {
     font-size: 12px;
   }
+	${desktop} {
+		width : 100%;
+	}
+	${tablet_landscape} {
+		width : 100%;
+	}
+`;
+
+export const EtcItem2 = styled.div`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	margin-top : 1px;
+	span {
+		font-size: 12px;
+	}
 	${desktop} {
 		width : 100%;
 	}
@@ -189,11 +205,3 @@ export const EtcLeft = styled.div`
   color: black;
 `;
 
-export const EtcItem2 = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  span {
-    font-size: 12px;
-  }
-`;

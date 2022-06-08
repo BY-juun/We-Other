@@ -6,6 +6,9 @@ export const PostContentWrapper = styled.div`
 	${desktop} {
 		padding: 0 25%;
 	}
+	${mobile} {
+		padding : 0 5%;
+	}
 `
 
 export const PostContentTop = styled.div`

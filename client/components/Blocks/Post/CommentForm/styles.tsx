@@ -14,7 +14,7 @@ export const CommentFormRoot = styled.div`
 		display: flex;
 		align-items: center;
 		gap: 5%;
-		padding: 10px 5%;
+		padding: 10px 0;
 		border-bottom: 0.5px solid #C8C8C8;
 	}
   input {

@@ -8,6 +8,9 @@ export const PostWrapper = styled.div`
 	${desktop} {
 		margin-top : 100px;
 	}
+	${mobile} {
+		margin-top : 75px;
+	}
 `
 
 export const CommentListWrapper = styled.div`
@@ -19,9 +22,6 @@ export const CommentListWrapper = styled.div`
 `
 
 export const CommentWrapper = styled.div`
-${desktop} {
-	margin-top : 350px;
-}	
 `
 
 export const GoBackBtn = styled.button`

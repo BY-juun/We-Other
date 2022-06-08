@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mobile, tablet, tablet_landscape } from "Utils/styles";
+import { customBtn, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const LoginWrapper = styled.form`
   ${mobile} {
@@ -19,13 +19,9 @@ export const LoginWrapper = styled.form`
 `;
 
 export const LoginBtn = styled.button`
-  cursor: pointer;
-  border-radius: 4px;
-  border: none;
   width: 100%;
-  color: white;
-  background: #fc96a5;
   padding: 10px;
+	${customBtn}
 `;
 
 export const EtcWrapper = styled.div`
