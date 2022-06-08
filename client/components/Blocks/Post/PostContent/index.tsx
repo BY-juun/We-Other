@@ -50,7 +50,7 @@ const PostContent = ({ id, post }: Props) => {
 					<div>
 						{post.userIdx === Number(Cookies.get("userIdx")) && <DeleteBtn onClick={deletePost}>지우기</DeleteBtn>}
 						<ReportBtn onClick={onClickOpenReport}>
-							<Image width={15} height={15} src={"/alarm.png"} alt="신고" />
+							<Image width={20} height={20} src={"/alarm.png"} alt="신고" />
 						</ReportBtn>
 					</div>
 				</PostContentTop>
@@ -59,11 +59,11 @@ const PostContent = ({ id, post }: Props) => {
 				<EtcArea>
 					<EtcLeft>
 						<EtcItem onClick={onClickLikeBtn}>
-							<Image src={"/heart.png"} alt="좋아요" width={15} height={15} />
+							<Image src="/heart.png" alt="좋아요" width={25} height={25} />
 							<span>{post.likeCount}</span>
 						</EtcItem>
 						<EtcItem2>
-							<Image src={"/comment.png"} alt="댓글" width={15} height={15} />
+							<Image src="/comment.png" alt="댓글" width={17} height={17} />
 							<span>{post.commentCount}</span>
 						</EtcItem2>
 					</EtcLeft>

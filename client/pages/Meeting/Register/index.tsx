@@ -1,11 +1,13 @@
 import { CustomInput } from "components/Atoms/CustomInput/styles";
 import { CustomTextArea } from "components/Atoms/CustomTextArea/styles";
 import RegisterPartner from "components/Blocks/RegisterMeeting/RegisterPartner";
-import React, { useCallback, useRef, useState } from "react";
-import { PartnerType } from "Types/Meeting";
+import React, { createContext, useCallback, useRef, useState } from "react";
+import { MeetingContextType, PartnerType } from "Types/Meeting";
 import { dummyPartner } from "Utils/dummy";
 import { RegisterFormItem, RegisterPageWrapper, RegisterTop } from "./styles";
 import { isAllRegist, isRegist, meetingOption } from "./util";
+
+export const MeetingContext = createContext<MeetingContextType | null>(null);
 
 const MeetingRegister = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -21,7 +23,7 @@ const MeetingRegister = () => {
           numOfPeople
         )
       ) {
-        if (!window.confirm("등록된 사용자가 있습니다.\n인원을 변경할 경우, 등록된 사용자가 초기화됩니다.\n그래도 인원을 변경하시겠습니까?")) return;
+        if (!window.confirm("* 등록된 사용자가 있습니다.\n인원을 변경할 경우, 등록된 사용자가 초기화됩니다.\n그래도 인원을 변경하시겠습니까?")) return;
       }
       setNumOfPeople(Number(e.target.value));
       setPartner(Array.from({ length: Number(e.target.value) }, () => dummyPartner));
@@ -40,35 +42,35 @@ const MeetingRegister = () => {
   }, [partner]);
 
   return (
-    <RegisterPageWrapper>
-      <RegisterTop>
-        <h2>미팅 신청하기</h2>
-        <button onClick={submit}>등록</button>
-      </RegisterTop>
-      <RegisterFormItem>
-        <span>제목</span>
-        <CustomInput ref={titleRef} />
-      </RegisterFormItem>
-      <RegisterFormItem>
-        <span>인원</span>
-        <select value={numOfPeople} onChange={onChangeNumOfPeople}>
-          {meetingOption.map((option) => {
-            return (
-              <option value={option.num} key={option.text}>
-                {option.text}
-              </option>
-            );
-          })}
-        </select>
-      </RegisterFormItem>
-      <RegisterPartner partner={partner} setPartner={setPartner} />
-      <RegisterFormItem>
-        <div>
+    <MeetingContext.Provider value={{ partner, setPartner }}>
+      <RegisterPageWrapper>
+        <RegisterTop>
+          <h2>미팅 신청하기</h2>
+          <button onClick={submit}>등록</button>
+        </RegisterTop>
+        <RegisterFormItem>
+          <span>제목</span>
+          <CustomInput ref={titleRef} />
+        </RegisterFormItem>
+        <RegisterFormItem>
           <span>짧은 설명</span>
           <CustomTextArea ref={descriptionRef} />
-        </div>
-      </RegisterFormItem>
-    </RegisterPageWrapper>
+        </RegisterFormItem>
+        <RegisterFormItem>
+          <span>인원</span>
+          <select value={numOfPeople} onChange={onChangeNumOfPeople}>
+            {meetingOption.map((option) => {
+              return (
+                <option value={option.num} key={option.text}>
+                  {option.text}
+                </option>
+              );
+            })}
+          </select>
+        </RegisterFormItem>
+        <RegisterPartner partner={partner} />
+      </RegisterPageWrapper>
+    </MeetingContext.Provider>
   );
 };
 

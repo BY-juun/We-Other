@@ -3,6 +3,7 @@ import { mobile, tablet } from "Utils/styles";
 
 export const RegisterPartnerWrapper = styled.div`
   margin-top: 25px;
+  margin-bottom: 25px;
   span {
     font-size: 18px;
   }

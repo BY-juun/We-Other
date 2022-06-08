@@ -1,19 +1,20 @@
 import { CustomInput } from "components/Atoms/CustomInput/styles";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useContext, useRef } from "react";
 import Modal from "Utils/Modal";
 import { SearchFormWrapper } from "../SearchModal/styles";
 import { PartnerType } from "Types/Meeting";
+import { MeetingContext } from "pages/Meeting/Register";
 
 interface Props {
   partner: PartnerType[];
-  setPartner: React.Dispatch<React.SetStateAction<PartnerType[]>>;
+  //setPartner: React.Dispatch<React.SetStateAction<PartnerType[]>>;
   onClose: () => void;
   idx: number;
 }
 
-const FindPartnerModal = ({ partner, setPartner, onClose, idx }: Props) => {
+const FindPartnerModal = ({ partner, onClose, idx }: Props) => {
   const idRef = useRef<HTMLInputElement>(null);
-
+  const context = useContext(MeetingContext);
   const submit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -28,10 +29,10 @@ const FindPartnerModal = ({ partner, setPartner, onClose, idx }: Props) => {
       };
       let temp = [...partner];
       temp[idx] = registedData;
-      setPartner(temp);
+      context?.setPartner(temp);
       onClose();
     },
-    [idx, partner, setPartner, onClose]
+    [idx, partner, context?.setPartner, onClose]
   );
 
   return (

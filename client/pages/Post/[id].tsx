@@ -8,8 +8,9 @@ import PostLoading from "../../components/Loading/PostLoading";
 import { useGetPost } from "../../Hooks/Post";
 import useIsLoggedIn from "../../Hooks/useIsLoggedIn";
 import { CommentType } from "../../Types/Post";
+import PageLoading from "../../Utils/PageLoading";
 
-import { CommentListWrapper, PostWrapper, CommentWrapper, GoBackBtn } from "./styles";
+import { CommentListWrapper, PostWrapper, CommentWrapper } from "./styles";
 
 const Post: NextPage = () => {
 	const router = useRouter();
@@ -22,31 +23,27 @@ const Post: NextPage = () => {
 	return (
 		<>
 			<PostWrapper>
-				{/* <GoBackBtn>
-					<Image src="/back_icon.png" width={18} height={13} /><span>뒤로가기</span>
-				</GoBackBtn> */}
 				{!isLoading ? (
 					<>
 						<PostContent post={post} id={Number(id)} />
 						<CommentWrapper>
 							<CommentForm id={Number(id)} />
 							<CommentListWrapper style={{ filter: !isLoggedIn ? "blur(4px)" : "" }}>
-								{post.CommentOfPost.length !== 0
-									?
+								{post.CommentOfPost.length !== 0 ? (
 									<>
 										{post.CommentOfPost.map((comment: CommentType) => {
-											return <CommentList key={comment.commentIdx} comment={comment} postIdx={Number(id)} />
+											return <CommentList key={comment.commentIdx} comment={comment} postIdx={Number(id)} />;
 										})}
 									</>
-									:
-									<div>댓글이없습니다</div>}
+								) : (
+									<div>댓글이없습니다</div>
+								)}
 							</CommentListWrapper>
 						</CommentWrapper>
 					</>
 				) : (
-					<PostLoading loading={isLoading} />
+					<>{PageLoading(isLoading)}</>
 				)}
-
 			</PostWrapper>
 		</>
 	);
