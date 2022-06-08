@@ -4,6 +4,10 @@ const userDao = require("./userDao");
 const { pool } = require("../../config/database");
 const crypto = require("crypto");
 const { email } = require("../../config/regex");
+const jwt = require("jsonwebtoken")
+
+require("dotenv").config();
+const { PASSWD_TOKEN_SECRET } = process.env;
 
 exports.userIdxCheck = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
@@ -111,5 +115,20 @@ exports.findUserId = async (userName, admission ) => {
     connection.release();
   }
 };
+exports.verifyPasswdToken = async(token) =>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const {userIdx}  = await userDao.verifyPasswdToken(connection, token);
+    console.log(userIdx);
+
+    //발급된 토큰이 제기능을 한다면 userIdx를 넘겨준다. 
+    if(jwt.verify(token,PASSWD_TOKEN_SECRET)) return resultResponse(baseResponseStatus.SUCCESS,{userIdx});
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.TOKEN_NOT_VERIFIED);
+  } finally {
+    connection.release();
+  }
+}
 
 

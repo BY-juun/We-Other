@@ -122,6 +122,11 @@ module.exports = {
     code: 2009,
     message: "토큰이 존재하지 않습니다. ",
   },
+  TOKEN_NOT_VERIFIED: {
+    isSuccess: false,
+    code: 2009,
+    message: "정상적인 토큰이 아닙니다.",
+  },
   USER_NOT_EXIST: {
     isSuccess: false,
     code: 2010,

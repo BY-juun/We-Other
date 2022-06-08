@@ -2,6 +2,8 @@ const userProvider = require("../src/User/userProvider");
 const userService = require("../src/User/userService");
 const { tokenSet } = require("./jwt");
 const nodemailer = require("nodemailer");
+const { basicResponse } = require("./response");
+const baseResponseStatus = require("./baseResponseStatus");
 
 // 최상단 폴더에서 path를 설정해주었다면 그 하위 폴더에서는 config() 만해주면 된.
 require("dotenv").config();
@@ -9,9 +11,9 @@ require("dotenv").config();
 const { ADMIN_EMAIL, ADMIN_PASSWD } = process.env;
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 465,
-  secure: true, // true for 465, false for other ports
+  service: "Naver",
+  host: 'smtp.naver.com',
+  port: 587,
   auth: {
     // 이메일을 보낼 계정 데이터 입력
     user: ADMIN_EMAIL,
@@ -42,10 +44,10 @@ exports.findUserPassWd = async (req, res) => {
       subject: "비밀번호 초기화 이메일입니다.",
       html:
         "비밀번호 초기화를 위해서는 아래의 URL을 클릭하여 주세요." +
-        `http://localhost/reset/${token}`,
+        `http://localhost/passwd/reset/${token}`,
     };
     transporter.sendMail(emailOptions, res); //전송
   }
 
-  return res.send("test");
+  return res.send(basicResponse(baseResponseStatus.SUCCESS));
 };

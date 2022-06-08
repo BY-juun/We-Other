@@ -1,3 +1,5 @@
+const { passwd } = require("../../config/regex");
+
 exports.insertUser = async (connection, insertUserParams) => {
   const insertUserQuery = `
      INSERT INTO user (email, passwd, userName, department, sex, admission)
@@ -230,3 +232,23 @@ exports.insertUserPasswdToken = async (connection, email, token) => {
   );
   return insertUserPasswdTokenRow;
 };
+
+// 패스워드 재설정 시 필요한 토큰 검증
+exports.verifyPasswdToken = async(connection,token)=>{
+    const verifyPasswdTokenQuery =`
+      select userIdx from user where token =?
+    `
+    const [[verifyPasswdTokenRow]] = await connection.query(verifyPasswdTokenQuery,token);
+    return verifyPasswdTokenRow; 
+
+}
+
+// 유저의 패스워드 재설정
+exports.resetUserPasswd = async(connection,userIdx,passwd)=>{
+  const resetUserPasswdQuery = `
+  UPDATE user SET passwd =?  WHERE userIdx = ?;
+  `
+  const [resetUserPasswdRow] = await connection.query(resetUserPasswdQuery,[passwd,userIdx])
+  return resetUserPasswdRow;
+
+}

@@ -118,9 +118,29 @@ exports.findUserId = async (req,res)=>{
 
 }
 
-// 유저 패스워드 찾기 - 비밀번호 초기화까지
+exports.verifyPasswdToken = async(req,res)=>{
+  const {token} =req.query;
+  
+  if(!token) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const verifyPasswdTokenResult = await userProvider.verifyPasswdToken(token);
+  return res.send(verifyPasswdTokenResult);
+
+}
+
+
 
 // 먼저 이메일로 인증을 먼저 하고 그 뒤에 userRoute에서 해당 계정에 대해 초기화한 비밀번호를 입력하는 형식으로 모듈화
-exports.findUserPasswd = async (req,res)=>{
-  const {email } =req.body;
+exports.resetUserPasswd = async (req,res)=>{
+  const {userIdx, passwd } =req.body;
+
+  if(!userIdx || !passwd) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+ 
+  const passwdCheck = regex.passwd(passwd);
+  if (!passwdCheck)
+    return res.send(basicResponse(baseResponseStatus.PASSWORD_INVALID));
+
+  const resetUserPasswd = await userService.resetUserPasswd(userIdx,passwd);
+
+  return res.send(resetUserPasswd);
 }

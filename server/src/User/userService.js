@@ -10,6 +10,7 @@ const commentDao = require("../Comment/commentDao");
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const jwt = require("jsonwebtoken");
+const { passwd } = require("../../config/regex");
 
 // require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
@@ -214,8 +215,7 @@ exports.insertUserPasswdToken = async (email, token) => {
       email,
       token
     );
-
-    return resultResponse(baseResponseStatus.SUCCESS, likeResult);
+    return resultResponse(baseResponseStatus.SUCCESS, insertUserPasswdTokenResult);
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
@@ -223,3 +223,25 @@ exports.insertUserPasswdToken = async (email, token) => {
     connection.release();
   }
 };
+
+//패스워드 재설정
+exports.resetUserPasswd = async(userIdx,passwd)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const hashedPassword = await crypto
+    .createHash("sha512")
+    .update(passwd)
+    .digest("base64");
+    const resetUserPasswdResult = await userDao.resetUserPasswd(
+      connection,
+      userIdx,hashedPassword
+    );
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+}

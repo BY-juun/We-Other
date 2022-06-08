@@ -13,10 +13,13 @@ module.exports = (app) => {
   app.get("/api/user/find/id", user.findUserId);
 
   // 비밀번호 찾기 - 및 재설정.
-  app.get("/api/user/find/passwd", findUserPassWd, user.findUserPasswd);
+  app.get("/api/user/find/passwd", findUserPassWd);
+
+  // 비밀번호 재설정을 위한 토큰 검증 API
+  app.get("/api/user/verify/passwd/token", user.verifyPasswdToken)
 
   // 비밀전호 재설정
-  app.get("/api/user/reset/passwd", findUserPassWd, user.findUserPasswd);
+  app.put("/api/user/reset/passwd", user.resetUserPasswd);
 
   //사용자 정보 가져오기
   app.get("/api/user/:userIdx", user.getUserDeepInfo);
