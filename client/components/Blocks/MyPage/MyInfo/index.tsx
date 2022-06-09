@@ -1,20 +1,12 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { useGetUserInfo } from '../../../../Hooks/User';
 import PageLoading from '../../../../Utils/PageLoading';
-import CheckPwdModal from '../../_Modal/CheckPwdModal';
+import AdditionalInfoBtn from '../../../Atoms/AdditionalInfoBtn';
+import ResetBtn from '../../../Atoms/ResetPwdBtn';
 import { MyInfoItem, MyInfoRoot, MyInfoTitle } from './styles';
 
 const MyInfo = () => {
 	const { data: UserInfo, isLoading } = useGetUserInfo();
-	const [openCheckPwdModal, setOpenCheckPwdModal] = useState(false);
-
-	const gotoResetPasswd = useCallback(() => {
-		setOpenCheckPwdModal(true);
-	}, [])
-
-	const closeModal = useCallback(() => {
-		setOpenCheckPwdModal(false);
-	}, [])
 
 	if (isLoading) return <>{PageLoading(isLoading)}</>
 
@@ -25,10 +17,11 @@ const MyInfo = () => {
 					<MyInfoTitle>이메일</MyInfoTitle><div>{UserInfo?.email}</div>
 				</MyInfoItem>
 				<MyInfoItem>
-					<MyInfoTitle>비밀번호</MyInfoTitle><button onClick={gotoResetPasswd}>재설정</button>
+					<MyInfoTitle>비밀번호</MyInfoTitle><ResetBtn email={String(UserInfo?.email)} />
 				</MyInfoItem>
 				<MyInfoItem>
-					<MyInfoTitle>추가정보 등록</MyInfoTitle><div style={{ color: "red" }}>미등록</div>
+					<MyInfoTitle>추가정보 등록</MyInfoTitle>
+					<AdditionalInfoBtn />
 				</MyInfoItem>
 				<MyInfoItem>
 					<MyInfoTitle>이름</MyInfoTitle><div>{UserInfo?.userName}</div>
@@ -45,8 +38,10 @@ const MyInfo = () => {
 				<MyInfoItem>
 					<MyInfoTitle>간단한 자기소개</MyInfoTitle><div>{UserInfo?.admission}</div>
 				</MyInfoItem>
+				<MyInfoItem>
+					<MyInfoTitle>관심사</MyInfoTitle><div>어쩌구 저쩌구 </div>
+				</MyInfoItem>
 			</MyInfoRoot>
-			{openCheckPwdModal && <CheckPwdModal email={String(UserInfo?.email)} onClose={closeModal} />}
 		</>
 	)
 }
