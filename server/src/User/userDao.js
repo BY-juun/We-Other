@@ -17,7 +17,7 @@ exports.userIdxCheck = async (connection, userIdx) => {
     select * from user where userIdx = ?
     ) as exist
 `;
-  const [userIdxCheckRow] = await connection.query(userIdxCheckQuery, userIdx);
+  const [[userIdxCheckRow]] = await connection.query(userIdxCheckQuery, userIdx);
   return userIdxCheckRow;
 };
 exports.emailCheck = async (connection, email) => {
@@ -251,4 +251,16 @@ exports.resetUserPasswd = async(connection,userIdx,passwd)=>{
   const [resetUserPasswdRow] = await connection.query(resetUserPasswdQuery,[passwd,userIdx])
   return resetUserPasswdRow;
 
+}
+
+// 유저의 userIntro 가져오기
+exports.getUserIntro = async(connection, userIdx)=>{
+  const getUserIntroQuery = `
+    select u.userIdx, u.email, u.userName, u.department, u.sex, u.admission, 
+    ui.mbti, ui.introduce, ui.favorite 
+    from user u left join user_intro ui 
+    on u.userIdx = ui.userIdx where u.userIdx = ?;
+  `
+  const [getUserIntroRow] = await connection.query(getUserIntroQuery,userIdx);
+  return getUserIntroRow;
 }

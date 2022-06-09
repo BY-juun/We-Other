@@ -79,8 +79,8 @@ exports.getUserDeepInfo = async (req, res) => {
   const { userIdx } = req.params;
   if (!userIdx)
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
-  const userIdxCheck = await userProvider.userIdxCheck(userIdx);
-  if (!userIdxCheck)
+  const {exist} = await userProvider.userIdxCheck(userIdx);
+  if (!exist)
     return res.send(basicResponse(baseResponseStatus.USER_NOT_EXIST));
   const userDeepInfo = await userProvider.getUserDeepInfo(userIdx);
   return res.send(resultResponse(baseResponseStatus.SUCCESS, userDeepInfo));
@@ -118,6 +118,8 @@ exports.findUserId = async (req,res)=>{
 
 }
 
+
+// 비밀번호 재절성 시 발급되는 token 인증.
 exports.verifyPasswdToken = async(req,res)=>{
   const {token} =req.query;
   
@@ -127,8 +129,6 @@ exports.verifyPasswdToken = async(req,res)=>{
   return res.send(verifyPasswdTokenResult);
 
 }
-
-
 
 // 먼저 이메일로 인증을 먼저 하고 그 뒤에 userRoute에서 해당 계정에 대해 초기화한 비밀번호를 입력하는 형식으로 모듈화
 exports.resetUserPasswd = async (req,res)=>{
@@ -145,6 +145,7 @@ exports.resetUserPasswd = async (req,res)=>{
   return res.send(resetUserPasswd);
 }
 
+//비밀번호 확인 
 exports.verifyPasswd = async(req,res)=>{
   const {email, passwd} = req.query;
 
@@ -160,3 +161,22 @@ exports.verifyPasswd = async(req,res)=>{
     return res.send("비밀번호 확인 실패");
   }
 }
+
+// user의 deep 정보들 조회하기 
+exports.getUserIntro = async(req,res) =>{
+  const {userIdx} = req.params
+
+  if(!userIdx) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+  
+  const {exist} = await userProvider.userIdxCheck(userIdx);
+  if (!exist)
+    return res.send(basicResponse(baseResponseStatus.USER_NOT_EXIST));
+  
+  const getUserIntroResult = await userProvider.getUserIntro(userIdx);
+
+  res.send(getUserIntroResult);
+}
+
+
+// user의 deep 정보들 입력하기
+

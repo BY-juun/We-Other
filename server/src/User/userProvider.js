@@ -164,3 +164,18 @@ exports.verifyPasswd = async(email,passwd)=>{
   }
 
 }
+
+// userIntro 에 대한 정보 가져오기 
+exports.getUserIntro = async(userIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const getUserIntro = await userDao.getUserIntro(connection, userIdx);
+    console.log("getUserIntro : ",getUserIntro)
+    return resultResponse(baseResponseStatus.SUCCESS, getUserIntro);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}

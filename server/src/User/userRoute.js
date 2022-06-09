@@ -1,8 +1,13 @@
 const { verifyAccessToken } = require("../../config/jwt");
 const user = require("./userController");
 const { findUserPassWd } = require("../../config/email");
+const userIntro =require("./userIntro/userIntro")
 
 module.exports = (app) => {
+
+  // userIntro에 대한 라우터 
+  app.use('/api/user/intro', userIntro)
+
   //회원가입
   app.post("/api/user/sign-up", user.signUpUser);
 
@@ -29,4 +34,7 @@ module.exports = (app) => {
 
   // 좋아요 누르기
   app.patch("/api/user/like", verifyAccessToken, user.pushLike);
+
+  
+
 };
