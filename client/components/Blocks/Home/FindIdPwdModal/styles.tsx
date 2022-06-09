@@ -35,3 +35,8 @@ export const FindContentWrapper = styled.div`
     }
   }
 `;
+
+export const ShowUserEmailBox = styled.span`
+	text-align : center;
+	font-size : 15px;
+`

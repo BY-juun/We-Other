@@ -5,11 +5,12 @@ const userDao = require("./userDao");
 const { resultResponse, basicResponse } = require("../../config/response");
 const baseResponseStatus = require("../../config/baseResponseStatus");
 const tokenSet = require("../../config/jwt");
-const postDao = require('../Post/postDao');
-const commentDao = require('../Comment/commentDao');
+const postDao = require("../Post/postDao");
+const commentDao = require("../Comment/commentDao");
 const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const jwt = require("jsonwebtoken");
+const { passwd } = require("../../config/regex");
 
 // require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
@@ -161,40 +162,86 @@ exports.updateAccessToken = async (id, accessToken) => {
   }
 };
 
-// 좋아요 등록 
+// 좋아요 등록
 exports.pushLike = async (userIdx, postIdx, commentIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     let likeResult;
-    // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다. 
+    // 게시물에 대한 것과 댓글에 대한 로직을 분리하여 작성하여야만 한다.
     if (postIdx) {
-      const {exist} =await postDao.checkLikePost(connection,userIdx,postIdx);
-      if(!exist){
-      // 좋아요를 눌렀던 적이 없을 때는 좋아요를 넣어줘야겠지;
+      const { exist } = await postDao.checkLikePost(
+        connection,
+        userIdx,
+        postIdx
+      );
+      if (!exist) {
+        // 좋아요를 눌렀던 적이 없을 때는 좋아요를 넣어줘야겠지;
         await userDao.insertLikeToPost(connection, userIdx, postIdx);
-        likeResult = 1 ; // 좋아요를 누름
-      }else{
-        // 좋아요를 눌렀던 적이 있을 때는 없애줘야 한다. 
-        await userDao.deleteLikePost(connection,userIdx,postIdx);
+        likeResult = 1; // 좋아요를 누름
+      } else {
+        // 좋아요를 눌렀던 적이 있을 때는 없애줘야 한다.
+        await userDao.deleteLikePost(connection, userIdx, postIdx);
         likeResult = 0; // 좋아요를 취소함
       }
-  
-    }
-    else {
-      const {exist} =await commentDao.checkLikeComment(connection,userIdx,commentIdx);
-      if(!exist){
-        await userDao.insertLikeToComment(connection, userIdx, commentIdx)
-        likeResult = 1 ; // 좋아요를 누름
-      }else{
-        await userDao.deleteLikeComment(connection,userIdx,postIdx);
+    } else {
+      const { exist } = await commentDao.checkLikeComment(
+        connection,
+        userIdx,
+        commentIdx
+      );
+      if (!exist) {
+        await userDao.insertLikeToComment(connection, userIdx, commentIdx);
+        likeResult = 1; // 좋아요를 누름
+      } else {
+        await userDao.deleteLikeComment(connection, userIdx, postIdx);
         likeResult = 0; // 좋아요를 취소함
       }
     }
-    return resultResponse(baseResponseStatus.SUCCESS,likeResult);
+    return resultResponse(baseResponseStatus.SUCCESS, likeResult);
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
   }
+};
+
+// 비밀번호 초기화시에 token을 부여하기 하기 위함.
+exports.insertUserPasswdToken = async (email, token) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const insertUserPasswdTokenResult = await userDao.insertUserPasswdToken(
+      connection,
+      email,
+      token
+    );
+    return resultResponse(baseResponseStatus.SUCCESS, insertUserPasswdTokenResult);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+//패스워드 재설정
+exports.resetUserPasswd = async(userIdx,passwd)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const hashedPassword = await crypto
+    .createHash("sha512")
+    .update(passwd)
+    .digest("base64");
+    const resetUserPasswdResult = await userDao.resetUserPasswd(
+      connection,
+      userIdx,hashedPassword
+    );
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
 }

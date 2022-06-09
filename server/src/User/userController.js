@@ -3,8 +3,8 @@ const { basicResponse, resultResponse } = require("../../config/response");
 const userService = require("./userService");
 const userProvider = require("./userProvider");
 const regex = require("../../config/regex");
-const jwt = require("jsonwebtoken");
-const { token } = require("../../config/jwt");
+const transporter = require("../../config/email")
+
 //회원가입 과정
 exports.signUpUser = async (req, res) => {
   const { email, passwd, userName, department, sex, admission } = req.body;
@@ -117,7 +117,46 @@ exports.findUserId = async (req,res)=>{
   return res.send(findUserIdResult);
 
 }
-exports.findUserPasswd = async(req,res)=>{
+
+exports.verifyPasswdToken = async(req,res)=>{
+  const {token} =req.query;
+  
+  if(!token) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const verifyPasswdTokenResult = await userProvider.verifyPasswdToken(token);
+  return res.send(verifyPasswdTokenResult);
+
+}
 
 
+
+// 먼저 이메일로 인증을 먼저 하고 그 뒤에 userRoute에서 해당 계정에 대해 초기화한 비밀번호를 입력하는 형식으로 모듈화
+exports.resetUserPasswd = async (req,res)=>{
+  const {userIdx, passwd } =req.body;
+
+  if(!userIdx || !passwd) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+ 
+  const passwdCheck = regex.passwd(passwd);
+  if (!passwdCheck)
+    return res.send(basicResponse(baseResponseStatus.PASSWORD_INVALID));
+
+  const resetUserPasswd = await userService.resetUserPasswd(userIdx,passwd);
+
+  return res.send(resetUserPasswd);
+}
+
+exports.verifyPasswd = async(req,res)=>{
+  const {email, passwd} = req.query;
+
+  if(!email || !passwd) return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const {result} = await userProvider.verifyPasswd(email,passwd);
+  console.log(result);
+
+  if(result.exist){
+    return res.send("비밀번호 확인 성공")
+  }
+  else{
+    return res.send("비밀번호 확인 실패");
+  }
 }

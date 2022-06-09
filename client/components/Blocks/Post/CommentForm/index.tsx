@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from "react";
-import { isObject } from "util";
 import { useSubmitComment } from "Hooks/Comment";
 import { CustomInput } from "../../../Atoms/CustomInput/styles";
 import { CommentFormRoot } from "./styles";

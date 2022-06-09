@@ -5,23 +5,25 @@ export const PartnerCardRoot = styled.div`
   width: 100%;
   height: 100%;
   min-height: 225px;
-  background: #f5f5f5;
+  background: #fff 0 0 no-repeat padding-box;
+  color: #000 !important;
   border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 16%);
   button {
+    font-weight: 700;
     border: none;
     background: none;
     cursor: pointer;
-    color: white;
-    background: #fc96a5;
+    color: #fc96a5;
     border-radius: 4px;
     padding: 10px 15px;
-    position: absolte;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     &:hover {
-      background: #c16171;
+      color: #c16171;
     }
   }
 `;

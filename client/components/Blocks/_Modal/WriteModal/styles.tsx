@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { customBtn } from "../../../../Utils/styles";
 
 export const PostFormWrapper = styled.div`
   margin-top: 25px;
@@ -18,13 +19,8 @@ export const ImageAddBtn = styled.button`
 `;
 
 export const SubmitBtn = styled.button`
-  border: none;
-  background: #fc96a5;
-  color: white;
-  font-size: 15px;
-  padding: 10px 30px;
-  border-radius: 4px;
-  cursor: pointer;
+	padding: 10px 25px;
+	${customBtn}
 `;
 
 export const ImageWrapper = styled.div`

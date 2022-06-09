@@ -63,4 +63,14 @@ export const RegisterFormItem = styled.div`
       border: 1px solid #fc96a5;
     }
   }
+  textarea {
+    width: 50%;
+    min-height: 100px;
+    ${mobile} {
+      width: 100%;
+    }
+    ${tablet} {
+      width: 75%;
+    }
+  }
 `;

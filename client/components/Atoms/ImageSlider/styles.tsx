@@ -2,27 +2,41 @@ import styled from "@emotion/styled";
 import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const SliderImg = styled.img`
-	width : 100%;	
-	min-width : 400px;
-	height : 200px;
-	${desktop} {
-		height : 400px;
-	}
+	width : 100%;
+	height : auto;
 `
 
 export const SlideWrapper = styled.div`
 	max-width: 100%;
-	max-height : 200px;
 	margin-top: 25px;
 	margin-bottom: 50px;
-
-	button {
+	position : relative;
+	button {	
 		cursor : pointer;
+	}
+	${mobile} {
+		width : 90%;
+		margin : 0 auto;
+		margin-top: 25px;
+		margin-bottom: 50px;
 	}
 `
 
-export const ControlBtn = styled.div`
+export const PrevBtn = styled.div`
+	position : absolute;
+	left: -7.5%;
+  top: 45%;
+`
+
+export const NextBtn = styled.div`
+	position : absolute;
+	right: -7.5%;
+  top: 45%;
+`
+
+export const ControlBtn = styled.button`
 	background : #fc96a5;
+	border : none;
 	border-radius : 100%;
 	display : flex;
 	justify-content : center;

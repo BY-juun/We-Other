@@ -1,11 +1,16 @@
 const jwt = require("jsonwebtoken");
 const { basicResponse } = require("../config/response");
 const baseResponseStatus = require("../config/baseResponseStatus");
+require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
 // require("dotenv").config();
-const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, PASSWD_TOKEN_SECRET } =
+  process.env;
 const userProvider = require("../src/User/userProvider");
 const userService = require("../src/User/userService");
+
+//토큰을 발급하는 함수에 대한 셋
+
 exports.tokenSet = () => {
   return {
     access(id) {
@@ -18,6 +23,11 @@ exports.tokenSet = () => {
         expiresIn: "30d",
       });
     },
+    passwd(email) {
+      return jwt.sign({ email }, PASSWD_TOKEN_SECRET, {
+        expiresIn: "5m",
+      });
+    },
   };
 };
 
@@ -28,7 +38,8 @@ exports.verifyAccessToken = async (req, res, next) => {
     // console.log(accessToken);
     // 클라이언트에서 토큰을 받아온다.
 
-    if (!accessToken) return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
+    if (!accessToken)
+      return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
     const access = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
 
     if (access) {

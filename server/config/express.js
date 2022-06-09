@@ -26,6 +26,8 @@ module.exports = function () {
   require("../src/Post/postRoute")(app);
   require("../src/Tag/tagRoute")(app);
 
+  
+
   return app;
 };
 // 웹소켓 미들웨어도 바로 고려할 것. 이를 통해 사용자간 메시지를 서로 주고 받을 수 있도록.
