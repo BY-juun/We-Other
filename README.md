@@ -11,6 +11,8 @@
     <img src="https://img.shields.io/badge/React-v18.0.0-blue?logo=React"/></a>
     <img src="https://img.shields.io/badge/TypeScript-v4.6.3-skyblue?logo=TypeScript&logoColor=skyblue"/></a>
     <img src="https://img.shields.io/badge/NextJs-v12.1.4-white?logo=Next.js&logoColor=white"/></a>
+    <img src="https://img.shields.io/badge/Redux-v8.0.2-blueviolet?style=flat-square&logo=Redux&logoColor=blueviolet"/></a>
+    <img src="https://img.shields.io/badge/ReduxToolKit-v1.8.2-violet?style=flat-square&logo=Redux&logoColor=violet"/></a>
     <img src="https://img.shields.io/badge/ReactQuery-v3.34.19-FF4154?style=flat-square&logo=ReactQuery&logoColor=#FF4154"/></a>
 </p>
 
