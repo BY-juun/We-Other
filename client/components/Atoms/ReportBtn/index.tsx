@@ -1,21 +1,18 @@
 import ReportModal from "components/Blocks/_Modal/ReportModal";
+import useModal from "Hooks/useModal";
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { ReportButton } from "./styles";
 
 const ReportBtn = () => {
-  const [openReport, setOpenReport] = useState<boolean>(false);
-
-  const onClickOpenReport = useCallback(() => {
-    setOpenReport(true);
-  }, []);
+  const [openReport, _, openModal, closeModal] = useModal();
 
   return (
     <>
-      <ReportButton onClick={onClickOpenReport}>
+      <ReportButton onClick={openModal}>
         <Image width={20} height={20} src={"/alarm.png"} alt="신고" />
       </ReportButton>
-      {openReport && <ReportModal setOpenReport={setOpenReport} />}
+      {openReport && <ReportModal onClose={closeModal} />}
     </>
   );
 };

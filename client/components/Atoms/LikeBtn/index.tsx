@@ -1,6 +1,5 @@
 import { useAddLike } from "Hooks/Post";
 import Cookies from "js-cookie";
-import Image from "next/image";
 import React, { useCallback } from "react";
 
 interface Props {

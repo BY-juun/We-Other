@@ -1,23 +1,17 @@
-import React, { useCallback, useState } from 'react'
-import { MyInfoBtn } from '../../Blocks/MyPage/MyInfo/styles';
-import AdditionalInfoModal from '../../Blocks/_Modal/AdditionalInfoModal';
+import useModal from "Hooks/useModal";
+import React from "react";
+import { MyInfoBtn } from "../../Blocks/MyPage/MyInfo/styles";
+import AdditionalInfoModal from "../../Blocks/_Modal/AdditionalInfoModal";
 
 const AdditionalInfoBtn = () => {
-	const [openRegistUserInfoModal, setOpenRegistUserInfoModal] = useState(false);
+  const [open, _, openModal, closeModal] = useModal();
 
-	const openModal = useCallback(() => {
-		setOpenRegistUserInfoModal(true);
-	}, [setOpenRegistUserInfoModal])
+  return (
+    <>
+      <MyInfoBtn onClick={openModal}>등록하기</MyInfoBtn>
+      {open && <AdditionalInfoModal onClose={closeModal} />}
+    </>
+  );
+};
 
-	const closeModal = useCallback(() => {
-		setOpenRegistUserInfoModal(false);
-	}, [setOpenRegistUserInfoModal])
-	return (
-		<>
-			<MyInfoBtn onClick={openModal}>등록하기</MyInfoBtn>
-			{openRegistUserInfoModal && <AdditionalInfoModal onClose={closeModal} />}
-		</>
-	)
-}
-
-export default AdditionalInfoBtn
+export default AdditionalInfoBtn;

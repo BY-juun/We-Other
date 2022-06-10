@@ -4,12 +4,14 @@ import PageLoading from "Utils/PageLoading";
 import AdditionalInfoBtn from "components/Atoms/AdditionalInfoBtn";
 import ResetPwdBtn from "components/Atoms/ResetPwdBtn";
 import { MyInfoItem, MyInfoRoot, MyInfoTitle } from "./styles";
+import { DummyUser } from "Types/Dummy";
 
 const MyInfo = () => {
-  const { data: UserInfo, isLoading } = useGetUserInfo();
+  // const { data: UserInfo, isLoading } = useGetUserInfo();
 
-  if (isLoading) return <>{PageLoading(isLoading)}</>;
+  // if (isLoading) return <>{PageLoading(isLoading)}</>;
 
+  const UserInfo = DummyUser;
   return (
     <>
       <MyInfoRoot>

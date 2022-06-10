@@ -1,21 +1,15 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { MyInfoBtn } from "components/Blocks/MyPage/MyInfo/styles";
 import CheckPwdModal from "components/Blocks/_Modal/CheckPwdModal";
+import useModal from "Hooks/useModal";
 
 const ResetPwdBtn = ({ email }: { email: string }) => {
-  const [openCheckPwdModal, setOpenCheckPwdModal] = useState(false);
-  const gotoResetPasswd = useCallback(() => {
-    setOpenCheckPwdModal(true);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setOpenCheckPwdModal(false);
-  }, []);
+  const [open, _, openModal, closeModal] = useModal();
 
   return (
     <>
-      <MyInfoBtn onClick={gotoResetPasswd}>재설정</MyInfoBtn>
-      {openCheckPwdModal && <CheckPwdModal email={email} onClose={closeModal} />}
+      <MyInfoBtn onClick={openModal}>재설정</MyInfoBtn>
+      {open && <CheckPwdModal email={email} onClose={closeModal} />}
     </>
   );
 };
