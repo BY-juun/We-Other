@@ -28,7 +28,10 @@ export interface UserInfo {
   userName: string;
   department: string;
   sex: string;
-  admission: number;
+  admission: string;
+  MBTI: string;
+  shortDescription: string;
+  intereset: Array<string>;
 }
 
 export interface FindIdResponse {

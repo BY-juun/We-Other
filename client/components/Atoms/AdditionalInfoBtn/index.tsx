@@ -1,6 +1,6 @@
 import useModal from "Hooks/useModal";
 import React from "react";
-import { MyInfoBtn } from "../../Blocks/MyPage/MyInfo/styles";
+import { MyInfoBtn } from "components/Blocks/MyPage/styles";
 import AdditionalInfoModal from "../../Blocks/_Modal/AdditionalInfoModal";
 
 const AdditionalInfoBtn = () => {

@@ -13,6 +13,9 @@ export const DummyUser = {
   department: "소프트웨어학과",
   sex: "남자",
   admission: "201720739",
+  MBTI: "ESFP",
+  shortDescription: "안녕하세요. 짧은 자기 소개입니당",
+  intereset: ["코딩", "코딩2", "코코코코코코코코코딩", "졸리다", "엄청"],
 };
 
 export const DummyFriend = [
