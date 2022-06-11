@@ -45,18 +45,13 @@ export const SignUpBtn = styled.button`
   padding: 10px;
 `;
 
-
 export const Stepper = styled.div`
-	display : flex;
-	width : 100%;
-	height : 5px;
-	background : #E5E5E5;
-	margin-bottom : 25px;
-	div {
-		width : 50%;
-	}
-`
-
-export const Active = styled.div`
-	background : #fc96a5;
-`
+  display: flex;
+  width: 100%;
+  height: 5px;
+  background: #e5e5e5;
+  margin-bottom: 25px;
+  div {
+    width: 50%;
+  }
+`;
