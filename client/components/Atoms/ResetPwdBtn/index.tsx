@@ -1,5 +1,5 @@
 import React from "react";
-import { MyInfoBtn } from "components/Blocks/MyPage/MyInfo/styles";
+import { MyInfoBtn } from "components/Blocks/MyPage/styles";
 import CheckPwdModal from "components/Blocks/_Modal/CheckPwdModal";
 import useModal from "Hooks/useModal";
 

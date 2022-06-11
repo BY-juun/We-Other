@@ -1,4 +1,4 @@
-import MyFriend from "components/Blocks/MyPage/MyFriend";
+import MyFriend from "components/Blocks/MyFriends";
 import React from "react";
 import { FriendsItem, FriendsWrapper } from "./styles";
 

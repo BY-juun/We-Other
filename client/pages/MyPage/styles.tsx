@@ -6,20 +6,13 @@ export const MyPageWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 2%;
-
+  margin-top: 25px;
   ${mobile} {
-    margin-top: 10vh;
+    padding: 0 5%;
     flex-flow: wrap;
   }
   ${tablet} {
-    margin-top: 10vh;
     flex-flow: wrap;
-  }
-  ${tablet_landscape} {
-    margin-top: 12.5vh;
-  }
-  ${desktop} {
-    margin-top: 12.5vh;
   }
 `;
 
@@ -32,7 +25,7 @@ export const MypageItem = styled.div`
   padding: 20px;
   width: 100%;
   margin: 0 auto;
-  height: 70vh;
+  margin-bottom: 25px;
   h2 {
     margin-top: 0;
   }

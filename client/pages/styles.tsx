@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { desktop, mobile, tablet, tablet_landscape } from "Utils/styles";
 
 export const Wrapper = styled.div`
-	margin-top : 80px;
-	${mobile} {
-		margin-top : 60px;
-	}
-`
+  padding-top: 80px;
+  ${mobile} {
+    padding-top: 60px;
+  }
+`;
 
 export const HomeWrapper = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const HomeWrapper = styled.div`
     font-size: 50px;
   }
   ${mobile} {
-    margin-top: 15%;
+    margin-top: 10%;
   }
   ${tablet} {
     margin-top: 30%;
@@ -26,7 +26,7 @@ export const HomeWrapper = styled.div`
   }
   ${desktop} {
     flex-direction: row;
-    margin-top: 12.5%;
+    margin-top: 5%;
   }
 `;
 

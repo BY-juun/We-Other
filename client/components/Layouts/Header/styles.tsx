@@ -15,6 +15,7 @@ export const HeaderWrapper = styled.div`
   padding: 0 10%;
   ${mobile} {
     height: 60px;
+    padding: 0 5%;
   }
 `;
 
@@ -29,19 +30,33 @@ export const HeaderTitle = styled.span`
 
 export const DesktopItems = styled.div`
   display: none;
-  div {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border-radius: 4px;
-    &:hover {
-      background: #f5f5f5;
-      /* color: #fc96a5; */
-    }
-  }
   ${desktop} {
     display: flex;
+  }
+`;
+
+export const OtherItem = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px;
+  &:hover {
+    background: #f5f5f5;
+    /* color: #fc96a5; */
+  }
+`;
+
+export const MessageItem = styled.div`
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 4px;
+  &:hover {
+    background: #f5f5f5;
+    /* color: #fc96a5; */
   }
 `;
 

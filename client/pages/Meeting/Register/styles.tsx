@@ -36,7 +36,6 @@ export const RegisterFormItem = styled.div`
     background: #f5f5f5;
     border: none;
     cursor: pointer;
-
     &:focus {
       outline: none;
       border: 1px solid #fc96a5;
