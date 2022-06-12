@@ -46,7 +46,7 @@ exports.findUserPassWd = async (req, res) => {
       subject: "비밀번호 초기화 이메일입니다.",
       html:
         "비밀번호 초기화를 위해서는 아래의 URL을 클릭하여 주세요." +
-        `http://localhost/passwd/reset/${token}`,
+        `http://localhost:3003/passwd/reset/${token}`,
     };
     transporter.sendMail(emailOptions, res); //전송
   }

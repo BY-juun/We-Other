@@ -191,7 +191,6 @@ exports.seachUser = async (req, res) => {
 exports.sendFriendRequest = async (req, res) => {
   const userIdx = req.userIdx;
   const { email } = req.body;
-  console.log("email  : ", email);
   if (!email)
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   const { userIdx: friendIdx } = await userProvider.getUserIdx(email);
@@ -200,4 +199,12 @@ exports.sendFriendRequest = async (req, res) => {
   const result = await userService.sendFriendRequest(userIdx, friendIdx);
 
   return res.send(result);
+};
+
+//친구 신청 내역 확인
+exports.getFriendRequest = async (req, res) => {
+  const userIdx = req.userIdx;
+
+  const getFriendRequestResult = await userProvider.getFriendRequest(userIdx);
+  return res.send(getFriendRequestResult);
 };

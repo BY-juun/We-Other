@@ -287,11 +287,33 @@ exports.getUserIntro = async (connection, userIdx) => {
 exports.sendFriendRequest = async (connection, userIdx, friendIdx) => {
   const sendFriendRequestQuery = `
     insert into friend(userIdx,friendIdx,status)
-    values(?, ?, P);
+    values(?, ?, 'P');
   `;
   const [sendFriendRequestRow] = await connection.query(
     sendFriendRequestQuery,
     [userIdx, friendIdx]
   );
   return sendFriendRequestRow;
+};
+
+// 친구 요청을 받은
+exports.getFriendRequestCome = async (connection, userIdx) => {
+  const getFriendRequestComeQuery = `
+  SELECT * FROM friend where friendIdx=?;
+  `;
+  const [getFriendRequestComeRow] = await connection.query(
+    getFriendRequestComeQuery,
+    userIdx
+  );
+  return getFriendRequestComeRow;
+};
+exports.getFriendRequestSend = async (connection, userIdx) => {
+  const getFriendRequestSendQuery = `
+  SELECT * FROM friend where userIdx=?;
+`;
+  const [getFriendRequestSendRow] = await connection.query(
+    getFriendRequestSendQuery,
+    userIdx
+  );
+  return getFriendRequestSendRow;
 };

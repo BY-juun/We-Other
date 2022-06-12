@@ -191,3 +191,29 @@ exports.getUserIntro = async (userIdx) => {
     connection.release();
   }
 };
+
+exports.getFriendRequest = async (userIdx) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    // 친구 요청을 보낸 목록과 친구 요청을 받은 목록을 둘다 확인해야만 한다.
+    // 친구 요청을 받은 데이터
+    const getFriendRequestCome = await userDao.getFriendRequestCome(
+      connection,
+      userIdx
+    );
+    console.log("getFriendRequestCome : ", getFriendRequestCome);
+    //친구 요청을 보낸 데이터
+    const getFriendRequestSend = await userDao.getFriendRequestSend(
+      connection,
+      userIdx
+    );
+    console.log("getFriendRequestSend : ", getFriendRequestSend);
+
+    return resultResponse(baseResponseStatus.SUCCESS, getFriendRequestCome);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
