@@ -1,94 +1,119 @@
 // 댓글 등록하기
-exports.insertCommentOfPost = async(connection, userIdx, postIdx, content)=>{
-    const insertCommentOfPostQuery = `
+exports.insertCommentOfPost = async (connection, userIdx, postIdx, content) => {
+  const insertCommentOfPostQuery = `
     INSERT INTO comment (userIdx, postIdx, content) VALUES (?, ?, ?);
-    `
-    const [insertCommentOfPostRow]= await connection.query(insertCommentOfPostQuery,[userIdx, postIdx, content]);
-    return insertCommentOfPostRow;
-}
+    `;
+  const [insertCommentOfPostRow] = await connection.query(
+    insertCommentOfPostQuery,
+    [userIdx, postIdx, content]
+  );
+  return insertCommentOfPostRow;
+};
 
 // 단일 댓글 조회하기
-exports.getCommentOfPost = async (connection,postIdx)=>{
-    const getCommentOfPostQuery =`
+exports.getCommentOfPost = async (connection, postIdx) => {
+  const getCommentOfPostQuery = `
         select commentIdx, userIdx,content, updatedAt as createdAt from comment where postIdx= ? and commentRef is null
-    `
-    const [getCommentOfPostRow]= await connection.query(getCommentOfPostQuery,postIdx);
-    return getCommentOfPostRow;
-}
+    `;
+  const [getCommentOfPostRow] = await connection.query(
+    getCommentOfPostQuery,
+    postIdx
+  );
+  return getCommentOfPostRow;
+};
 // 댓글의 생성(업데이트로) 날짜 조회하기
-exports.getCommentCreatedAt = async(connection,commentIdx)=>{
-    const getCommentCreatedAtQuery = `
+exports.getCommentCreatedAt = async (connection, commentIdx) => {
+  const getCommentCreatedAtQuery = `
     select updatedAt as createdAt from comment where commentIdx = ?;
-    `
-    const [getCommentCreatedAtRow]  = await connection.query(getCommentCreatedAtQuery,commentIdx);
-    return getCommentCreatedAtRow;  
-
-}
-
+    `;
+  const [getCommentCreatedAtRow] = await connection.query(
+    getCommentCreatedAtQuery,
+    commentIdx
+  );
+  return getCommentCreatedAtRow;
+};
 
 //대댓글의 댓글 대상 조회하기
-exports.getCommentOfcomment = async(connection,postIdx) =>{
-    const getCommentOfcommentQuery =`
+exports.getCommentOfcomment = async (connection, postIdx) => {
+  const getCommentOfcommentQuery = `
      select commentRef from comment  where postIdx = ?  and commentRef is not null group by commentRef;
-    `
-    const [getCommentOfcommentRow]  = await connection.query(getCommentOfcommentQuery,postIdx);
-    return getCommentOfcommentRow;
-
-}
+    `;
+  const [getCommentOfcommentRow] = await connection.query(
+    getCommentOfcommentQuery,
+    postIdx
+  );
+  return getCommentOfcommentRow;
+};
 
 //대댓글의 내용 조회하기
-exports.getCommentOfCommmentContent = async (connection, postIdx, commentRef) =>{
-    const getCommentOfCommmentContentQuery  = `
+exports.getCommentOfCommmentContent = async (
+  connection,
+  postIdx,
+  commentRef
+) => {
+  const getCommentOfCommmentContentQuery = `
         select userIdx, content, updatedAt as createdAt from comment where  postIdx = ? and commentRef = ?;
-    `
-    const [getCommentOfCommmentContentRow]  = await connection.query(getCommentOfCommmentContentQuery,[postIdx,commentRef]);
-    return getCommentOfCommmentContentRow;
-}
+    `;
+  const [getCommentOfCommmentContentRow] = await connection.query(
+    getCommentOfCommmentContentQuery,
+    [postIdx, commentRef]
+  );
+  return getCommentOfCommmentContentRow;
+};
 
+// 댓글의 익명 순서.
+exports.getOrderOfComment = async (connection, postIdx) => {
+  // const setQuery = `
+  //     set @rownum = 0;
+  // `
+  // await connenction.query(setQuery);
+  // const getOrderOfCommentQuery = `
+  // select b.order, b.userIdx from
+  // (select @RNUM:=@RNUM+1 as 'order',a.* from
+  // (select * from comment where postIdx =? group by userIdx order by createdAt) as a,  ( SELECT @RNUM := 0 ) R
+  // ) as b;
+  // `
 
-// 댓글의 익명 순서. 
-exports.getOrderOfComment = async (connection,postIdx)=>{
-
-    // const setQuery = `
-    //     set @rownum = 0;
-    // `
-    // await connenction.query(setQuery);
-    const getOrderOfCommentQuery = `
+  const getOrderOfCommentQuery = `
     select b.order, b.userIdx from 
     (select @RNUM:=@RNUM+1 as 'order',a.* from 
-    (select * from comment where postIdx =? group by userIdx order by createdAt) as a,  ( SELECT @RNUM := 0 ) R
+    (select * from comment where postIdx =? order by createdAt) as a,  ( SELECT @RNUM := 0 ) R
     ) as b;
-    `
-    const [getOrderOfCommentRow] = await connection.query(getOrderOfCommentQuery,postIdx);
-    return getOrderOfCommentRow;
-}
+    `;
+  const [getOrderOfCommentRow] = await connection.query(
+    getOrderOfCommentQuery,
+    postIdx
+  );
+  return getOrderOfCommentRow;
+};
 
 //대댓 등록하기
-exports.insertCommentOfComment = async (connection, insertParams) =>{
-    const [userIdx,postIdx,commentIdx,content] = insertParams;
-    const insertCommentOfCommentQuery = `
+exports.insertCommentOfComment = async (connection, insertParams) => {
+  const [userIdx, postIdx, commentIdx, content] = insertParams;
+  const insertCommentOfCommentQuery = `
         insert into comment(commentRef,userIdx,postIdx,content) 
         values(?,?,?,?)
         ;   
-    `
-    const [insertCommentOfCommentRow] = await connection.query(insertCommentOfCommentQuery,[commentIdx,userIdx,postIdx,content]);
-    return insertCommentOfCommentRow;
-}
+    `;
+  const [insertCommentOfCommentRow] = await connection.query(
+    insertCommentOfCommentQuery,
+    [commentIdx, userIdx, postIdx, content]
+  );
+  return insertCommentOfCommentRow;
+};
 
 //
 //댓글의 좋아요 존재 여부 판단.
-exports.checkLikeComment = async (connection,userIdx,commentIdx)=>{
-    const checkLikeCommentQuery = `
+exports.checkLikeComment = async (connection, userIdx, commentIdx) => {
+  const checkLikeCommentQuery = `
       select exists ( select * from recommend where userIdx = ? and commentIdx =?) as exist;
-    `
-    const [[checkLikeCommentRow]] = await connection.query(checkLikeCommentQuery,[userIdx,commentIdx]);
-    return checkLikeCommentRow;
+    `;
+  const [[checkLikeCommentRow]] = await connection.query(
+    checkLikeCommentQuery,
+    [userIdx, commentIdx]
+  );
+  return checkLikeCommentRow;
+};
 
-}
-
-//대댓의 존재 여부. 
-exports.checkCommentOfCommentExist  = async (connection)=>{
-
-
-
-}
+//대댓의 존재 여부.
+exports.checkCommentOfCommentExist = async (connection) => {};

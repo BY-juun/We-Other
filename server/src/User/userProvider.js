@@ -4,7 +4,7 @@ const userDao = require("./userDao");
 const { pool } = require("../../config/database");
 const crypto = require("crypto");
 const { email, passwd } = require("../../config/regex");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 const { PASSWD_TOKEN_SECRET } = process.env;
@@ -14,6 +14,21 @@ exports.userIdxCheck = async (userIdx) => {
   try {
     const userIdxCheckResult = await userDao.userIdxCheck(connection, userIdx);
     return userIdxCheckResult;
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+// 유저의 이메일로 Idx 찾기
+exports.getUserIdx = async (email) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const getUserIdxResult = await userDao.getUserIdx(connection, email);
+    // console.log(emailCheckResult);
+    return getUserIdxResult;
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
@@ -56,12 +71,14 @@ exports.userNameCheck = async (userName) => {
 };
 
 // user의 존재 여부 체크 이메일 이름 학번
-exports.userCheck = async (userName, email,admission) => {
+exports.userCheck = async (userName, email, admission) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const userCheckResult = await userDao.userCheck(
       connection,
-      userName,email,admission
+      userName,
+      email,
+      admission
     );
     return userCheckResult;
   } catch (error) {
@@ -102,12 +119,12 @@ exports.getRefreshToken = async (accessToken) => {
 };
 
 // 유저의 아이디 찾기
-exports.findUserId = async (userName, admission ) => {
+exports.findUserId = async (userName, admission) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const userId = await userDao.getUserId(connection, userName, admission);
-    if (!userId) return basicResponse(baseResponseStatus.USER_NOT_EXIST)
-    console.log(userId)
+    if (!userId) return basicResponse(baseResponseStatus.USER_NOT_EXIST);
+    console.log(userId);
     return resultResponse(baseResponseStatus.SUCCESS, userId);
   } catch (error) {
     console.log(error);
@@ -116,61 +133,56 @@ exports.findUserId = async (userName, admission ) => {
     connection.release();
   }
 };
-exports.verifyPasswdToken = async(token) =>{
+exports.verifyPasswdToken = async (token) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
-    const {userIdx}  = await userDao.verifyPasswdToken(connection, token);
+    const { userIdx } = await userDao.verifyPasswdToken(connection, token);
     console.log(userIdx);
 
-    //발급된 토큰이 제기능을 한다면 userIdx를 넘겨준다. 
-    if(jwt.verify(token,PASSWD_TOKEN_SECRET)) return resultResponse(baseResponseStatus.SUCCESS,{userIdx});
-
+    //발급된 토큰이 제기능을 한다면 userIdx를 넘겨준다.
+    if (jwt.verify(token, PASSWD_TOKEN_SECRET))
+      return resultResponse(baseResponseStatus.SUCCESS, { userIdx });
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.TOKEN_NOT_VERIFIED);
   } finally {
     connection.release();
   }
-}
-exports.verifyPasswd = async(email,passwd)=>{
+};
+exports.verifyPasswd = async (email, passwd) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
-
     const hashedPassword = await crypto
-    .createHash("sha512")
-    .update(passwd)
-    .digest("base64");
-    
+      .createHash("sha512")
+      .update(passwd)
+      .digest("base64");
+
     let exist;
-  const signInCheckPasswd = await userDao.signInCheckPasswd(
-    connection,
-    email
-  );
-  if (hashedPassword == signInCheckPasswd.passwd){
-    exist =1;
-    return resultResponse(baseResponseStatus.SUCCESS,{exist})
-  }
-  else{
-    exist = 0;
-    return resultResponse(baseResponseStatus.SUCCESS,{exist})
-  }
-
-
+    const signInCheckPasswd = await userDao.signInCheckPasswd(
+      connection,
+      email
+    );
+    if (hashedPassword == signInCheckPasswd.passwd) {
+      exist = 1;
+      return resultResponse(baseResponseStatus.SUCCESS, { exist });
+    } else {
+      exist = 0;
+      return resultResponse(baseResponseStatus.SUCCESS, { exist });
+    }
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
   }
+};
 
-}
-
-// userIntro 에 대한 정보 가져오기 
-exports.getUserIntro = async(userIdx)=>{
+// userIntro 에 대한 정보 가져오기
+exports.getUserIntro = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getUserIntro = await userDao.getUserIntro(connection, userIdx);
-    console.log("getUserIntro : ",getUserIntro)
+    console.log("getUserIntro : ", getUserIntro);
     return resultResponse(baseResponseStatus.SUCCESS, getUserIntro);
   } catch (error) {
     console.log(error);
@@ -178,4 +190,4 @@ exports.getUserIntro = async(userIdx)=>{
   } finally {
     connection.release();
   }
-}
+};

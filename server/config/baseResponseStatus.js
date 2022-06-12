@@ -70,7 +70,7 @@ module.exports = {
   PARAMS_NOT_EXACT: {
     isSuccess: false,
     code: 3000,
-    message: "입력되지 않은 인자가 존재합니다. ",
+    message: "정확하지 않은 인자가 존재합니다. ",
   },
   TOKEN_EXPIRED: {
     isSuccess: false,

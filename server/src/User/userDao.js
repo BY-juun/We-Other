@@ -1,4 +1,4 @@
-const { passwd } = require("../../config/regex");
+const { passwd, email } = require("../../config/regex");
 
 exports.insertUser = async (connection, insertUserParams) => {
   const insertUserQuery = `
@@ -17,9 +17,23 @@ exports.userIdxCheck = async (connection, userIdx) => {
     select * from user where userIdx = ?
     ) as exist
 `;
-  const [[userIdxCheckRow]] = await connection.query(userIdxCheckQuery, userIdx);
+  const [[userIdxCheckRow]] = await connection.query(
+    userIdxCheckQuery,
+    userIdx
+  );
   return userIdxCheckRow;
 };
+
+//email로 userIdx 가져오기
+exports.getUserIdx = async (connection, email) => {
+  const getUserIdxQuery = `
+    select userIdx from user where email = ?;
+  `;
+  console.log("test");
+  const [[getUserIdxRow]] = await connection.query(getUserIdxQuery, email);
+  return getUserIdxRow;
+};
+
 exports.emailCheck = async (connection, email) => {
   const emailCheckQuery = `
     select exists (
@@ -234,33 +248,50 @@ exports.insertUserPasswdToken = async (connection, email, token) => {
 };
 
 // 패스워드 재설정 시 필요한 토큰 검증
-exports.verifyPasswdToken = async(connection,token)=>{
-    const verifyPasswdTokenQuery =`
+exports.verifyPasswdToken = async (connection, token) => {
+  const verifyPasswdTokenQuery = `
       select userIdx from user where token =?
-    `
-    const [[verifyPasswdTokenRow]] = await connection.query(verifyPasswdTokenQuery,token);
-    return verifyPasswdTokenRow; 
-
-}
+    `;
+  const [[verifyPasswdTokenRow]] = await connection.query(
+    verifyPasswdTokenQuery,
+    token
+  );
+  return verifyPasswdTokenRow;
+};
 
 // 유저의 패스워드 재설정
-exports.resetUserPasswd = async(connection,userIdx,passwd)=>{
+exports.resetUserPasswd = async (connection, userIdx, passwd) => {
   const resetUserPasswdQuery = `
   UPDATE user SET passwd =?  WHERE userIdx = ?;
-  `
-  const [resetUserPasswdRow] = await connection.query(resetUserPasswdQuery,[passwd,userIdx])
+  `;
+  const [resetUserPasswdRow] = await connection.query(resetUserPasswdQuery, [
+    passwd,
+    userIdx,
+  ]);
   return resetUserPasswdRow;
-
-}
+};
 
 // 유저의 userIntro 가져오기
-exports.getUserIntro = async(connection, userIdx)=>{
+exports.getUserIntro = async (connection, userIdx) => {
   const getUserIntroQuery = `
     select u.userIdx, u.email, u.userName, u.department, u.sex, u.admission, 
     ui.mbti, ui.introduce, ui.favorite 
     from user u left join user_intro ui 
     on u.userIdx = ui.userIdx where u.userIdx = ?;
-  `
-  const [getUserIntroRow] = await connection.query(getUserIntroQuery,userIdx);
+  `;
+  const [getUserIntroRow] = await connection.query(getUserIntroQuery, userIdx);
   return getUserIntroRow;
-}
+};
+
+// 친구 신청 보내기 메서드
+exports.sendFriendRequest = async (connection, userIdx, friendIdx) => {
+  const sendFriendRequestQuery = `
+    insert into friend(userIdx,friendIdx,status)
+    values(?, ?, P);
+  `;
+  const [sendFriendRequestRow] = await connection.query(
+    sendFriendRequestQuery,
+    [userIdx, friendIdx]
+  );
+  return sendFriendRequestRow;
+};

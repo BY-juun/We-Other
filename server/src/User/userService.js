@@ -215,7 +215,10 @@ exports.insertUserPasswdToken = async (email, token) => {
       email,
       token
     );
-    return resultResponse(baseResponseStatus.SUCCESS, insertUserPasswdTokenResult);
+    return resultResponse(
+      baseResponseStatus.SUCCESS,
+      insertUserPasswdTokenResult
+    );
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
@@ -225,16 +228,17 @@ exports.insertUserPasswdToken = async (email, token) => {
 };
 
 //패스워드 재설정
-exports.resetUserPasswd = async(userIdx,passwd)=>{
+exports.resetUserPasswd = async (userIdx, passwd) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const hashedPassword = await crypto
-    .createHash("sha512")
-    .update(passwd)
-    .digest("base64");
+      .createHash("sha512")
+      .update(passwd)
+      .digest("base64");
     const resetUserPasswdResult = await userDao.resetUserPasswd(
       connection,
-      userIdx,hashedPassword
+      userIdx,
+      hashedPassword
     );
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
@@ -243,5 +247,23 @@ exports.resetUserPasswd = async(userIdx,passwd)=>{
   } finally {
     connection.release();
   }
+};
 
-}
+// 친구 신청 보내기 메서드
+exports.sendFriendRequest = async (userIdx, friendIdx) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const sendFriendRequest = await userDao.sendFriendRequest(
+      connection,
+      userIdx,
+      friendIdx
+    );
+    console.log("sendFriendRequest: ", sendFriendRequest);
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};

@@ -46,7 +46,6 @@ exports.getPosts = async (connection) => {
   const getPostsQuery = `
       select  p.userIdx, p.postIdx,p.title,p.content,i.url, p.updatedAt from post p
       left join image i on i.postIdx = p.postIdx
-      group by p.postIdx
       order by p.updatedAt desc
     `;
   const [getPostsRow] = await connection.query(getPostsQuery);
@@ -75,59 +74,71 @@ exports.deletePost = async (connection, postIdx) => {
   return deletePostRow;
 };
 
-
 //게시물의 이미지의 존재여부 파악
 exports.checkImageNum = async (connection, postIdx) => {
   const checkImageNumQuery = `
     select exists (select count(*) from image where postIdx = ? ) as exist;
   `;
-  const [[checkImageNumRow]] = await connection.query(checkImageNumQuery, postIdx);
+  const [[checkImageNumRow]] = await connection.query(
+    checkImageNumQuery,
+    postIdx
+  );
   return checkImageNumRow.exist;
-}
+};
 
 // 특정 게시물의 이미지 인덱스들을 반환.
 exports.getImageIdxs = async (connection, postIdx) => {
-
   const getImageIdxsQuery = ` 
     select imageIdx from image where postIdx = ? 
-  `
+  `;
   const [getImageIdxsRow] = await connection.query(getImageIdxsQuery, postIdx);
   return getImageIdxsRow;
-}
+};
 
 // 게시물의 imgIdx와 게시물의 맵핑을 끊기.
 exports.breakImgToPost = async (connection, imageIdx) => {
   const breakImgToPostQuery = `
   UPDATE image SET postIdx = null WHERE imageIdx = ?;
-  `
-  const [breakImgToPostRow] = await connection.query(breakImgToPostQuery, imageIdx);
+  `;
+  const [breakImgToPostRow] = await connection.query(
+    breakImgToPostQuery,
+    imageIdx
+  );
   return breakImgToPostRow;
-}
+};
 
 //게시물의 댓글 갯수가져오기
-exports.getCommentCount= async (connection,postIdx)=>{
+exports.getCommentCount = async (connection, postIdx) => {
   const getcommentCountQuery = `
   select count(*) commentCount from comment where postIdx =?;
-  `
-  const [[getcommentCountRow]] = await connection.query(getcommentCountQuery,postIdx);
+  `;
+  const [[getcommentCountRow]] = await connection.query(
+    getcommentCountQuery,
+    postIdx
+  );
   return getcommentCountRow;
-}
+};
 
 //게시물의 좋아요 갯수가져오기
-exports.getLikeCount = async (connection,postIdx)=>{
+exports.getLikeCount = async (connection, postIdx) => {
   const getLikeCountQuery = `
   select count(*) likeCount from recommend where postIdx = ?;
-  `
-  const [[getLikeCountRow]] = await connection.query(getLikeCountQuery,postIdx);
+  `;
+  const [[getLikeCountRow]] = await connection.query(
+    getLikeCountQuery,
+    postIdx
+  );
   return getLikeCountRow;
-}
+};
 
 //게시물의 좋아요 존재 여부 판단.
-exports.checkLikePost = async (connection,userIdx,postIdx)=>{
-    const checkLikePostQuery = `
+exports.checkLikePost = async (connection, userIdx, postIdx) => {
+  const checkLikePostQuery = `
       select exists ( select * from recommend where userIdx = ? and postIdx =?) as exist;
-    `
-    const [[checkLikePostRow]] = await connection.query(checkLikePostQuery,[userIdx,postIdx]);
-    return checkLikePostRow;
-
-}
+    `;
+  const [[checkLikePostRow]] = await connection.query(checkLikePostQuery, [
+    userIdx,
+    postIdx,
+  ]);
+  return checkLikePostRow;
+};
