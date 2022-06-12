@@ -17,11 +17,14 @@ export const MyInfoItem = styled.div`
 		align-items : flex-start;
 		gap : 3px;
 	}
-	button {
-		padding : 5px 20px;
-		${customBtn}
-		
+	span {
+		margin-right : 10px;
 	}
+`
+
+export const MyInfoBtn = styled.button`
+	padding : 5px 20px;
+	${customBtn}
 `
 
 export const MyInfoTitle = styled.div`

@@ -1,19 +1,13 @@
 import FindIdPwdModal from "components/Blocks/Home/FindIdPwdModal";
-import React, { useCallback, useState } from "react";
+import useModal from "Hooks/useModal";
+import React from "react";
 
 const FindIdPwdBtn = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const onClickOpen = useCallback(() => {
-    setOpenModal(true);
-  }, [setOpenModal]);
-
-  const onClose = useCallback(() => {
-    setOpenModal(false);
-  }, []);
+  const [open, _, openModal, closeModal] = useModal();
   return (
     <>
-      <button onClick={onClickOpen}>ID/PWD 찾기</button>
-      {openModal && <FindIdPwdModal onClose={onClose} />}
+      <button onClick={openModal}>ID/PWD 찾기</button>
+      {open && <FindIdPwdModal onClose={closeModal} />}
     </>
   );
 };

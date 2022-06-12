@@ -10,6 +10,7 @@ import Header from "components/Layouts/Header";
 import useSetProgressState from "Hooks/useSetProgressState";
 import PageLoading from "Utils/PageLoading";
 import { Wrapper } from "./styles";
+import wrapper from "store";
 
 const WeOther = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -48,4 +49,4 @@ WeOther.getInitialProps = async (appContext: AppContext) => {
   }
   return {};
 };
-export default WeOther;
+export default wrapper.withRedux(WeOther);
