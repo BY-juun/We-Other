@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { customBtn } from "Utils/styles";
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
