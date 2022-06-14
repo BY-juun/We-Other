@@ -208,3 +208,27 @@ exports.getFriendRequest = async (req, res) => {
   const getFriendRequestResult = await userProvider.getFriendRequest(userIdx);
   return res.send(getFriendRequestResult);
 };
+
+// 친구 신청 응답
+exports.answerFriendRequest = async (req,res)=>{
+  const userIdx = req.userIdx;
+  const {friendReqIdx , answer} = req.query;
+  
+  if (!friendReqIdx ||  !answer)
+  return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const answerFriendRequestResult = await userService.answerFriendRequest( friendReqIdx , answer);
+  return res.send(answerFriendRequestResult)
+
+}
+
+// 친구 신청 요청 삭제
+exports.deleteFriendRequest = async (req,res)=>{
+  const {friendReqIdx} = req.query;
+
+  if (!friendReqIdx)
+  return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const deleteFriendRequestResult = await userService.deleteFriendRequest(friendReqIdx)
+  return res.send(deleteFriendRequestResult)
+}

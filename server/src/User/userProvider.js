@@ -197,19 +197,28 @@ exports.getFriendRequest = async (userIdx) => {
   try {
     // 친구 요청을 보낸 목록과 친구 요청을 받은 목록을 둘다 확인해야만 한다.
     // 친구 요청을 받은 데이터
+    let getFriendRequestResult={};
+
     const getFriendRequestCome = await userDao.getFriendRequestCome(
       connection,
       userIdx
     );
+    // 친구 요청이 들어온 것에 대한 것. 
     console.log("getFriendRequestCome : ", getFriendRequestCome);
+
+    getFriendRequestResult["받은 친구 신청"] = getFriendRequestCome;
+
+  
     //친구 요청을 보낸 데이터
     const getFriendRequestSend = await userDao.getFriendRequestSend(
       connection,
       userIdx
     );
     console.log("getFriendRequestSend : ", getFriendRequestSend);
+      
+    getFriendRequestResult["보낸 친구 신청"] = getFriendRequestSend;
 
-    return resultResponse(baseResponseStatus.SUCCESS, getFriendRequestCome);
+    return resultResponse(baseResponseStatus.SUCCESS, getFriendRequestResult);
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);

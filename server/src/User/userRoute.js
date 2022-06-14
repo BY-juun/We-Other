@@ -34,9 +34,15 @@ module.exports = (app) => {
   // 좋아요 누르기
   app.patch("/api/user/like", verifyAccessToken, user.pushLike);
 
-  // 친구 신청
+  // 친구 신청
   app.post("/api/user/friend", verifyAccessToken, user.sendFriendRequest);
 
   // 친구 신청 내역 가져오기
   app.get("/api/user/friend/list", verifyAccessToken, user.getFriendRequest);
+
+  // 친구 신청 응답하기 
+  app.patch("/api/user/friend/answer", verifyAccessToken, user.answerFriendRequest)
+
+  // 친구 신청 요청 삭제하기
+  app.delete("/api/user/friend/delete",verifyAccessToken,user.deleteFriendRequest)
 };

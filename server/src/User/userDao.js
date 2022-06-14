@@ -296,10 +296,11 @@ exports.sendFriendRequest = async (connection, userIdx, friendIdx) => {
   return sendFriendRequestRow;
 };
 
-// 친구 요청을 받은
+// 친구 요청을 받은 목록
 exports.getFriendRequestCome = async (connection, userIdx) => {
   const getFriendRequestComeQuery = `
-  SELECT * FROM friend where friendIdx=?;
+  select f.friendReqIdx,u.userIdx, u.userName as senderName, u.email from friend f 
+  join user u on f.userIdx = u.userIdx where f.friendIdx = ? ;
   `;
   const [getFriendRequestComeRow] = await connection.query(
     getFriendRequestComeQuery,
@@ -307,9 +308,12 @@ exports.getFriendRequestCome = async (connection, userIdx) => {
   );
   return getFriendRequestComeRow;
 };
+
+// 친구 요청을 보낸 목록 
 exports.getFriendRequestSend = async (connection, userIdx) => {
   const getFriendRequestSendQuery = `
-  SELECT * FROM friend where userIdx=?;
+  select f.friendReqIdx,u.userIdx, u.userName as receiverName , u.email from friend f 
+  join user u on f.friendIdx = u.userIdx where f.userIdx =?;
 `;
   const [getFriendRequestSendRow] = await connection.query(
     getFriendRequestSendQuery,
@@ -317,3 +321,22 @@ exports.getFriendRequestSend = async (connection, userIdx) => {
   );
   return getFriendRequestSendRow;
 };
+
+// 친구 요청 응답하기. 
+exports.answerFriendRequest = async (connection, friendReqIdx, answer) =>{
+  const acceptFriendRequestQuery =`
+    update friend set status = ? where friendReqIdx = ?
+  `
+  const [acceptFriendRequestRow] = await connection.query(acceptFriendRequestQuery,[answer,friendReqIdx]);
+  return acceptFriendRequestRow
+}
+
+// 친구 요청 거절하기 
+exports.deleteFriendRequest = async(connection,friendReqIdx) =>{
+  const deleteFriendRequestQuery = `
+    DELETE FROM friend WHERE friendReqIdx = ?;
+  `
+  const [deleteFriendRequestRow] = await connection.query(deleteFriendRequestQuery,friendReqIdx);
+  return deleteFriendRequestRow;
+
+}

@@ -11,6 +11,23 @@ const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const jwt = require("jsonwebtoken");
 const { passwd } = require("../../config/regex");
+const { Z_PARTIAL_FLUSH } = require("zlib");
+
+/**
+ * 기본 구조. 
+exports.deleteFriendRequest  = async (friendReqIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
+*/
+
 
 // require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
@@ -267,3 +284,43 @@ exports.sendFriendRequest = async (userIdx, friendIdx) => {
     connection.release();
   }
 };
+// 친구 신청 수락 받기
+exports.answerFriendRequest  = async ( friendReqIdx , answer)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    switch (answer){
+      case "수락" : 
+          answer = "A"
+          break;
+      case "거절" :
+          answer = "R"
+          break;
+    }
+    const answerFriendRequestResult = await userDao.answerFriendRequest(
+      connection,
+      friendReqIdx,
+      answer
+    );
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+}
+
+exports.deleteFriendRequest  = async (friendReqIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+
+    await userDao.deleteFriendRequest(connection,friendReqIdx);
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
