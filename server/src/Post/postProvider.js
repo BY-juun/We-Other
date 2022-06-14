@@ -11,7 +11,6 @@ exports.getPosts = async () => {
     const getPostsResult = await postDao.getPosts(connection);
     let count = getPostsResult.length;
 
-    console.log("getPostsResult : ", getPostsResult.length);
     await Promise.all(
       getPostsResult.map(async (v) => {
         let { commentCount } = await postDao.getCommentCount(
@@ -68,7 +67,6 @@ exports.getPost = async (postIdx) => {
 
     // 이 게시물의 댓글 등록 순서.
     const orderResult = await commentDao.getOrderOfComment(connection, postIdx);
-    // console.log("getCommentOfPost: ",getCommentOfPost);
     await Promise.all(
       getCommentOfPost.map(async (x) => {
         // let orderOfComment;

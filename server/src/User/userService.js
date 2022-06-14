@@ -93,9 +93,9 @@ exports.createUser = async (
     return resultResponse(baseResponseStatus.SIGN_UP_SUCCESS, {
       userIdx: signUpResult.insertId,
     });
-  } catch (err) {
+  } catch (error) {
     await connection.rollback();
-    console.log(err);
+    console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
@@ -275,7 +275,6 @@ exports.sendFriendRequest = async (userIdx, friendIdx) => {
       userIdx,
       friendIdx
     );
-    console.log("sendFriendRequest: ", sendFriendRequest);
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
     console.log(error);

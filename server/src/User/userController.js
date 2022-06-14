@@ -185,6 +185,8 @@ exports.getUserIntro = async (req, res) => {
 // user의 이메일로 해당 계정 정보 가져오기
 exports.seachUser = async (req, res) => {
   //아무나 할 수는 없게 해야하는데?ㅜㅜ
+  // 먼저 
+
 };
 
 // 친구 신청 보내기 메서드

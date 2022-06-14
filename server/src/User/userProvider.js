@@ -27,7 +27,6 @@ exports.getUserIdx = async (email) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getUserIdxResult = await userDao.getUserIdx(connection, email);
-    // console.log(emailCheckResult);
     return getUserIdxResult;
   } catch (error) {
     console.log(error);
@@ -42,7 +41,6 @@ exports.emailCheck = async (email) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const emailCheckResult = await userDao.emailCheck(connection, email);
-    // console.log(emailCheckResult);
     return emailCheckResult;
   } catch (error) {
     console.log(error);
@@ -60,7 +58,6 @@ exports.userNameCheck = async (userName) => {
       connection,
       userName
     );
-    // console.log(emailCheckResult);
     return userNameCheckResult;
   } catch (error) {
     console.log(error);
@@ -96,7 +93,6 @@ exports.getUserDeepInfo = async (userIdx) => {
       connection,
       userIdx
     );
-    // console.log(emailCheckResult);
     return getUserDeepInfoResult;
   } catch (error) {
     console.log(error);
@@ -124,7 +120,6 @@ exports.findUserId = async (userName, admission) => {
   try {
     const userId = await userDao.getUserId(connection, userName, admission);
     if (!userId) return basicResponse(baseResponseStatus.USER_NOT_EXIST);
-    console.log(userId);
     return resultResponse(baseResponseStatus.SUCCESS, userId);
   } catch (error) {
     console.log(error);
@@ -137,7 +132,6 @@ exports.verifyPasswdToken = async (token) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const { userIdx } = await userDao.verifyPasswdToken(connection, token);
-    console.log(userIdx);
 
     //발급된 토큰이 제기능을 한다면 userIdx를 넘겨준다.
     if (jwt.verify(token, PASSWD_TOKEN_SECRET))
@@ -182,7 +176,6 @@ exports.getUserIntro = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const getUserIntro = await userDao.getUserIntro(connection, userIdx);
-    console.log("getUserIntro : ", getUserIntro);
     return resultResponse(baseResponseStatus.SUCCESS, getUserIntro);
   } catch (error) {
     console.log(error);
@@ -195,7 +188,7 @@ exports.getUserIntro = async (userIdx) => {
 exports.getFriendRequest = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
-    // 친구 요청을 보낸 목록과 친구 요청을 받은 목록을 둘다 확인해야만 한다.
+    // 친구 요청을 보낸 목록과 친구 요청을 받은 목록을 둘다 확인해야만 한다.
     // 친구 요청을 받은 데이터
     let getFriendRequestResult={};
 
@@ -204,7 +197,6 @@ exports.getFriendRequest = async (userIdx) => {
       userIdx
     );
     // 친구 요청이 들어온 것에 대한 것. 
-    console.log("getFriendRequestCome : ", getFriendRequestCome);
 
     getFriendRequestResult["받은 친구 신청"] = getFriendRequestCome;
 
@@ -214,7 +206,6 @@ exports.getFriendRequest = async (userIdx) => {
       connection,
       userIdx
     );
-    console.log("getFriendRequestSend : ", getFriendRequestSend);
       
     getFriendRequestResult["보낸 친구 신청"] = getFriendRequestSend;
 

@@ -29,7 +29,6 @@ exports.getUserIdx = async (connection, email) => {
   const getUserIdxQuery = `
     select userIdx from user where email = ?;
   `;
-  console.log("test");
   const [[getUserIdxRow]] = await connection.query(getUserIdxQuery, email);
   return getUserIdxRow;
 };
