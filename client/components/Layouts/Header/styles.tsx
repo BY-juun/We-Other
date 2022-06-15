@@ -39,13 +39,29 @@ export const OtherItem = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+
   border-radius: 4px;
   &:hover {
     background: #f5f5f5;
     /* color: #fc96a5; */
   }
+	${desktop} {
+		padding: 10px 15px;
+	}
 `;
+
+export const RequestLength = styled.span`
+	background : #fc96a5;
+	color : white;
+	border-radius : 100%;
+	width : 20px;
+	height : 20px;
+	font-size : 12px;
+	margin-left : 5px;
+	display : flex;
+	justify-content : center;
+	align-items : center;
+`
 
 export const MessageItem = styled.div`
   position: relative;

@@ -1,21 +1,29 @@
 import FriendCard from "components/Atoms/FriendCard";
 import React from "react";
-import { DummyFriend } from "Types/Dummy";
-import { FriendListRoot } from "./styles";
+import { useGetFriendList } from "../../../../Hooks/Friends";
+import { FriendCardWrapper, FriendListRoot } from "./styles";
 
 const MyFriend = () => {
-	const friends = DummyFriend;
+	const { data: friends, isLoading } = useGetFriendList();
+
 	return (
 		<FriendListRoot>
-			{friends.length > 0 ? (
+			{!isLoading &&
 				<>
-					{friends.map((friend) => (
-						<FriendCard friend={friend} />
-					))}
+					{friends && friends.length > 0 ? (
+						<>
+							{friends?.map((friend) => (
+								<FriendCardWrapper>
+									<FriendCard key={friend?.userIdx} name={String(friend?.name)} email={String(friend?.email)} userIdx={friend?.userIdx} />
+								</FriendCardWrapper>
+							))}
+						</>
+					) : (
+						<span>아직 등록된 친구가 없어요.</span>
+					)}
 				</>
-			) : (
-				<span>아직 등록된 친구가 없어요.</span>
-			)}
+			}
+
 		</FriendListRoot>
 	);
 };

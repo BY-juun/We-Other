@@ -6,13 +6,13 @@ export const SignUpContainer = styled.div`
     width: 100%;
   }
   ${tablet} {
-    width: 50%;
+    width: 80%;
   }
   ${tablet_landscape} {
-    width: 35%;
+    width: 50%;
   }
   margin-top: 0;
-  width: 25%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   gap: 15px;

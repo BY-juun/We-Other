@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react'
+import { useReplyFriendRequest } from '../../../Hooks/Friends';
 
-const RequestAcceptBtn = () => {
+const RequestAcceptBtn = ({ reqIdx, name }: { reqIdx: number, name: string }) => {
+	const { mutate } = useReplyFriendRequest();
 	const accept = useCallback(() => {
 		if (!window.confirm("* 요청을 수락하시겠어요?")) return;
-		alert("* 이제 친구가 되었어요")
+		mutate({ name: name, reqIdx: reqIdx, answer: "수락" });
 	}, [])
 	return (
 		<button onClick={accept}><img src="/accept.png" alt="수락" /></button>

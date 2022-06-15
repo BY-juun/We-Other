@@ -19,7 +19,7 @@ const RegistedImage = ({ fileImage, setFileImage, setSubmitImageIdx }: Props) =>
 		<>
 			{fileImage.map((file) => {
 				return (
-					<div>
+					<div key={file.url}>
 						<img key={file.url} alt="sample" src={`${ServerURL}/${file.url}`} />
 						<button onClick={() => filterImg(file)}>삭제</button>
 					</div>

@@ -31,3 +31,10 @@ export const RequestCard = styled.div`
 		}
 	}
 `
+
+export const BtnSet = styled.div`
+	display : flex;
+	flex-direction : column;
+	gap : 3px;
+	justify-content : center;
+`
