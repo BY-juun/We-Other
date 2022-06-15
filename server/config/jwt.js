@@ -35,7 +35,6 @@ exports.tokenSet = () => {
 exports.verifyAccessToken = async (req, res, next) => {
   const accessToken = req.headers["accesstoken"];
   try {
-    // console.log(accessToken);
     // 클라이언트에서 토큰을 받아온다.
 
     if (!accessToken)

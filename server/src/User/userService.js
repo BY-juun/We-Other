@@ -11,6 +11,23 @@ const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const jwt = require("jsonwebtoken");
 const { passwd } = require("../../config/regex");
+const { Z_PARTIAL_FLUSH } = require("zlib");
+
+/**
+ * 기본 구조. 
+exports.deleteFriendRequest  = async (friendReqIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
+*/
+
 
 // require("dotenv").config();
 // const JWT_SECRET = process.env.JWT_SECRET;
@@ -76,9 +93,9 @@ exports.createUser = async (
     return resultResponse(baseResponseStatus.SIGN_UP_SUCCESS, {
       userIdx: signUpResult.insertId,
     });
-  } catch (err) {
+  } catch (error) {
     await connection.rollback();
-    console.log(err);
+    console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
   } finally {
     connection.release();
@@ -215,7 +232,10 @@ exports.insertUserPasswdToken = async (email, token) => {
       email,
       token
     );
-    return resultResponse(baseResponseStatus.SUCCESS, insertUserPasswdTokenResult);
+    return resultResponse(
+      baseResponseStatus.SUCCESS,
+      insertUserPasswdTokenResult
+    );
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);
@@ -225,16 +245,60 @@ exports.insertUserPasswdToken = async (email, token) => {
 };
 
 //패스워드 재설정
-exports.resetUserPasswd = async(userIdx,passwd)=>{
+exports.resetUserPasswd = async (userIdx, passwd) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     const hashedPassword = await crypto
-    .createHash("sha512")
-    .update(passwd)
-    .digest("base64");
+      .createHash("sha512")
+      .update(passwd)
+      .digest("base64");
     const resetUserPasswdResult = await userDao.resetUserPasswd(
       connection,
-      userIdx,hashedPassword
+      userIdx,
+      hashedPassword
+    );
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+// 친구 신청 보내기 메서드
+exports.sendFriendRequest = async (userIdx, friendIdx) => {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const sendFriendRequest = await userDao.sendFriendRequest(
+      connection,
+      userIdx,
+      friendIdx
+    );
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+// 친구 신청 수락 받기
+exports.answerFriendRequest  = async ( friendReqIdx , answer)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    switch (answer){
+      case "수락" : 
+          answer = "A"
+          break;
+      case "거절" :
+          answer = "R"
+          break;
+    }
+    const answerFriendRequestResult = await userDao.answerFriendRequest(
+      connection,
+      friendReqIdx,
+      answer
     );
     return basicResponse(baseResponseStatus.SUCCESS);
   } catch (error) {
@@ -244,4 +308,18 @@ exports.resetUserPasswd = async(userIdx,passwd)=>{
     connection.release();
   }
 
+}
+
+exports.deleteFriendRequest  = async (friendReqIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+
+    await userDao.deleteFriendRequest(connection,friendReqIdx);
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
 }

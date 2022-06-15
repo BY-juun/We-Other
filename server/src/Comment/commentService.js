@@ -7,7 +7,7 @@ const commentDao = require("./commentDao");
 exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
     const connection = await pool.getConnection(async (conn) => conn);
     try {
-    //   const insertParams = [userIdx, postIdx, content];
+      // const insertParams = [userIdx, postIdx, content];
       //게시물 등록하기
     
       //insertId는 commentIdx와 직결된다. 
@@ -15,14 +15,7 @@ exports.insertCommentOfPost = async (userIdx,postIdx,content)=>{
       const [{createdAt}] = await commentDao.getCommentCreatedAt(connection,insertId);
 
       const orderResult = await commentDao.getOrderOfComment(connection,postIdx);
-      // console.log("orderResult : ",orderResult);
-/** orderResult
- *  [
-        { order: 1, userIdx: 12 },
-        { order: 2, userIdx: 13 },
-        { order: 3, userIdx: 9 }
-      ]
- */
+
      let {order} = orderResult.find(x=>{
        return x.userIdx == userIdx;
      })

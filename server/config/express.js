@@ -25,7 +25,7 @@ module.exports = function () {
   require("../src/Comment/commentRoute")(app);
   require("../src/Post/postRoute")(app);
   require("../src/Tag/tagRoute")(app);
-
+  require("../src/Meet/meetRoute")(app);
   
 
   return app;

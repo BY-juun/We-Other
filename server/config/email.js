@@ -12,7 +12,7 @@ const { ADMIN_EMAIL, ADMIN_PASSWD } = process.env;
 
 const transporter = nodemailer.createTransport({
   service: "Naver",
-  host: 'smtp.naver.com',
+  host: "smtp.naver.com",
   port: 587,
   auth: {
     // 이메일을 보낼 계정 데이터 입력
@@ -29,12 +29,12 @@ exports.findUserPassWd = async (req, res) => {
   }
 
   const { exist } = await userProvider.userCheck(email, userName, admission);
-  console.log("exist : ", exist);
+  if (exist == 0)
+    return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
   if (exist) {
     //만약 해당 사용자가 존재한다면 메일을 보내기 위한 처리를 해줄 수 있다.
     // 토큰 발급은 Jwt를 이용해서 진행하도록 한.
     const token = tokenSet().passwd(email);
-    console.log("token : ", token);
     await userService.insertUserPasswdToken(email, token);
 
     const emailOptions = {
@@ -44,7 +44,7 @@ exports.findUserPassWd = async (req, res) => {
       subject: "비밀번호 초기화 이메일입니다.",
       html:
         "비밀번호 초기화를 위해서는 아래의 URL을 클릭하여 주세요." +
-        `http://localhost/passwd/reset/${token}`,
+        `http://localhost:3003/passwd/reset/${token}`,
     };
     transporter.sendMail(emailOptions, res); //전송
   }
