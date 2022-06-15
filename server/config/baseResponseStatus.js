@@ -142,5 +142,10 @@ module.exports = {
     code: 2012,
     message: "이미지 파일이 존재하지 않습니다. ",
   },
+  INVALID_FRIEND_REQUEST: {
+    isSuccess: false,
+    code: 2012,
+    message: "상대방과 이미 친구 이거나 상대방의 응답을 기다리고 있습니다.",
+  },
   DB_ERROR: { isSuccess: false, code: 4000, message: "데이터 베이스 에러" },
 };

@@ -9,6 +9,23 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { PASSWD_TOKEN_SECRET } = process.env;
 
+/**
+ * 기본 구조. 
+exports.deleteFriendRequest  = async (friendReqIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    return basicResponse(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
+*/
+
+
+
 exports.userIdxCheck = async (userIdx) => {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
@@ -21,6 +38,21 @@ exports.userIdxCheck = async (userIdx) => {
     connection.release();
   }
 };
+
+// 친구 신청을 보냈는 지에 대한 여부
+exports.friendIdxCheck = async (userIdx,friendIdx)=>{
+    const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const friendIdxCheckResult = await userDao.friendIdxCheck(connection,userIdx, friendIdx);
+    return friendIdxCheckResult;
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+
+}
 
 // 유저의 이메일로 Idx 찾기
 exports.getUserIdx = async (email) => {
@@ -198,8 +230,7 @@ exports.getFriendRequest = async (userIdx) => {
     );
     // 친구 요청이 들어온 것에 대한 것. 
 
-    getFriendRequestResult["받은 친구 신청"] = getFriendRequestCome;
-
+    getFriendRequestResult["friendRequestedList"] = getFriendRequestCome;
   
     //친구 요청을 보낸 데이터
     const getFriendRequestSend = await userDao.getFriendRequestSend(
@@ -207,7 +238,7 @@ exports.getFriendRequest = async (userIdx) => {
       userIdx
     );
       
-    getFriendRequestResult["보낸 친구 신청"] = getFriendRequestSend;
+    getFriendRequestResult["friendRequestingList"] = getFriendRequestSend;
 
     return resultResponse(baseResponseStatus.SUCCESS, getFriendRequestResult);
   } catch (error) {
@@ -217,3 +248,36 @@ exports.getFriendRequest = async (userIdx) => {
     connection.release();
   }
 };
+
+// 친구들 리스트들 가져오기
+exports.getFriendsIdx  = async (userIdx)=>{
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const friendsList = await userDao.getFriendsList(connection, userIdx);
+
+    return resultResponse(baseResponseStatus.SUCCESS,friendsList)
+
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}
+
+// 받은 친구 요청 갯수 
+exports.requestedFriendList = async(userIdx)=>{
+
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    const requestedFriendList = await userDao.requestedFriendList(connection, userIdx);
+
+    return resultResponse(baseResponseStatus.SUCCESS,requestedFriendList)
+
+  } catch (error) {
+    console.log(error);
+    return basicResponse(baseResponseStatus.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+}

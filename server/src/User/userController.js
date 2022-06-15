@@ -46,6 +46,21 @@ exports.signUpUser = async (req, res) => {
   return res.send(basicResponse(baseResponseStatus.SIGN_UP_SUCCESS));
 };
 
+// 회원가입시 이메일 중복체크 
+exports.emailDublicate = async (req,res)=>{
+  const {email} =req.query
+  if (!email)
+  return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+
+  const emailCheck = await userProvider.emailCheck(email);
+  
+  if(emailCheck) return res.send(basicResponse(baseResponseStatus.EMAIL_EXISTS))
+
+  return res.send(basicResponse(baseResponseStatus.SUCCESS))
+
+
+}
+
 exports.signIn = async (req, res) => {
   const { email, passwd } = req.body;
 
@@ -185,7 +200,8 @@ exports.getUserIntro = async (req, res) => {
 // user의 이메일로 해당 계정 정보 가져오기
 exports.seachUser = async (req, res) => {
   //아무나 할 수는 없게 해야하는데?ㅜㅜ
-  // 먼저 
+  // 1. 친구 신청이 되어 있다는 것을 먼저 확인할 수 있어야한다. 
+  // 2. 해당 친구가 친구라면 
 
 };
 
@@ -193,10 +209,20 @@ exports.seachUser = async (req, res) => {
 exports.sendFriendRequest = async (req, res) => {
   const userIdx = req.userIdx;
   const { email } = req.body;
+
   if (!email)
-    return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
+      return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));  
+       const emailCheck = await userProvider.emailCheck(email);
+  if(!emailCheck)
+    return res.send(basicResponse(baseResponseStatus.USER_NOT_EXIST))
+
   const { userIdx: friendIdx } = await userProvider.getUserIdx(email);
+
   console.log(friendIdx);
+
+  // 이미 신청했던 유저라면 신청을 할 수 없다. 
+  const friendIdxCheck = await userProvider.friendIdxCheck(userIdx, friendIdx);
+  if(friendIdxCheck) return res.send(basicResponse(baseResponseStatus.INVALID_FRIEND_REQUEST))
 
   const result = await userService.sendFriendRequest(userIdx, friendIdx);
 
@@ -224,6 +250,16 @@ exports.answerFriendRequest = async (req,res)=>{
 
 }
 
+// 받은 친구 요청 리스트 갯수 가져오기
+exports.requestedFriendList = async (req,res)=>{
+  const userIdx = req.userIdx;
+
+  const requestedFriendList = await userProvider.requestedFriendList(userIdx);
+
+  return res.send(requestedFriendList)
+
+
+}
 // 친구 신청 요청 삭제
 exports.deleteFriendRequest = async (req,res)=>{
   const {friendReqIdx} = req.query;
@@ -233,4 +269,14 @@ exports.deleteFriendRequest = async (req,res)=>{
 
   const deleteFriendRequestResult = await userService.deleteFriendRequest(friendReqIdx)
   return res.send(deleteFriendRequestResult)
+}
+
+// 친구 목록 리스트 가져오기
+exports.getFriendList = async(req,res)=>{
+  const userIdx = req.userIdx
+  
+  const friendList = await userProvider.getFriendsIdx(userIdx);
+
+  return res.send(friendList)
+
 }
