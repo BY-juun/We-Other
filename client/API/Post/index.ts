@@ -15,7 +15,6 @@ export const GetPostAPI = async (id: number) => {
 }
 
 export const submitImg = async (reqData: FormData) => {
-	console.log(customAxios);
 	const { data } = await customAxios.post("/post/image", reqData);
 	return data;
 };

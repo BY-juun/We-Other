@@ -44,9 +44,3 @@ export interface FindIdResponse {
 		};
 	};
 }
-export interface FriendType {
-	userIdx: number;
-	name: string;
-	age: number;
-	email: string;
-}

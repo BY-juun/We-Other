@@ -6,7 +6,7 @@ import { ModalContent, ModalDescription } from "./styles";
 
 const AddFriendModal = ({ onClose }: { onClose: () => void }) => {
 	const friendEmail = useRef<HTMLInputElement>(null);
-	const addfriendMutation = useAddFriend();
+	const addfriendMutation = useAddFriend(onClose);
 
 	const submit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

@@ -1,21 +1,25 @@
 import React from 'react'
-import { DummyFriend } from '../../../../../Types/Dummy'
-import FriendCard from '../../../../Atoms/FriendCard'
-import RequestDenyBtn from '../../../../Atoms/RequestDenyBtn'
+import FriendCard from 'components/Atoms/FriendCard'
+import RequestDenyBtn from 'components/Atoms/RequestDenyBtn'
 import { ListWrapper, RequestCard } from '../styles'
+import { useGetRequestFriendList } from '../../../../../Hooks/Friends'
 
 const RequestList = () => {
+	const { data, isLoading } = useGetRequestFriendList();
+	const requestList = data?.friendRequestingList;
 	return (
 		<>
 			<h2>보낸 친구 요청</h2>
-			<ListWrapper>
-				{DummyFriend.map((friend) =>
-					<RequestCard>
-						<RequestDenyBtn />
-						<FriendCard friend={friend} />
-					</RequestCard>
-				)}
-			</ListWrapper>
+			{!isLoading &&
+				<ListWrapper>
+					{requestList?.length !== 0 && requestList?.map((friend) =>
+						<RequestCard>
+							<RequestDenyBtn reqIdx={Number(friend?.friendReqIdx)} />
+							<FriendCard name={friend?.name as string} email={friend?.email as string} />
+						</RequestCard>
+					)}
+				</ListWrapper>
+			}
 		</>
 	)
 }

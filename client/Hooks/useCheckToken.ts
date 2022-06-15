@@ -15,6 +15,7 @@ const useCheckToken = (setLoading: React.Dispatch<React.SetStateAction<boolean>>
 	}, [])
 	useEffect(() => {
 		if (!Cookies.get('userIdx')) checkToken();
+		else setUserIdx(Number(Cookies.get('userIdx')));
 		setLoading(false);
 	}, [])
 };
