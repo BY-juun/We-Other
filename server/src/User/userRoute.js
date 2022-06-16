@@ -10,6 +10,9 @@ module.exports = (app) => {
   //회원가입
   app.post("/api/user/sign-up", user.signUpUser);
 
+  // 이메일 중복체크
+  app.get("/api/user/email/duplicate", user.emailDublicate)
+
   //로그인
   app.post("/api/user/sign-in", user.signIn);
 
@@ -38,11 +41,17 @@ module.exports = (app) => {
   app.post("/api/user/friend", verifyAccessToken, user.sendFriendRequest);
 
   // 친구 신청 내역 가져오기
-  app.get("/api/user/friend/list", verifyAccessToken, user.getFriendRequest);
+  app.get("/api/user/friendRequest/list", verifyAccessToken, user.getFriendRequest);
+
+  // 받은 친구 요청 갯수 가져오기
+  app.get("/api/user/friend/receive",verifyAccessToken,user.requestedFriendList)
 
   // 친구 신청 응답하기 
   app.patch("/api/user/friend/answer", verifyAccessToken, user.answerFriendRequest)
 
   // 친구 신청 요청 삭제하기
   app.delete("/api/user/friend/delete",verifyAccessToken,user.deleteFriendRequest)
+
+  // 친구 목록 가져오기
+  app.get("/api/user/friend/list", verifyAccessToken, user.getFriendList)
 };
