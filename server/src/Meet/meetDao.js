@@ -17,3 +17,12 @@ exports.matchUserMeet = async(connection, roomIdx,userIdx)=>{
     console.log("이거를봐! :", userIdx) 
     return matchUserMeetRow
 }
+
+// 미팅 룸 게시글 조회
+exports.getMeetRooms = async(connection)=>{
+   const getMeetRoomsQuery =`
+   select roomIdx, sexInfo,capacity, title, roomIntro from meetingroom;
+   ` 
+    const [getMeetRoomsRow] = await connection.query(getMeetRoomsQuery);
+    return getMeetRoomsRow;
+}

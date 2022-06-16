@@ -1,6 +1,17 @@
 const meetService = require("./meetService");
 const {debugFn} =require("../../util/console")
+const meetProvider =require("./meetProvider");
 
+exports.getMeetRooms = async(req,res)=>{
+    const getMeetRoomsResult = await meetProvider.getMeetRooms();
+
+    
+
+
+    return res.send(getMeetRoomsResult)
+}
+
+// 미팅룸 생성 API
 exports.roomCreate = async(req,res)=>{
     const userIdx = req.userIdx;
     const {title, sexInfo, roomIntro, capacity,meetMateList} = req.body;

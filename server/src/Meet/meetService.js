@@ -24,7 +24,6 @@ exports.roomCreate = async(title, sexInfo, roomIntro, capacity,memberListIdx)=>{
     await connection.beginTransaction();
 
     const roomCreateResult = await meetDao.createMeetRoom(connection,title, sexInfo, roomIntro, capacity);
-    debugFn(roomCreateResult)
     const roomIdx = roomCreateResult.insertId
     await Promise.all(memberListIdx.map(async (v) =>{
         debugFn(v)
@@ -42,5 +41,6 @@ exports.roomCreate = async(title, sexInfo, roomIntro, capacity,memberListIdx)=>{
   } finally {
     connection.release();
   }
-
 }
+
+
