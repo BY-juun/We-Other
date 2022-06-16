@@ -71,7 +71,6 @@ exports.signIn = async (req, res) => {
   // 이메일의 형식이 틀렸을 경우에
 
   if (!emailValid) {
-    // console.log(emailValid);
     return res.send(basicResponse(baseResponseStatus.EMAIL_INVALID));
   }
   const emailCheck = await userProvider.emailCheck(email);
@@ -85,7 +84,6 @@ exports.signIn = async (req, res) => {
 
   //이메일과 패스워드가 제대로 되었다면 이를 제대로 되었는지 비교해 봐야겠지?
   const signInResult = await userService.signIn(email, passwd);
-  // console.log(signInResult, ": signInResult");
   return res.send(signInResult);
 };
 
@@ -171,7 +169,6 @@ exports.verifyPasswd = async (req, res) => {
     return res.send(basicResponse(baseResponseStatus.PARAMS_NOT_EXACT));
 
   const { result } = await userProvider.verifyPasswd(email, passwd);
-  console.log(result);
 
   if (result.exist) {
     return res.send("비밀번호 확인 성공");
@@ -218,7 +215,6 @@ exports.sendFriendRequest = async (req, res) => {
 
   const { userIdx: friendIdx } = await userProvider.getUserIdx(email);
 
-  console.log(friendIdx);
 
   // 이미 신청했던 유저라면 신청을 할 수 없다. 
   const friendIdxCheck = await userProvider.friendIdxCheck(userIdx, friendIdx);
