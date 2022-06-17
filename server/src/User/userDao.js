@@ -372,7 +372,6 @@ exports.getFriendsList = async(connection, userIdx)=>{
   const [getFriendsListingRow] = await connection.query(getFriendsListingQuery,userIdx)
   const [getFriendsList] = [[...getFriendsListedRow,...getFriendsListingRow]];
 
-  console.log("getFriendsList : ",getFriendsList)
   return getFriendsList
 }
 
@@ -383,6 +382,5 @@ exports.requestedFriendList = async(connection,userIdx)=>{
   join user u on f.userIdx = u.userIdx where f.friendIdx = ? and f.status ="P";
   `
   const [[requestedFriendListRow]] = await connection.query(requestedFriendListQuery , userIdx);
-console.log("requestedFriendListRow : ", requestedFriendListRow)
   return requestedFriendListRow
 }

@@ -1,7 +1,9 @@
 const { verifyAccessToken } = require("../../config/jwt");
 const user = require("./userController");
 const { findUserPassWd } = require("../../config/email");
+
 const userIntro = require("./userIntro/userIntro");
+const userFriend = require("./userFriend/userFriend");
 
 module.exports = (app) => {
   // userIntro에 대한 라우터
@@ -37,21 +39,6 @@ module.exports = (app) => {
   // 좋아요 누르기
   app.patch("/api/user/like", verifyAccessToken, user.pushLike);
 
-  // 친구 신청
-  app.post("/api/user/friend", verifyAccessToken, user.sendFriendRequest);
-
-  // 친구 신청 내역 가져오기
-  app.get("/api/user/friendRequest/list", verifyAccessToken, user.getFriendRequest);
-
-  // 받은 친구 요청 갯수 가져오기
-  app.get("/api/user/friend/receive",verifyAccessToken,user.requestedFriendList)
-
-  // 친구 신청 응답하기 
-  app.patch("/api/user/friend/answer", verifyAccessToken, user.answerFriendRequest)
-
-  // 친구 신청 요청 삭제하기
-  app.delete("/api/user/friend/delete",verifyAccessToken,user.deleteFriendRequest)
-
-  // 친구 목록 가져오기
-  app.get("/api/user/friend/list", verifyAccessToken, user.getFriendList)
+  // user의 Friend에 대한 api들 정리 
+  app.use("/api/user/friend",userFriend);
 };
