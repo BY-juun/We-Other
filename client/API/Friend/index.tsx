@@ -21,7 +21,7 @@ export const AddFriendAPI = async (reqData: { email: string }) => {
 
 export const getFriendRequestList = async () => {
 	if (!Cookies.get("userIdx")) return;
-	const { data } = await customAxios.get('/user/friendRequest/list');
+	const { data } = await customAxios.get('/user/friend/request/list');
 	if (data.isSuccess) return data.result;
 }
 
