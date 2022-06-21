@@ -70,7 +70,7 @@ module.exports = {
   PARAMS_NOT_EXACT: {
     isSuccess: false,
     code: 3000,
-    message: "입력되지 않은 인자가 존재합니다. ",
+    message: "정확하지 않은 인자가 존재합니다. ",
   },
   TOKEN_EXPIRED: {
     isSuccess: false,
@@ -122,6 +122,11 @@ module.exports = {
     code: 2009,
     message: "토큰이 존재하지 않습니다. ",
   },
+  TOKEN_NOT_VERIFIED: {
+    isSuccess: false,
+    code: 2009,
+    message: "정상적인 토큰이 아닙니다.",
+  },
   USER_NOT_EXIST: {
     isSuccess: false,
     code: 2010,
@@ -136,6 +141,11 @@ module.exports = {
     isSuccess: false,
     code: 2012,
     message: "이미지 파일이 존재하지 않습니다. ",
+  },
+  INVALID_FRIEND_REQUEST: {
+    isSuccess: false,
+    code: 2012,
+    message: "상대방과 이미 친구 이거나 상대방의 응답을 기다리고 있습니다.",
   },
   DB_ERROR: { isSuccess: false, code: 4000, message: "데이터 베이스 에러" },
 };
