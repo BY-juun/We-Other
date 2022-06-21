@@ -1,3 +1,5 @@
+import { queryCachingOption } from './../../Utils/queryOption';
+import { QueryKey } from './../../Utils/QueryKey';
 import { LoginAPI, SignUpAPI, UserInfoAPI } from "API/User";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -24,18 +26,14 @@ export const useLogin = () => {
 			if (!res.isSuccess) return alert(res.message);
 			const { accessToken, userIdx } = res.result;
 			setToken(accessToken, userIdx);
-			queryClient.invalidateQueries(["userInfo"]);
+			queryClient.invalidateQueries(QueryKey.User);
+			queryClient.refetchQueries(QueryKey.Friend)
 			return alert("로그인 성공!");
 		},
 	});
 };
 
 export const useGetUserInfo = () => {
-	return useQuery<UserInfo>(["userInfo"], () => UserInfoAPI(), {
-		refetchOnWindowFocus: false,
-		staleTime: Infinity,
-		refetchOnMount: false,
-		retry: false,
-	});
+	return useQuery<UserInfo>([QueryKey.User, "userInfo"], () => UserInfoAPI(), queryCachingOption);
 };
 

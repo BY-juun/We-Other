@@ -35,12 +35,10 @@ export interface UserInfo {
 }
 
 export interface FindIdResponse {
-	data: {
-		isSuccess: boolean;
-		code: number;
-		message: string;
-		result: {
-			email: string;
-		};
+	isSuccess: boolean;
+	code: number;
+	message: string;
+	result: {
+		email: string;
 	};
 }

@@ -1,12 +1,11 @@
+import axios, { HeadersDefaults } from "axios";
 import Cookies from "js-cookie";
-import { customAxios } from "./customAxios";
+import { AxiosHeaderDefault } from "./request";
 
 function setToken(accessToken: string, userIdx: number) {
-	customAxios.defaults.headers.common["accesstoken"] = accessToken;
-
 	const expires = new Date();
+	(axios.defaults.headers as AxiosHeaderDefault).accesstoken = accessToken
 	expires.setDate(Date.now() + 1000 * 60 * 60 * 24);
-
 	Cookies.set("accessToken", accessToken, {
 		path: "/",
 		expires,

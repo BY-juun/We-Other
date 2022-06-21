@@ -14,7 +14,6 @@ const MyPage = () => {
 
 	if (isLoading) return <>{PageLoading(isLoading)}</>;
 
-
 	return (
 		<MyPageWrapper>
 			<MypageItem>

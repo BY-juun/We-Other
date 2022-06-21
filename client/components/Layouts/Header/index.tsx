@@ -21,7 +21,7 @@ const Header = () => {
 	return (
 		<>
 			<HeaderWrapper>
-				<div onClick={gotoPage("/")}>
+				<div onClick={() => push('/')}>
 					<HeaderTitle>WeOther</HeaderTitle>
 				</div>
 				<DesktopItems>

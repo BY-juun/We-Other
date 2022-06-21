@@ -1,9 +1,11 @@
 import CommentForm from "components/Blocks/Post/CommentForm";
 import CommentList from "components/Blocks/Post/CommentList";
 import PostContent from "components/Blocks/Post/PostContent";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
+import { dehydrate, QueryClient } from "react-query";
+import { GetPostAPI } from "../../API/Post";
 import { useGetPost } from "../../Hooks/Post";
 import useIsLoggedIn from "../../Hooks/useIsLoggedIn";
 import { CommentType } from "../../Types/Post";
@@ -12,40 +14,45 @@ import PageLoading from "../../Utils/PageLoading";
 import { CommentListWrapper, PostWrapper, CommentWrapper } from "./styles";
 
 const Post: NextPage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+	const router = useRouter();
+	const { id } = router.query;
+	const { data: post } = useGetPost(Number(id));
 
-  const { data: post, isLoading } = useGetPost(Number(id));
+	const isLoggedIn = useIsLoggedIn();
 
-  const isLoggedIn = useIsLoggedIn();
-
-  return (
-    <>
-      <PostWrapper>
-        {!isLoading ? (
-          <>
-            <PostContent post={post} />
-            <CommentWrapper>
-              <CommentForm />
-              <CommentListWrapper style={{ filter: !isLoggedIn ? "blur(4px)" : "" }}>
-                {post.CommentOfPost.length !== 0 ? (
-                  <>
-                    {post.CommentOfPost.map((comment: CommentType) => {
-                      return <CommentList key={comment.commentIdx} comment={comment} />;
-                    })}
-                  </>
-                ) : (
-                  <div>댓글이없습니다</div>
-                )}
-              </CommentListWrapper>
-            </CommentWrapper>
-          </>
-        ) : (
-          <>{PageLoading(isLoading)}</>
-        )}
-      </PostWrapper>
-    </>
-  );
+	return (
+		<>
+			<PostWrapper>
+				<PostContent post={post} />
+				<CommentWrapper>
+					<CommentForm />
+					<CommentListWrapper style={{ filter: !isLoggedIn ? "blur(4px)" : "" }}>
+						{post.CommentOfPost.length !== 0 ? (
+							<>
+								{post.CommentOfPost.map((comment: CommentType) => {
+									return <CommentList key={comment.commentIdx} comment={comment} />;
+								})}
+							</>
+						) : (
+							<div>댓글이없습니다</div>
+						)}
+					</CommentListWrapper>
+				</CommentWrapper>
+			</PostWrapper>
+		</>
+	);
 };
+
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+	const queryClient = new QueryClient();
+	const id = query.id
+	await queryClient.prefetchQuery(["Post", Number(id)], () => GetPostAPI(Number(id)))
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
+}
 
 export default Post;

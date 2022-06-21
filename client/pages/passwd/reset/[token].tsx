@@ -3,8 +3,8 @@ import { ContentWrapper } from "components/Layouts/Content/styles";
 import { useRouter } from "next/router";
 import React, { useCallback, useRef, useState } from "react";
 import useCheckToken from "../../../Hooks/useCheckToken";
-import { customAxios } from "../../../Utils/customAxios";
 import PageLoading from "../../../Utils/PageLoading";
+import { request } from "../../../Utils/request";
 import { ResetWrapper } from "./styles";
 
 const reset = () => {
@@ -18,7 +18,7 @@ const reset = () => {
 		e.preventDefault();
 		if (!newPassword.current || !newPasswordCheck.current) return;
 		if (newPassword.current.value !== newPasswordCheck.current.value) return alert("* 비밀번호와 비밀번호 확인이 일치하지 않습니다");
-		const { data } = await customAxios.put('/user/reset/passwd', { userIdx: userIdx, passwd: newPassword.current.value });
+		const data = await request("PUT", '/user/reset/passwd', { userIdx: userIdx, passwd: newPassword.current.value });
 		if (data.isSuccess) {
 			alert("* 비밀번호가 변경되었습니다. 메인화면으로 이동합니다.");
 			push('/');

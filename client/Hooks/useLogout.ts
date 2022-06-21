@@ -1,6 +1,7 @@
 import { useQueryClient } from 'react-query';
 import { useCallback } from 'react';
 import Cookies from "js-cookie";
+import { QueryKey } from '../Utils/QueryKey';
 
 const useLogout = () => {
 	const QueryClient = useQueryClient();

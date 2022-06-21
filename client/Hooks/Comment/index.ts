@@ -1,3 +1,4 @@
+import { QueryKey } from './../../Utils/QueryKey';
 import { submitCommentAPI, submitCommentOfCommentAPI } from "API/Comment";
 import Cookies from "js-cookie";
 import { useMutation, useQueryClient } from "react-query";
@@ -15,7 +16,7 @@ export const useSubmitComment = (onSuccess: () => void) => {
 				userIdx: Number(Cookies.get("userIdx")),
 				commentOfComment: undefined,
 			}
-			const newData: PostType | undefined = queryClient.getQueryData(["Post", variables.id])
+			const newData: PostType | undefined = queryClient.getQueryData([QueryKey.Post, variables.id])
 			newData?.CommentOfPost.push(newComment);
 			queryClient.setQueryData(["Post", variables.id], newData);
 			onSuccess();
@@ -34,11 +35,16 @@ export const useSubmitCommentOfComment = (onSuccess: () => void) => {
 				orderOfComment: data.result.orderOfComment,
 				userIdx: Number(Cookies.get("userIdx")),
 			}
-			const newData: PostType | undefined = queryClient.getQueryData(["Post", variable.postIdx]);
+			const newData: PostType | undefined = queryClient.getQueryData([QueryKey.Post, variable.postIdx]);
 			const CommentOfPost = newData?.CommentOfPost;
 			const commentArr = CommentOfPost?.find((comment) => comment.commentIdx === variable.commentIdx)
+
 			if (commentArr?.commentOfComment) commentArr.commentOfComment.push(newComment);
 			else commentArr!.commentOfComment = [newComment];
+
+			newData!.commentCount += 1;
+
+			queryClient.setQueryData([QueryKey.Post, variable.postIdx], newData)
 			onSuccess();
 		}
 	})

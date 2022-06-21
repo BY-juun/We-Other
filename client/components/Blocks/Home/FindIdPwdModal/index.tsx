@@ -2,9 +2,9 @@ import { CustomInput } from "components/Atoms/CustomInput/styles";
 import React, { useCallback, useRef, useState } from "react";
 import Modal from "Utils/Modal";
 import { FindIdResponse } from "../../../../Types/User";
-import { customAxios } from "../../../../Utils/customAxios";
 import useInput from '../../../../Hooks/useInput';
 import { FindContentWrapper, SelectBtnWrapper, ShowUserEmailBox } from "./styles";
+import { request } from "../../../../Utils/request";
 
 interface Props {
 	onClose: () => void;
@@ -34,7 +34,7 @@ const FindIdPwdModal = ({ onClose }: Props) => {
 		e.preventDefault();
 		if (mode === "id") {
 			if (!nameRef.current || !studentNumRef.current) return;
-			const { data }: FindIdResponse = await customAxios.get(`/user/find/id?userName=${nameRef.current.value}&admission=${studentNumRef.current.value}`);
+			const data: FindIdResponse = await request("GET", `/user/find/id?userName=${nameRef.current.value}&admission=${studentNumRef.current.value}`);
 			if (data.isSuccess) {
 				setFindIdFinish(true);
 				setUserEmail(data.result.email);
@@ -42,7 +42,7 @@ const FindIdPwdModal = ({ onClose }: Props) => {
 			else alert(data.message);
 		} else {
 			if (!nameRef.current || !studentNumRef.current) return;
-			const { data } = await customAxios.get(`/user/find/passwd?email=${userEmail}&userName=${nameRef.current.value}&admission=${studentNumRef.current.value}`);
+			const data = await request("GET", `/user/find/passwd?email=${userEmail}&userName=${nameRef.current.value}&admission=${studentNumRef.current.value}`);
 			if (data?.isSuccess) {
 				alert("* 이메일이 전송되었습니다. 이메일을 통해 비밀번호를 재설정해주세요.");
 				onClose()

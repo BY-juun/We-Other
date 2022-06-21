@@ -12,11 +12,6 @@ export const CommentListTop = styled.div`
   font-size: 15px;
   margin-bottom: 7.5px;
   font-weight: 600;
-  & :first-of-type {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
 `;
 
 export const UnknownUserImg = styled.img`

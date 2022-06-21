@@ -1,23 +1,23 @@
 import Cookies from "js-cookie";
 import { LoginData, SignUpData } from "Types/User";
-import { customAxios } from "../../Utils/customAxios";
+import { request } from "../../Utils/request";
 
 export const SignUpAPI = async (reqData: SignUpData) => {
-	const { data } = await customAxios.post(`/user/sign-up`, reqData);
-	return data;
+	const res = await request('POST', '/user/sign-up', reqData);
+	return res
 };
 
 export const LoginAPI = async (reqData: LoginData) => {
-	const { data } = await customAxios.post(`/user/sign-in`, reqData);
-	return data;
+	const res = await request('POST', '/user/sign-in', reqData);
+	return res
 };
 
 export const UserInfoAPI = async () => {
 	const userIdx = Cookies.get("userIdx");
 	if (!userIdx) return;
-	const { data } = await customAxios.get(`/user/${userIdx}`);
-	if (data?.isSuccess) {
-		return data?.result;
+	const res = await request('GET', `/user/${userIdx}`);
+	if (res?.isSuccess) {
+		return res?.result;
 	}
 	return false;
 };
