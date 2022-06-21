@@ -5,9 +5,6 @@ const meetProvider =require("./meetProvider");
 exports.getMeetRooms = async(req,res)=>{
     const getMeetRoomsResult = await meetProvider.getMeetRooms();
 
-    
-
-
     return res.send(getMeetRoomsResult)
 }
 

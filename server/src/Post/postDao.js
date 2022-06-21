@@ -44,8 +44,9 @@ exports.getPost = async (connection, postIdx) => {
 // 모든 쿼리 조회 (이미지에 대한 여러개의 게시물은 하나의 이미지만 보여줄 수 있도록. )
 exports.getPosts = async (connection) => {
   const getPostsQuery = `
-      select  p.userIdx, p.postIdx,p.title,p.content,i.url, p.updatedAt from post p
+      select   p.userIdx, p.postIdx,p.title,p.content,i.url, p.updatedAt from post p
       left join image i on i.postIdx = p.postIdx
+      group by p.postIdx
       order by p.updatedAt desc
     `;
   const [getPostsRow] = await connection.query(getPostsQuery);

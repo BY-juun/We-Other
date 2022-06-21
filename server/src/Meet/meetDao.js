@@ -28,7 +28,6 @@ exports.matchUserMeet = async (connection, roomIdx, userIdx) => {
     userIdx,
     roomIdx,
   ]);
-  console.log("이거를봐! :", userIdx);
   return matchUserMeetRow;
 };
 
