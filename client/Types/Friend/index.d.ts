@@ -2,6 +2,7 @@ export interface FriendType {
 	userIdx: number;
 	name: string;
 	email: string;
+	sex: string;
 }
 
 

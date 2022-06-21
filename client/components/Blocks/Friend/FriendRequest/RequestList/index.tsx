@@ -13,7 +13,7 @@ const RequestList = () => {
 			{!isLoading &&
 				<ListWrapper>
 					{requestList?.length !== 0 && requestList?.map((friend) =>
-						<RequestCard>
+						<RequestCard key={friend?.userIdx}>
 							<RequestDenyBtn reqIdx={Number(friend?.friendReqIdx)} />
 							<FriendCard name={friend?.name as string} email={friend?.email as string} />
 						</RequestCard>

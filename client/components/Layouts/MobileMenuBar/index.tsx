@@ -4,8 +4,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useRef } from "react";
-import useGotoPage from "../../../Hooks/useGotoPage";
-import useOpenMobileMenu from "../../../Hooks/useOpenMobileMenu";
+import useOpenMobileMenu from "./Hooks/useOpenMobileMenu";
 import GotoFriendListBtn from "../../Atoms/GotoFriendListBtn";
 import { MenuBarContent, MenuBarHeader, MobileMenuBarWrapper, MobileOverLay } from "./styles";
 

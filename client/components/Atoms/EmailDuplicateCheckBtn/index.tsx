@@ -1,14 +1,14 @@
 import { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CheckDuplicate, SignUpEmail } from "../../../store/signup";
-import { customAxios } from "../../../Utils/customAxios";
+import { request } from "../../../Utils/request";
 
 const EmailDuplicateCheckBtn = () => {
 	const [checkDuplicate, setCheckDuplicate] = useRecoilState(CheckDuplicate);
 	const email = useRecoilValue(SignUpEmail);
 
 	const clickCheckDuplicate = useCallback(async () => {
-		const { data } = await customAxios.get(`/user/email/duplicate?email=${email}`);
+		const data = await request("GET", `/user/email/duplicate?email=${email}`);
 		if (data?.isSuccess) {
 			alert("* 사용 가능한 이메일입니다");
 			setCheckDuplicate(true);

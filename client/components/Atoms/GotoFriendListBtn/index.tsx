@@ -4,7 +4,6 @@ import { OtherItem, RequestLength } from '../../Layouts/Header/styles'
 
 const GotoFriendListBtn = ({ onClick }: { onClick: () => void }) => {
 	const { data } = useGetRequestedFriendListLength();
-	console.log(data);
 	return (
 		<OtherItem onClick={onClick}>
 			<span>친구목록</span>

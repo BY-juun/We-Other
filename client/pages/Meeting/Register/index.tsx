@@ -1,21 +1,37 @@
 import { CustomInput } from "components/Atoms/CustomInput/styles";
 import { CustomTextArea } from "components/Atoms/CustomTextArea/styles";
-import FriendCard from "components/Atoms/FriendCard";
 import React, { useCallback, useRef } from "react";
-import { DummyFriend } from "Types/Dummy";
+import { useRecoilValue } from "recoil";
+import SelectMeetMate from "../../../components/Blocks/Meeting/SelectMeetMate";
+import { useRegistMeeting } from "../../../Hooks/Meeting";
+import useCheckLogin from "../../../Hooks/useCheckLogin";
+import { useGetUserInfo } from "../../../Hooks/User";
+import { MeetMate } from "../../../store/meeting";
 import { AddFriendBox, AddFriendDescription, ContentItem, RegisterContent, RegisterFormItem, RegisterPageWrapper, RegisterTop } from "./styles";
 
 const MeetingRegister = () => {
 	const titleRef = useRef<HTMLInputElement>(null);
 	const descriptionRef = useRef<HTMLTextAreaElement>(null);
+	const meetMateList = useRecoilValue(MeetMate);
+	const { data: UserInfo } = useGetUserInfo();
+	const { mutate } = useRegistMeeting();
 
 	const submit = useCallback(() => {
 		if (!titleRef.current || !descriptionRef.current) return;
-		if (titleRef.current.value === "") return alert("* 제목을 입력해주세요");
-		if (descriptionRef.current.value === "") return alert("* 짧은 설명을 입력해주세요");
-		console.log(titleRef.current.value);
-		console.log(descriptionRef.current.value);
-	}, []);
+		if (titleRef.current.value === "") return alert("* 제목을 입력해주세요.");
+		if (descriptionRef.current.value === "") return alert("* 짧은 설명을 입력해주세요.");
+		if (meetMateList.length < 1) return alert("* 함께 참여할 친구를 최소 2명 이상 등록해야해요.")
+		const reqData = {
+			title: titleRef.current.value,
+			sexInfo: String(UserInfo?.sex),
+			roomIntro: descriptionRef.current.value,
+			capacity: 1 + meetMateList.length,
+			meetMateList: meetMateList,
+		}
+		mutate(reqData);
+	}, [meetMateList]);
+
+	useCheckLogin();
 
 	return (
 		<RegisterPageWrapper>
@@ -35,11 +51,9 @@ const MeetingRegister = () => {
 					</RegisterFormItem>
 				</ContentItem>
 				<ContentItem>
-					<AddFriendDescription>함께 참여할 친구를 등록해주세요 (최소 2명, 최대 4명)</AddFriendDescription>
+					<AddFriendDescription>함께 참여할 친구를 등록해주세요 <br /> (본인포함 2~4명, 자신과 같은 성별의 친구만 등록할 수 있습니다.)</AddFriendDescription>
 					<AddFriendBox>
-						{DummyFriend.map((friend) => (
-							<FriendCard key={friend.userIdx} friend={friend} />
-						))}
+						<SelectMeetMate userSex={String(UserInfo?.sex)} />
 					</AddFriendBox>
 				</ContentItem>
 			</RegisterContent>

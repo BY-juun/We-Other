@@ -1,39 +1,37 @@
-import Cookies from "js-cookie";
 import { SubmitPostReqData } from "Types/Post";
-import { customAxios } from "Utils/customAxios";
+import { request } from "../../Utils/request";
 
 export const GetPostsListAPI = async () => {
-	const { data } = await customAxios.get("/post");
-	if (!data.isSuccess) return alert(data.message);
-	return data.result;
+	const res = await request('GET', '/post');
+	if (!res.isSuccess) return alert(res.message);
+	return res.result;
 };
 
 export const GetPostAPI = async (id: number) => {
-	const { data } = await customAxios.get(`/post/${id}`);
-	if (!data.isSuccess) return alert(data.message);
-	return data.result
+	const res = await request('GET', `/post/${id}`);
+	if (!res.isSuccess) return alert(res.message);
+	return res.result
 }
 
 export const submitImg = async (reqData: FormData) => {
-	const { data } = await customAxios.post("/post/image", reqData);
-	return data;
+	const res = await request('POST', "/post/image", reqData);
+	return res;
 };
 
 export const submitPost = async (reqData: SubmitPostReqData) => {
-	const { data } = await customAxios.post("/post", reqData);
-	return data;
+	const res = await request('POST', "/post", reqData);
+	return res;
 };
 
 export const deletePostAPI = async (id: number) => {
-	const { data } = await customAxios.delete(`/post/delete?postIdx=${id}`);
-	return data;
+	const res = await request('DELETE', `/post/delete?postIdx=${id}`);
+	return res;
 }
 
 export const AddLikeAPI = async ({ postIdx, commentIdx, type }: { postIdx?: number, commentIdx?: number, type: string }) => {
 	let body;
 	if (type === "comment") body = { commentIdx: commentIdx };
 	else if (type === "post") body = { postIdx: postIdx }
-
-	const { data } = await customAxios.patch(`/user/like`, body);
-	return data;
+	const res = await request('PATCH', '/user/like', body);
+	return res;
 }
