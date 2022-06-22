@@ -1,26 +1,15 @@
-import MyFriend from "components/Blocks/Friend/MyFriends";
 import React from "react";
-import AddFriendBtn from "components/Atoms/AddFriendBtn";
-import { FriendsItem, FriendsWrapper, TitleArea } from "./styles";
-import FriendRequest from "../../components/Blocks/Friend/FriendRequest";
+import { FriendsWrapper } from "./styles";
 import useCheckLogin from "../../Hooks/useCheckLogin";
+import FriendsTemplate from "components/Templates/Friends";
 
 const Friend = () => {
-	useCheckLogin();
-	return (
-		<FriendsWrapper>
-			<FriendsItem>
-				<TitleArea>
-					<h2>친구목록</h2>
-					<AddFriendBtn />
-				</TitleArea>
-				<MyFriend />
-			</FriendsItem>
-			<FriendsItem>
-				<FriendRequest />
-			</FriendsItem>
-		</FriendsWrapper>
-	);
+  useCheckLogin();
+  return (
+    <FriendsWrapper>
+      <FriendsTemplate />
+    </FriendsWrapper>
+  );
 };
 
 export default Friend;

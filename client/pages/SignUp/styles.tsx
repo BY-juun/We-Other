@@ -16,8 +16,3 @@ export const SignUpWrapper = styled.div`
     margin-top: 15%;
   }
 `;
-
-export const SignUpTitle = styled.div`
-  font-size: 25px;
-  margin-bottom: 20px;
-`;
