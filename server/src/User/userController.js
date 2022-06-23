@@ -171,9 +171,9 @@ exports.verifyPasswd = async (req, res) => {
   const { result } = await userProvider.verifyPasswd(email, passwd);
 
   if (result.exist) {
-    return res.send("비밀번호 확인 성공");
+    return res.send(baseResponseStatus.SUCCESS);
   } else {
-    return res.send("비밀번호 확인 실패");
+    return res.send(baseResponseStatus.PASSWD_NOT_EXACT);
   }
 };
 
@@ -270,7 +270,7 @@ exports.deleteFriendRequest = async (req,res)=>{
 // 친구 목록 리스트 가져오기
 exports.getFriendList = async(req,res)=>{
   const userIdx = req.userIdx
-  
+
   const friendList = await userProvider.getFriendsIdx(userIdx);
 
   return res.send(friendList)

@@ -366,12 +366,12 @@ exports.deleteFriendRequest = async (connection, friendReqIdx) => {
 exports.getFriendsList = async (connection, userIdx) => {
   // 친구 요청 받은 것들에 대한 수락 리스트
   const getFriendsListedQuery = `
-    select u.userIdx, u.userName as name, u.email from friend f 
+    select u.userIdx, u.userName as name, u.sex ,u.email from friend f 
     join user u on f.userIdx = u.userIdx where f.friendIdx = ? and f.status ="A";
   `;
   // 친구 요청 보낸 것들에 대한 수락 리스트
   const getFriendsListingQuery = `
-  select u.userIdx, u.userName as name , u.email from friend f 
+  select u.userIdx, u.userName as name , u.sex ,u.email from friend f 
   join user u on f.friendIdx = u.userIdx where f.userIdx =? and f.status ="A";
   `;
   const [getFriendsListedRow] = await connection.query(
