@@ -1,10 +1,10 @@
-import { queryCachingOption } from "./../../Utils/queryOption";
-import { QueryKey } from "./../../Utils/QueryKey";
-import { LoginAPI, SignUpAPI, UserInfoAPI } from "API/User";
+import { queryCachingOption } from "Utils/queryOption";
+import { QueryKey } from "Utils/QueryKey";
+import { getUserDetailInfoAPI, getUserInfoAPI, LoginAPI, SignUpAPI } from "API/User";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { LoginResponse, UserInfo } from "../../Types/User";
-import { setToken } from "../../Utils/TokenManager";
+import { LoginResponse, UserDetailInfo, UserInfo } from "Types/User";
+import { setToken } from "Utils/TokenManager";
 
 export const useSignUp = () => {
   const router = useRouter();
@@ -34,5 +34,9 @@ export const useLogin = () => {
 };
 
 export const useGetUserInfo = () => {
-  return useQuery<UserInfo>([QueryKey.User, "userInfo"], () => UserInfoAPI(), queryCachingOption);
+  return useQuery<UserInfo>([QueryKey.User, "userInfo"], () => getUserInfoAPI(), queryCachingOption);
+};
+
+export const useGetUserDetailInfo = (userIdx: number) => {
+  return useQuery<UserDetailInfo>([QueryKey.User, "userDetailInfo", userIdx], () => getUserDetailInfoAPI(userIdx), queryCachingOption);
 };

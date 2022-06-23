@@ -1,6 +1,7 @@
 import FriendCard from "components/Molecules/Friends/FriendCard";
+import NoFriend from "components/Molecules/Friends/NoFriend";
 import React from "react";
-import { useGetFriendList } from "../../../../Hooks/Friends";
+import { useGetFriendList } from "Hooks/Friends";
 import { FriendCardWrapper, FriendListRoot } from "./styles";
 
 const MyFriend = () => {
@@ -19,7 +20,7 @@ const MyFriend = () => {
               ))}
             </>
           ) : (
-            <span>아직 등록된 친구가 없어요.</span>
+            <NoFriend />
           )}
         </>
       )}

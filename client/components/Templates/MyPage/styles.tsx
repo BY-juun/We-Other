@@ -1,4 +1,17 @@
 import styled from "@emotion/styled";
+import { mobile, tablet } from "Utils/styles";
+
+export const MyPageTemplateWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  ${tablet} {
+    grid-template-columns: 1fr;
+  }
+  ${mobile} {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
 
 export const MypageItem = styled.div`
   height: 100%;

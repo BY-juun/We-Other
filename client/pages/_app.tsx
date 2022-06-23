@@ -17,7 +17,6 @@ const WeOther = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(() => new QueryClient());
   const [loading, setLoading] = useState<boolean>(false);
   useSetProgressState(setLoading);
-  console.log(Component);
   return (
     <>
       {loading ? (
