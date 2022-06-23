@@ -1,27 +1,27 @@
-import MyDetailInfo from "components/Organisms/MyPage/MyDetailInfo";
 import MyInfo from "components/Organisms/MyPage/MyInfo";
-import { useGetUserInfo } from "Hooks/User";
+import { useGetUserDetailInfo } from "Hooks/User";
 import React from "react";
 import PageLoading from "Utils/PageLoading";
-import { UserInfo } from "Types/User";
-import { MypageItem } from "./styles";
+import { UserDetailInfo, UserInfo } from "Types/User";
+import { MypageItem, MyPageTemplateWrapper } from "./styles";
+import Cookies from "js-cookie";
+import MyPosts from "components/Organisms/MyPage/MyPosts";
 
 const MyPageTemplate = () => {
-  const { data: UserInfo, isLoading } = useGetUserInfo();
+  const { data: UserInfo, isLoading } = useGetUserDetailInfo(Number(Cookies.get("userIdx")));
 
   if (isLoading) return <>{PageLoading(isLoading)}</>;
 
   return (
-    <>
+    <MyPageTemplateWrapper>
       <MypageItem>
-        <h2>기본정보</h2>
-        <MyInfo UserInfo={UserInfo as UserInfo} />
+        <h2>내 정보</h2>
+        <MyInfo UserInfo={UserInfo as UserDetailInfo} />
       </MypageItem>
       <MypageItem>
-        <h2>추가정보</h2>
-        <MyDetailInfo UserInfo={UserInfo as UserInfo} />
+        <MyPosts />
       </MypageItem>
-    </>
+    </MyPageTemplateWrapper>
   );
 };
 

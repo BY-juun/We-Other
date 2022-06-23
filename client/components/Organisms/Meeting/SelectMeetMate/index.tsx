@@ -4,6 +4,7 @@ import FriendCard from "../../../Molecules/Friends/FriendCard";
 import { useRecoilState } from "recoil";
 import { MeetMate } from "../../../../store/meeting";
 import { AddFriendItem } from "./styles";
+import NoFriend from "components/Molecules/Friends/NoFriend";
 
 const SelectMeetMate = ({ userSex }: { userSex: string }) => {
   const { data: friends, isLoading } = useGetFriendList();
@@ -25,7 +26,7 @@ const SelectMeetMate = ({ userSex }: { userSex: string }) => {
     <>
       {!isLoading && (
         <>
-          {friends &&
+          {friends && friends.length > 1 ? (
             friends
               .filter((f) => f?.sex === userSex)
               .map((friend) => {
@@ -35,7 +36,10 @@ const SelectMeetMate = ({ userSex }: { userSex: string }) => {
                     <FriendCard name={String(friend?.name)} email={String(friend?.email)} userIdx={friend?.userIdx} />
                   </AddFriendItem>
                 );
-              })}
+              })
+          ) : (
+            <NoFriend />
+          )}
         </>
       )}
     </>

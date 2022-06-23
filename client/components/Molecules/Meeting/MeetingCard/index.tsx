@@ -5,7 +5,11 @@ import { ContentBox, ImgBox, MeetingCardWrapper } from "./styles";
 const MeetingCard = ({ meeting }: { meeting: MeetingType }) => {
   return (
     <MeetingCardWrapper>
-      <ImgBox />
+      <ImgBox>
+        {Array.from({ length: meeting.capacity }).map((v, idx) => {
+          return <div style={getImgBoxItemStyle(meeting.capacity)} key={idx + 100} />;
+        })}
+      </ImgBox>
       <ContentBox>
         <div>
           <h4>{meeting.title}</h4>
@@ -20,6 +24,12 @@ const MeetingCard = ({ meeting }: { meeting: MeetingType }) => {
       </ContentBox>
     </MeetingCardWrapper>
   );
+};
+
+const getImgBoxItemStyle = (capacity: number) => {
+  if (capacity === 4) return { width: "50%", height: "50%" };
+  else if (capacity === 3) return { width: "33.3%", height: "100%" };
+  else if (capacity === 2) return { width: "50%", height: "100%" };
 };
 
 export default MeetingCard;

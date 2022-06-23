@@ -1,37 +1,61 @@
 import styled from "@emotion/styled";
-import { customBtn, mobile } from "../../../../Utils/styles";
+import { customBtn, mobile, tablet_landscape } from "Utils/styles";
 
 export const MyInfoRoot = styled.div`
-	width : 100%;
-	display : flex;
-	flex-direction : column;
-	gap : 25px;
-`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
 
-export const MyInfoItem = styled.div`
-	width : 100%;
-	display : flex;
-	align-items : center;
-	${mobile}{
-		flex-direction : column;
-		align-items : flex-start;
-		gap : 3px;
-	}
-	span {
-		margin-right : 10px;
-	}
-`
+export const MyInfoLeftBlock = styled.div`
+  width: 25%;
+  ${mobile} {
+    width: 45%;
+  }
+  ${tablet_landscape} {
+    width: 40%;
+  }
+  border-right: 2px solid #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  text-align: left;
+  gap: 25px;
+  p {
+    margin: 0;
+    height: 30px;
+    font-weight: 600;
+    ${mobile} {
+      font-size: 15px;
+    }
+  }
+`;
 
-export const MyInfoBtn = styled.button`
-	padding : 5px 20px;
-	${customBtn}
-`
+export const MyInfoBtnWrapper = styled.div`
+  padding-left: 25px;
+  width: 100%;
+  ${mobile} {
+    height: 30px;
+  }
+`;
 
-export const MyInfoTitle = styled.div`
-	width : 30%;
-	font-size : 20px;
-	font-weight : 600;
-	${mobile} {
-		width : 100%;
-	}
-`
+export const MyInfoRightBlock = styled.div`
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  text-align: left;
+  gap: 25px;
+  overflow: hidden;
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+    height: 30px;
+    padding-left: 25px;
+    ${mobile} {
+      font-size: 15px;
+    }
+  }
+`;

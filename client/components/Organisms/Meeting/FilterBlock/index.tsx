@@ -6,7 +6,7 @@ const FilterBlock = () => {
   return (
     <FilterBlockWrapper>
       {filterOption.map((option) => (
-        <MeetingFilter title={option.title} options={option.options} />
+        <MeetingFilter key={option.title} title={option.title} options={option.options} />
       ))}
     </FilterBlockWrapper>
   );
