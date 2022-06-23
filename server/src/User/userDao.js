@@ -25,20 +25,18 @@ exports.userIdxCheck = async (connection, userIdx) => {
 };
 
 // 친구 신청 보낸 적이 있는 지에 대한 검사
-exports.friendIdxCheck = async (connection,userIdx,friendIdx)=>{
-  const friendIdxCheckQuery =`
+exports.friendIdxCheck = async (connection, userIdx, friendIdx) => {
+  const friendIdxCheckQuery = `
     select exists (
       select * from friend Where userIdx = ? and friendIdx = ? and status != "R"
     ) as exist
-  `
-  const [[friendIdxCheckRow]] = await connection.query(
-    friendIdxCheckQuery,[userIdx,
-    friendIdx]
-  );
+  `;
+  const [[friendIdxCheckRow]] = await connection.query(friendIdxCheckQuery, [
+    userIdx,
+    friendIdx,
+  ]);
   return friendIdxCheckRow.exist;
-
-}
-
+};
 
 //email로 userIdx 가져오기
 exports.getUserIdx = async (connection, email) => {
@@ -294,7 +292,10 @@ exports.getUserIntro = async (connection, userIdx) => {
     from user u left join user_intro ui 
     on u.userIdx = ui.userIdx where u.userIdx = ?;
   `;
-  const [getUserIntroRow] = await connection.query(getUserIntroQuery, userIdx);
+  const [[getUserIntroRow]] = await connection.query(
+    getUserIntroQuery,
+    userIdx
+  );
   return getUserIntroRow;
 };
 
@@ -324,7 +325,7 @@ exports.getFriendRequestCome = async (connection, userIdx) => {
   return getFriendRequestComeRow;
 };
 
-// 친구 요청을 보낸 목록 
+// 친구 요청을 보낸 목록
 exports.getFriendRequestSend = async (connection, userIdx) => {
   const getFriendRequestSendQuery = `
   select f.friendReqIdx,u.userIdx, u.userName as name , u.email from friend f 
@@ -337,50 +338,64 @@ exports.getFriendRequestSend = async (connection, userIdx) => {
   return getFriendRequestSendRow;
 };
 
-// 친구 요청 응답하기. 
-exports.answerFriendRequest = async (connection, friendReqIdx, answer) =>{
-  const acceptFriendRequestQuery =`
+// 친구 요청 응답하기.
+exports.answerFriendRequest = async (connection, friendReqIdx, answer) => {
+  const acceptFriendRequestQuery = `
     update friend set status = ? where friendReqIdx = ?
-  `
-  const [acceptFriendRequestRow] = await connection.query(acceptFriendRequestQuery,[answer,friendReqIdx]);
-  return acceptFriendRequestRow
-}
+  `;
+  const [acceptFriendRequestRow] = await connection.query(
+    acceptFriendRequestQuery,
+    [answer, friendReqIdx]
+  );
+  return acceptFriendRequestRow;
+};
 
-// 친구 요청 거절하기 
-exports.deleteFriendRequest = async(connection,friendReqIdx) =>{
+// 친구 요청 거절하기
+exports.deleteFriendRequest = async (connection, friendReqIdx) => {
   const deleteFriendRequestQuery = `
     DELETE FROM friend WHERE friendReqIdx = ?;
-  `
-  const [deleteFriendRequestRow] = await connection.query(deleteFriendRequestQuery,friendReqIdx);
+  `;
+  const [deleteFriendRequestRow] = await connection.query(
+    deleteFriendRequestQuery,
+    friendReqIdx
+  );
   return deleteFriendRequestRow;
-
-}
+};
 
 //친구들 목록 가져오기
-exports.getFriendsList = async(connection, userIdx)=>{
+exports.getFriendsList = async (connection, userIdx) => {
   // 친구 요청 받은 것들에 대한 수락 리스트
-  const getFriendsListedQuery =`
+  const getFriendsListedQuery = `
     select u.userIdx, u.userName as name, u.email from friend f 
     join user u on f.userIdx = u.userIdx where f.friendIdx = ? and f.status ="A";
-  `
+  `;
   // 친구 요청 보낸 것들에 대한 수락 리스트
   const getFriendsListingQuery = `
   select u.userIdx, u.userName as name , u.email from friend f 
   join user u on f.friendIdx = u.userIdx where f.userIdx =? and f.status ="A";
-  `
-  const [getFriendsListedRow] = await connection.query(getFriendsListedQuery,userIdx)
-  const [getFriendsListingRow] = await connection.query(getFriendsListingQuery,userIdx)
-  const [getFriendsList] = [[...getFriendsListedRow,...getFriendsListingRow]];
+  `;
+  const [getFriendsListedRow] = await connection.query(
+    getFriendsListedQuery,
+    userIdx
+  );
+  const [getFriendsListingRow] = await connection.query(
+    getFriendsListingQuery,
+    userIdx
+  );
+  const [getFriendsList] = [[...getFriendsListedRow, ...getFriendsListingRow]];
 
-  return getFriendsList
-}
+  return getFriendsList;
+};
 
 // 받은 친구요청 갯수 확인하기
-exports.requestedFriendList = async(connection,userIdx)=>{
-  const requestedFriendListQuery =`
+exports.requestedFriendList = async (connection, userIdx) => {
+  const requestedFriendListQuery = `
   select count(*) as count from friend f 
   join user u on f.userIdx = u.userIdx where f.friendIdx = ? and f.status ="P";
-  `
-  const [[requestedFriendListRow]] = await connection.query(requestedFriendListQuery , userIdx);
-  return requestedFriendListRow
-}
+  `;
+  const [[requestedFriendListRow]] = await connection.query(
+    requestedFriendListQuery,
+    userIdx
+  );
+  return requestedFriendListRow;
+};
