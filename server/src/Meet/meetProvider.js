@@ -34,7 +34,8 @@ exports.getMeetRooms = async () => {
         v["memberInfoList"] = memberInfoList;
       })
     );
-    return basicResponse(baseResponseStatus.SUCCESS);
+    debugFn(getMeetRoomsResult);
+    return resultResponse(baseResponseStatus.SUCCESS,getMeetRoomsResult);
   } catch (error) {
     console.log(error);
     return basicResponse(baseResponseStatus.DB_ERROR);

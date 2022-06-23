@@ -1,0 +1,1419 @@
+[33mcommit 8791f0eeb067e989e617377f5155bfc1fd77dee9[m[33m ([m[1;36mHEAD -> [m[1;32mqro[m[33m, [m[1;31morigin/qro[m[33m)[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Jun 17 15:54:33 2022 +0900
+
+    create : meetingRoom 개설과 정보 가져오기
+
+[33mcommit 66679bfc4606abc2301d9552d085caa3fa6bdd51[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Jun 16 18:55:28 2022 +0900
+
+     미팅 룸 게시물 조회에 대한 ver.01
+
+[33mcommit e7721279aa6d76b69b9518e2d372581a8a930af8[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Jun 16 17:49:40 2022 +0900
+
+     create : 미팅룸 생성하기
+
+[33mcommit 71ed08ed8a9d545110e7ebf01fd745456813072b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: d40b40b c6ae391
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu Jun 16 14:17:50 2022 +0900
+
+    Merge pull request #78 from sperr7489/qro
+    
+    create : 친구 신청 기능 api 작성 완료
+
+[33mcommit d40b40ba562ee0cd3e81dec438a78a4aa89ae7f3[m
+Merge: 7e083b2 3d1ce5f
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Wed Jun 15 18:58:51 2022 +0900
+
+    Merge pull request #77 from BY-juun/master
+    
+    Add Friends Page
+
+[33mcommit 3d1ce5ffd78f4e53ac281a0196306f288e07e45f[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Wed Jun 15 18:58:23 2022 +0900
+
+    Add Friends Page
+
+[33mcommit c6ae39119a4c4e6be61a35f0b6307a3b4b3a53c9[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed Jun 15 18:50:56 2022 +0900
+
+    create : 친구 신청 기능 api 작성 완료
+
+[33mcommit 7e083b2427f86232a32a97d13fda41d78b9b4cfd[m
+Merge: e5c951d 9ceb73c
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Wed Jun 15 14:14:16 2022 +0900
+
+    Merge pull request #76 from sperr7489/qro
+    
+    Qro
+
+[33mcommit e5c951de696d2179666c7e92bd15816f148288c5[m
+Merge: d919a17 3a270b6
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Tue Jun 14 19:01:05 2022 +0900
+
+    Merge pull request #75 from BY-juun/master
+    
+    Add FriendRequestList, MyPage
+
+[33mcommit 3a270b631f05f8e9885e229d71f312d605c05a92[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Tue Jun 14 19:00:37 2022 +0900
+
+    Add FriendRequestList, MyPage
+
+[33mcommit 9ceb73c3944dab479adbb7a11d12356ec707fe5b[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue Jun 14 17:42:54 2022 +0900
+
+    fix : console.log 삭제
+
+[33mcommit e8a3f4db8ad7d4cd27294a09be9155862d1453bb[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue Jun 14 16:24:07 2022 +0900
+
+     create : 친구 신청 기능 확인
+
+[33mcommit b0a58970e0be434199eb0061903a82e30440fd26[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sun Jun 12 20:43:12 2022 +0900
+
+    친구 내역 가져오기까지 기능 구현
+
+[33mcommit d9a2460c1a1b2143e9bb44677dcc0fa54b3dbf04[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sun Jun 12 20:02:30 2022 +0900
+
+     test
+
+[33mcommit eab5e2c4d52661d45d09e629089dd8cac7a6b73c[m
+Merge: 16fdaeb d919a17
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Sun Jun 12 19:00:33 2022 +0900
+
+    Merge pull request #74 from sperr7489/master
+    
+    merge
+
+[33mcommit d919a1780b85fe145db6941306988353e0e5c602[m
+Merge: 60c3465 4ec4d94
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 21:29:03 2022 +0900
+
+    Merge pull request #73 from BY-juun/master
+    
+    Add Message Modal
+
+[33mcommit 4ec4d940e51b8cf03d3b5819b7b49fcc9bdbdbdf[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Jun 11 21:28:40 2022 +0900
+
+    Add Message Modal
+
+[33mcommit 60c3465724818266dbc8f7cb2b829bcd8fad42fb[m
+Merge: b52a81a af602f8
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 18:11:57 2022 +0900
+
+    Merge pull request #72 from BY-juun/master
+    
+    Add MyPage, MyFriendPage
+
+[33mcommit af602f817f59a785b6e059a01b5e0d78f4623fbf[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Jun 11 18:11:36 2022 +0900
+
+    Add MyPage, MyFriendPage
+
+[33mcommit b52a81a4583d41ec35e9e40e8504e044859d7903[m
+Merge: 59d0ce9 8bccb31
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 17:13:03 2022 +0900
+
+    Merge pull request #71 from BY-juun/master
+    
+    Refactoring signup -> redux tool kit
+
+[33mcommit 8bccb319d54de632565c85dd99cb60a6b064e940[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Jun 11 17:12:23 2022 +0900
+
+    Refactoring signup -> redux tool kit
+
+[33mcommit 59d0ce95fa69f3bf5d18ee195e19a51c63b8b639[m
+Merge: 3bfb6f5 16b58d1
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 02:22:32 2022 +0900
+
+    Merge pull request #70 from BY-juun/master
+    
+    Update README.md
+
+[33mcommit 16b58d1cd20bd2eedc54ebd0475fe0d6978cf048[m
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 02:22:15 2022 +0900
+
+    Update README.md
+
+[33mcommit 3bfb6f5ca9927d0f0ceae22915bf3b2f6ec33af8[m
+Merge: ccc3d76 db44d9f
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Jun 11 02:18:57 2022 +0900
+
+    Merge pull request #69 from BY-juun/master
+    
+    ReduxToolKit Setting, Add FriendListBlock
+
+[33mcommit db44d9f7300c586aae8634176aa0f3eba4403749[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Jun 11 02:18:14 2022 +0900
+
+    ReduxToolKit Setting, Add FriendListBlock
+
+[33mcommit ccc3d7681273c639b7051d04cc8ea358be80fb23[m
+Merge: f5ae8b7 8da6ab5
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Jun 10 18:53:27 2022 +0900
+
+    Merge pull request #68 from BY-juun/master
+    
+    Refactor Post, Comment
+
+[33mcommit 8da6ab5a8a6580dff543811030767a3613758bd6[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Jun 10 18:49:14 2022 +0900
+
+    Refactor Post, Comment
+
+[33mcommit 16fdaeb73b481212aec0a4b24e64e3cad1e0b1fa[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Jun 9 18:50:37 2022 +0900
+
+     router 모듈 확인해보기
+
+[33mcommit f5ae8b7f028ff896d67ea90289871cbc9febddc1[m
+Merge: a75ee53 412ddcf
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu Jun 9 15:10:12 2022 +0900
+
+    Merge pull request #67 from BY-juun/master
+    
+    Add MyPage DetailInfo
+
+[33mcommit 412ddcfb7882f46c6220465191ce227ef447e88d[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Thu Jun 9 15:09:37 2022 +0900
+
+    Add MyPage DetailInfo
+
+[33mcommit fd0799151ce17567e77956fa189e2e95fc72e29a[m
+Merge: 25150f5 a75ee53
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu Jun 9 10:14:56 2022 +0900
+
+    Merge pull request #66 from sperr7489/master
+    
+    Merge pull request #65 from sperr7489/qro
+
+[33mcommit a75ee53c066569e3c1bf6f4f6b2d7a577acd4b38[m
+Merge: af06894 25150f5
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu Jun 9 10:13:48 2022 +0900
+
+    Merge pull request #65 from sperr7489/qro
+    
+    Qro
+
+[33mcommit 25150f5f7e3fb18e2f0e679401a243070acbdba5[m
+Merge: b8b6690 ec5a63e
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Wed Jun 8 18:49:35 2022 +0900
+
+    Merge pull request #64 from BY-juun/master
+    
+    Feat
+
+[33mcommit ec5a63ee985be671dc80fb3f6a3dea2b5bbbf5db[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Wed Jun 8 18:49:00 2022 +0900
+
+    Feat FindIdPwd, MyPage ResetPwd
+
+[33mcommit b8b669011e4e6e636d3244f7ed2540cd5fa5e82d[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed Jun 8 18:42:56 2022 +0900
+
+     비밀번호 확인
+
+[33mcommit d8ba733aa1a0d5217b710670aaf763c9fb106e0b[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed Jun 8 16:40:08 2022 +0900
+
+    create : 비밀번호 재설정 구현 완료
+
+[33mcommit 30190dc8d3792115d723a8777dc42a9b0beba1ba[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Wed Jun 8 12:55:05 2022 +0900
+
+     gitignore 적용
+
+[33mcommit c26c54e8b2b7070efc73b3421f0de8332ee4ed29[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Mon Jun 6 20:07:04 2022 +0900
+
+    Add Reset Page
+
+[33mcommit 5909fe8f16b42d08c33873442fb8e7aeca833f98[m
+Merge: e339b47 af06894
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Mon Jun 6 19:53:52 2022 +0900
+
+    Merge branch 'sperr7489:master' into master
+
+[33mcommit 65abe151bf083202134e75f6a83168b9b356368d[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Mon Jun 6 19:33:47 2022 +0900
+
+    패스워드 재설정 email 보내기
+
+[33mcommit e339b47a086678b6dd7d0e3e126cefd831f79985[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Mon Jun 6 02:49:16 2022 +0900
+
+    Add MeetingContext
+
+[33mcommit af06894385c835cd47218866ac7a72a468db5019[m
+Merge: b50db0d 8ae0a59
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu Jun 2 18:53:17 2022 +0900
+
+    Merge pull request #63 from BY-juun/master
+    
+    Add MyPage
+
+[33mcommit 3db90aa649d05adcca9d6dc051362f4b6ac1721c[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Jun 2 18:51:43 2022 +0900
+
+    비밀번호 재설정
+
+[33mcommit 8ae0a599e6f82e36189893524bc5ad0c4ee60568[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Thu Jun 2 18:50:59 2022 +0900
+
+    Add MyPage
+
+[33mcommit d280071c16d249971b20b4a000b47f3bb5c29c5f[m
+Merge: a35cfb0 b50db0d
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu Jun 2 15:09:12 2022 +0900
+
+    Merge pull request #62 from sperr7489/master
+    
+    merge
+
+[33mcommit b50db0d5c7f6bd816e2bc8327c0c114b475e7da7[m
+Merge: ccf9aa0 9b837c4
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Wed Jun 1 22:06:42 2022 +0900
+
+    Merge pull request #61 from BY-juun/master
+    
+    Add MeetingRegist Page
+
+[33mcommit 9b837c4607befd82ecd923915ef1446ee0b02636[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Wed Jun 1 22:06:09 2022 +0900
+
+    Add MeetingRegist Page
+
+[33mcommit ccf9aa0487cbaf4bdb9730a4ae0cb2171f2c7cd2[m
+Merge: f6451fd b657531
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Tue May 31 19:02:08 2022 +0900
+
+    Merge pull request #60 from BY-juun/master
+    
+    Update UI
+
+[33mcommit b657531d7c457fe172292f0f84804f204ef08d9a[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Tue May 31 19:01:37 2022 +0900
+
+    Update UI
+
+[33mcommit a35cfb064dcc154f63d70b79b2c28debc3d5268d[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue May 31 18:57:19 2022 +0900
+
+    create : 이메일 인증을 이용한 비밀번호 찾기 step1
+
+[33mcommit f6451fd8804da95f3b298a701dc9e5f7155b558f[m
+Merge: 11c9c84 96778a4
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Mon May 30 18:10:13 2022 +0900
+
+    Merge pull request #59 from BY-juun/master
+    
+    Add Post Skeleton
+
+[33mcommit 96778a4a0ec0de7e2839e1bbf3bb29cb1b44fbef[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Mon May 30 18:09:39 2022 +0900
+
+    Add Post Skeleton
+
+[33mcommit 11c9c84033fb6faba003c7a66fcadce79f7a072a[m
+Merge: 84a0819 37c29c4
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Mon May 30 17:47:13 2022 +0900
+
+    Merge pull request #58 from sperr7489/qro
+    
+    Qro
+
+[33mcommit 37c29c4d94f1fdfc37d3b681ccba3208709859c5[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Mon May 30 16:35:36 2022 +0900
+
+    create: 아이디 찾기
+
+[33mcommit fdb395d4b5975ed0afb929ac24a9c39217f2ba0c[m
+Merge: bba7069 84a0819
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Mon May 30 15:10:48 2022 +0900
+
+    Merge branch 'master' of https://github.com/sperr7489/We-Other into qro
+
+[33mcommit 84a08192313968c8c41a41feb4dba957fcb81bd2[m
+Merge: 653f568 8c96bee
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sun May 29 19:16:04 2022 +0900
+
+    Merge pull request #57 from BY-juun/master
+    
+    Add PageLoading Loader
+
+[33mcommit 8c96beea4d44d7d82ac5b00189ed4da706ef4411[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sun May 29 19:15:29 2022 +0900
+
+    Add PageLoading Loader
+
+[33mcommit 653f56829d890162b06bb0e8bb77ae9c2c353052[m
+Merge: a8b18c7 12b4c60
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat May 28 23:26:26 2022 +0900
+
+    Merge pull request #55 from BY-juun/master
+    
+    Add FindIdPwd Modal
+
+[33mcommit 12b4c607143e0d7f3894b73ad0765a039b35411b[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat May 28 23:25:57 2022 +0900
+
+    Add FindIdPwd Modal
+
+[33mcommit bba70697bc110672672610faaa60dfa3b2cb58d4[m
+Merge: c192b7b a8b18c7
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 19 18:54:50 2022 +0900
+
+    Merge pull request #54 from sperr7489/master
+    
+    front merge
+
+[33mcommit a8b18c7847dff5c28a4954e0460a7f81b2490f9a[m
+Merge: 3c8976c 855dbe4
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu May 19 18:51:55 2022 +0900
+
+    Merge pull request #53 from BY-juun/master
+    
+    Add CommentAPI, CommentView, ReportView
+
+[33mcommit 855dbe406541b4cc0bfd0ab905f09c31c8ece0aa[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Thu May 19 18:51:22 2022 +0900
+
+    Add CommentAPI, CommentView, ReportView
+
+[33mcommit 3c8976c6d8e3e75c03cf282c7f9c94fd81b53cc6[m
+Merge: fe18cd5 c192b7b
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 19 18:51:05 2022 +0900
+
+    Merge pull request #52 from sperr7489/qro
+    
+     쓸모 없는 콘솔 삭제
+
+[33mcommit c192b7be2b41eba1da92d901aa8647451c693b19[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 18:50:24 2022 +0900
+
+     쓸모 없는 콘솔 삭제
+
+[33mcommit fe18cd5d1a3258bfa1b697216e1eb4c25e8eebd8[m
+Merge: ed3d015 7bd97b2
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 19 18:36:27 2022 +0900
+
+    Merge pull request #51 from sperr7489/qro
+    
+    Qro
+
+[33mcommit 7bd97b28e851ff053eac73509991f86728c920db[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 18:35:41 2022 +0900
+
+    좋아요 취소 등록 마무리
+
+[33mcommit 6d8f87a9c38ffe108083b0528aecedde17bf63ce[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 18:32:22 2022 +0900
+
+    좋아요 취소 등록 마무리
+
+[33mcommit 2ba7dc1b67470202afe8833abd28a8a867cf5b4c[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 18:07:10 2022 +0900
+
+     좋아요 취소
+
+[33mcommit 5d824f9a21ef4a2789d907eeba30f7f19586f339[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 16:29:33 2022 +0900
+
+    게시글 삭제 및 조회 요청 api수정
+
+[33mcommit 499118195d743fccc20b3a9f065e9aea43d06e15[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 16:16:41 2022 +0900
+
+    게시물 가져오기 댓글 갯수, 좋아요 갯수 respose 작성
+
+[33mcommit 3b2ea3c1228a2e2ef78f573158f2efa736c45096[m
+Merge: 0de406e 12f252f
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 15:35:17 2022 +0900
+
+     10 = > ?
+
+[33mcommit 12f252f6b9791e62269f417dc86449cdddf46a51[m
+Merge: 77d4072 ed3d015
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 19 15:32:14 2022 +0900
+
+    Merge pull request #50 from sperr7489/master
+    
+    Merge pull request #49 from sperr7489/qro
+
+[33mcommit ed3d015c133bd91095ab9376d609c0baa5e13b67[m
+Merge: f9fef98 77d4072
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 19 15:31:52 2022 +0900
+
+    Merge pull request #49 from sperr7489/qro
+    
+    Merge pull request #48 from sperr7489/master
+
+[33mcommit 0de406e6dc0dfacb84ac2a0cabfbc1729477d68a[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 19 15:26:51 2022 +0900
+
+     나의 바보같은 실수  10 => ?
+
+[33mcommit 77d40722cce04a6f6785bbc5e011a710a073a44c[m
+Merge: 38b7be8 f9fef98
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Wed May 18 18:47:31 2022 +0900
+
+    Merge pull request #48 from sperr7489/master
+    
+    Merge pull request #47 from sperr7489/qro
+
+[33mcommit f9fef989e7d6b155dcb9bc842c13b4cd4316e535[m
+Merge: 304bb04 38b7be8
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Wed May 18 18:47:06 2022 +0900
+
+    Merge pull request #47 from sperr7489/qro
+    
+    Merge pull request #46 from sperr7489/master
+
+[33mcommit 38b7be8e30d2c73396fbc5e39bee8f59a5070f1f[m
+Merge: 9417fc4 304bb04
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Tue May 17 17:59:18 2022 +0900
+
+    Merge pull request #46 from sperr7489/master
+    
+    master -> qro
+
+[33mcommit 304bb048a58c0b1f59a9b58ad77bb158aee63369[m
+Merge: 09fff2a 834b8ae
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Tue May 17 17:50:16 2022 +0900
+
+    Merge pull request #45 from BY-juun/master
+    
+    ㅇㅇ
+
+[33mcommit 09fff2a631157c34579d69c4396fef5e747aec43[m
+Merge: b714cf8 9417fc4
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Tue May 17 17:48:48 2022 +0900
+
+    Merge pull request #44 from sperr7489/qro
+    
+     fix : 댓글 등록시 createdAt(updatedAt으로) 까지 반환
+
+[33mcommit 9417fc4d339c621c5417a78a29578ac97ddef8db[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue May 17 17:05:15 2022 +0900
+
+     fix : 댓글 등록시 createdAt(updatedAt으로) 까지 반환
+
+[33mcommit b714cf84c1770f2cf596d85efd051cd1bf06410b[m
+Merge: d4c3939 976dcf8
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Tue May 17 16:15:57 2022 +0900
+
+    Merge pull request #43 from sperr7489/qro
+    
+    콘솔 삭제
+
+[33mcommit 976dcf866acf6b0e93dcb5c6f4f38f6522385e2c[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue May 17 16:15:08 2022 +0900
+
+    콘솔 삭제
+
+[33mcommit d4c393982b8f406ce4b52083511b74c472d9dd0b[m
+Merge: 964421e 3f916a6
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Tue May 17 16:14:15 2022 +0900
+
+    Merge pull request #42 from sperr7489/qro
+    
+    create : 게시물 조회 시 댓글들에 대한 정보, 대댓에 대한 정보들까지 전부 가져올 수 있도록 함
+
+[33mcommit 3f916a6f9ac8c458f15f87e921d98e8d406102ad[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue May 17 16:13:40 2022 +0900
+
+    create : 게시물 조회 시 댓글들에 대한 정보, 대댓에 대한 정보들까지 전부 가져올 수 있도록 함
+
+[33mcommit 834b8aecf0c77f778cd4ff9956e34befeb948ef9[m
+Merge: 961770b d75102e
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Tue May 17 15:51:27 2022 +0900
+
+    Update Search Modal, Report Modal, Add CommentAPI
+
+[33mcommit 964421eade7a74200c6c75ae6d0abd6efb8b039d[m
+Merge: b45541e e486d34
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Tue May 17 11:46:02 2022 +0900
+
+    Merge pull request #41 from sperr7489/qro
+    
+    Qro
+
+[33mcommit e486d3449459b11edbfe03b9041006d499521ef1[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Tue May 17 11:45:32 2022 +0900
+
+    create : 대댓 기능 완성 && 불필요 console.log 삭제
+
+[33mcommit 3d7a04a5340b69a26d18946991d467e480f6b1fe[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Mon May 16 17:15:57 2022 +0900
+
+    create: 댓글에 대댓 달기
+
+[33mcommit b45541e3c7b6db6aa0ddf8c85a689be1c51d232e[m
+Merge: d75102e 41ffa6e
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Mon May 16 10:18:45 2022 +0900
+
+    Merge pull request #40 from sperr7489/qro
+    
+    20220513
+
+[33mcommit 961770b4da56b22c920b301644cc3a71acb4baf0[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Mon May 16 09:56:21 2022 +0900
+
+     temp
+
+[33mcommit d75102e5271f73453efec0d3489173aeaba96b82[m
+Merge: 4f9d5e5 b73ca99
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat May 14 18:27:54 2022 +0900
+
+    Merge pull request #39 from BY-juun/master
+    
+    Update Desktop UI
+
+[33mcommit b73ca992be1813ff61353872bdb88b32da3c41cf[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat May 14 18:27:22 2022 +0900
+
+    Update Desktop UI
+
+[33mcommit 4f9d5e56950457bed0ffe2ce72dcc4993f299f2c[m
+Merge: 9a05600 1bfa3ab
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri May 13 23:15:25 2022 +0900
+
+    Merge pull request #38 from BY-juun/master
+    
+    Refactor Page Type, Add Comment API
+
+[33mcommit 1bfa3ab036df298b946d33fa16a5b2a2d415a40d[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri May 13 23:04:09 2022 +0900
+
+    Refactor Page Type, Add Comment API
+
+[33mcommit 41ffa6e7a6723ceec9d1a36e646405ebbf42c27b[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Fri May 13 19:01:07 2022 +0900
+
+    20220513
+
+[33mcommit 9a056008391e4e3730048d1a285a777a24b4a436[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Fri May 13 17:02:33 2022 +0900
+
+     console 제거
+
+[33mcommit c44fefd607846d41c7da34dd2ff20c259de620f4[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Fri May 13 17:01:48 2022 +0900
+
+    serverUrL
+
+[33mcommit 2bd51caaa352af5c17059c5b3a754f1a06a08a5e[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Fri May 13 17:00:03 2022 +0900
+
+    create : 게시물에 좋아요 등록하기 API 작성
+
+[33mcommit 69e69f85fadc106777442fff9a50edf62dccf5a8[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 12 17:22:16 2022 +0900
+
+    gitignore
+
+[33mcommit 66ba946891dac0ce59e8c554c14ed0a2d16046a4[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 12 17:21:17 2022 +0900
+
+    gitignore
+
+[33mcommit 458570a5f6850986949fc6237b1bc7f922febb36[m
+Merge: 0ff5f01 763449c
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:13:26 2022 +0900
+
+    Merge pull request #37 from sperr7489/qro
+    
+    Merge pull request #36 from sperr7489/master
+
+[33mcommit 763449cefe2a3728b2de4ce380aa565e706d5c4e[m
+Merge: 71d61f1 0ff5f01
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:12:45 2022 +0900
+
+    Merge pull request #36 from sperr7489/master
+    
+    Merge pull request #35 from sperr7489/qro
+
+[33mcommit 0ff5f01081d6399c707896b843b74f0d11ea7873[m
+Merge: 9803b11 71d61f1
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:12:06 2022 +0900
+
+    Merge pull request #35 from sperr7489/qro
+    
+    Merge pull request #34 from sperr7489/master
+
+[33mcommit 71d61f17646e2508526111e98943312b38206576[m
+Merge: 6253003 9803b11
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:07:51 2022 +0900
+
+    Merge pull request #34 from sperr7489/master
+    
+    Merge pull request #33 from sperr7489/qro
+
+[33mcommit 9803b11b801a5a47bda07a9efd42ffb18e2d3b0d[m
+Merge: d6bf650 6253003
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:07:23 2022 +0900
+
+    Merge pull request #33 from sperr7489/qro
+    
+    Qro
+
+[33mcommit 6253003f208abb4edeed2f51300d2f64219483c9[m
+Merge: 2028469 d6bf650
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 17:04:20 2022 +0900
+
+    Merge pull request #32 from sperr7489/master
+    
+    pr
+
+[33mcommit d6bf650aecd7ba5622334d47c0500871955a9a64[m
+Merge: e90f4bc b5aa35b
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu May 12 14:46:10 2022 +0900
+
+    Merge pull request #31 from BY-juun/master
+    
+    Update CSS, SearchBtn
+
+[33mcommit b5aa35b1e5fdeacda99c49dc7d41f2153bd99024[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Thu May 12 14:45:13 2022 +0900
+
+    Update CSS, SearchBtn
+
+[33mcommit 2028469a36546073c5aec68f7976ba4ffcc9802d[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu May 12 14:28:36 2022 +0900
+
+     익명 번지수 출력기능 완료
+
+[33mcommit e90f4bc800fa1c2b7dc2a905b381dcea9c9885d1[m
+Merge: cdd3b79 550f347
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 10:24:51 2022 +0900
+
+    Merge pull request #30 from sperr7489/qro
+    
+    Merge pull request #29 from sperr7489/master
+
+[33mcommit 550f347efcd50c9edf6451b9d80d2f9ee11444b1[m
+Merge: d93d944 cdd3b79
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 10:23:58 2022 +0900
+
+    Merge pull request #29 from sperr7489/master
+    
+    merge
+
+[33mcommit cdd3b790aed6220314cda78805d4cffc58ac72b8[m
+Merge: 2ab0925 d93d944
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Thu May 12 10:23:48 2022 +0900
+
+    Merge branch 'qro' into master
+
+[33mcommit 2ab09255e5c50298253c6c4d7ec999cbece8ed5d[m
+Merge: 1b9cd5f 5fb2f34
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu May 12 00:54:06 2022 +0900
+
+    Merge pull request #28 from BY-juun/master
+    
+    Update Layout, MainPage
+
+[33mcommit 5fb2f3428cc7a6cb06a949e0782fcd7f614b12a4[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Thu May 12 00:53:25 2022 +0900
+
+    Update Layout, MainPage
+
+[33mcommit d93d944e9fa9a7ac06ca46d17393b000916c2d37[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 19:03:04 2022 +0900
+
+    fix
+
+[33mcommit f282e201ee99b364226bac30355d164cc771fa11[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Wed May 11 19:00:47 2022 +0900
+
+    Add Post Function, Refactor SignUp
+
+[33mcommit d693ae7870207d91730ec30545a25bc9d373a587[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 18:49:51 2022 +0900
+
+    mit
+    
+     log 정리
+
+[33mcommit e6d30a2f44145a4f5c551a976eb7e7d51a9a8269[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 17:44:05 2022 +0900
+
+    create : 게시물 삭제 ( 이미지 처리까지 마무리 )
+
+[33mcommit b1ee818e55216861b7b884a6ee946df1edc11041[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 17:43:11 2022 +0900
+
+    create : 게시물 삭제 ( 이미지 처리까지 마무리 )
+
+[33mcommit 1f667245359b04f124864d5caba756fc152f5014[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 17:41:01 2022 +0900
+
+    create : 게시물 삭제 ( 이미지 처리까지 마무리 )
+
+[33mcommit d0001cbf47e341fe37f2018b54476b428e289517[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 17:39:52 2022 +0900
+
+    create : 게시물 삭제 ( 이미지 처리까지 마무리 )
+
+[33mcommit ac9e9c5ee3e85a93387db16b1dd53257b8fd988a[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 17:39:01 2022 +0900
+
+    create : 게시물 삭제 ( 이미지 처리까지 마무리 )
+
+[33mcommit 72fdaecd40065fce1eeae184b0003ce65e9f7fd3[m
+Merge: 956c4de 1b9cd5f
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Wed May 11 12:41:24 2022 +0900
+
+    Merge pull request #27 from sperr7489/master
+    
+     fix: 특정 게시물 조회 수정
+
+[33mcommit 1b9cd5fdfb546b98b0f6b476e92e4a6b2e4698f6[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 12:40:43 2022 +0900
+
+     fix: 특정 게시물 조회 수정
+
+[33mcommit 956c4decea578cab62ef7177829e8dd3dcd21736[m
+Merge: a89304a 790eeaf
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Wed May 11 12:40:16 2022 +0900
+
+    Merge pull request #25 from sperr7489/master
+    
+    수정
+
+[33mcommit 790eeaf69ff2d9b11bab4785eaba67dd93c52722[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Wed May 11 12:37:49 2022 +0900
+
+    fix : 특정 게시물 조회 result 수정
+
+[33mcommit c06176f6f1ca014bacabc38afcc5ceff6e3a0806[m
+Merge: 92583b2 3dc8d21
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Mon May 9 02:02:57 2022 +0900
+
+    Merge pull request #22 from BY-juun/master
+    
+    Add SubmitPostAPI
+
+[33mcommit 3dc8d216314431c59db27f75e9dc4e2c420f6275[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Mon May 9 02:02:21 2022 +0900
+
+    Add SubmitPostAPI
+
+[33mcommit 92583b229945d1b99084bddb7f90693ce1d03469[m
+Merge: 1be73d0 152737a
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sun May 8 22:35:40 2022 +0900
+
+    Merge pull request #21 from BY-juun/master
+    
+    Add Image Submit API
+
+[33mcommit 152737aa42d3079ed639a0d62ae1c6eed63b23b4[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sun May 8 22:32:58 2022 +0900
+
+    Add SubmitImage API
+
+[33mcommit 09a87dde25f90cdcaa8b6fddc0337932e066b72d[m
+Merge: 364518b 1be73d0
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sun May 8 20:58:09 2022 +0900
+
+    Merge branch 'sperr7489:master' into master
+
+[33mcommit 1be73d0bef284cfc45a2fe10371ff77f8b2892c9[m
+Merge: 75421b8 a89304a
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Sun May 8 18:58:01 2022 +0900
+
+    Merge pull request #19 from sperr7489/qro
+    
+    Qro
+
+[33mcommit a89304adefc8faaaf527317179bc8477f661e365[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sun May 8 18:57:21 2022 +0900
+
+    create: 게시물 이미지 등록 처리까지 완료
+
+[33mcommit 364518b41a4e78c406f5034ffce55e2ecdd4f0bb[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Tue May 3 17:34:10 2022 +0900
+
+    UpdatE
+
+[33mcommit 75421b8763160da9a233db8297908b49e33a3847[m
+Merge: 2a57500 ac44e28
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 29 22:22:46 2022 +0900
+
+    Merge pull request #18 from BY-juun/master
+    
+    Feat PostContentForm
+
+[33mcommit ac44e28b9af084d1a3b4fa2ead19ecd28c274fc3[m
+Merge: d80dd10 2a57500
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 29 22:22:17 2022 +0900
+
+    Merge branch 'sperr7489:master' into master
+
+[33mcommit d80dd10b6d3cd0b4cb7e89766f8059304fab233b[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 29 22:21:55 2022 +0900
+
+    Feat PostContent
+
+[33mcommit 85f57ed8049a37135e3c8e73ac17294d5ba7b9a3[m
+Merge: a1b53c6 4588cf4
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 29 16:03:51 2022 +0900
+
+    Merge branch 'qro' of https://github.com/sperr7489/We-Other into qro
+
+[33mcommit 4588cf495e759168f885c423293881cc9f69d62d[m
+Merge: c183d9d 2a57500
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Fri Apr 29 16:03:41 2022 +0900
+
+    Merge pull request #16 from sperr7489/master
+    
+    ds
+
+[33mcommit a1b53c659a51df2e9d5b2bae93596840d58f4df4[m
+Merge: c183d9d 2a57500
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 29 16:02:11 2022 +0900
+
+    Merge branch 'master' of https://github.com/sperr7489/We-Other into qro
+
+[33mcommit 2a575000ee3cf1fc5c231f17eeb835d9e2734704[m
+Merge: c577e36 c91e71e
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu Apr 28 22:00:47 2022 +0900
+
+    Merge pull request #15 from BY-juun/master
+    
+    Feat GetPosts in SSR
+
+[33mcommit c91e71e323e179e778c6aaa3d6303e739be66939[m
+Merge: 9c7a147 c577e36
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Thu Apr 28 21:59:56 2022 +0900
+
+    Merge branch 'master' of https://github.com/BY-juun/We-Other
+
+[33mcommit 9c7a147768cea9038bf90d01d246fc40bbe48103[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Thu Apr 28 21:59:34 2022 +0900
+
+    Feat GetPosts in SSR
+
+[33mcommit c577e36964b6c6a6ccaefcce00c9e68793651a42[m
+Merge: 863ad86 b265a22
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Thu Apr 28 15:53:49 2022 +0900
+
+    Merge pull request #14 from BY-juun/master
+    
+    Feat Pick Dummy Post with ID
+
+[33mcommit b265a22aaa0afe3f8234c6565a1aff56eba2a36b[m
+Merge: 847e177 db375c4
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Thu Apr 28 15:52:50 2022 +0900
+
+    Merge branch 'master' of https://github.com/BY-juun/We-Other
+
+[33mcommit 847e1771759b4ca3d895cc7ef03f21fcebed4138[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Thu Apr 28 15:52:35 2022 +0900
+
+    Pick Dummy Post
+
+[33mcommit c183d9d5e3e53cbb0260f5340095326a17862802[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Wed Apr 20 21:46:01 2022 +0900
+
+    websocket
+
+[33mcommit 863ad86cf777d92e4191a0deb1f1ff07dd6956e4[m
+Merge: f185df8 db375c4
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Mon Apr 18 01:19:45 2022 +0900
+
+    Merge pull request #13 from BY-juun/master
+    
+    Add WritePostForm Page, Font-Family
+
+[33mcommit db375c4b7b7e6cf1745ebf752c32d0c76fb68146[m
+Merge: a48124b f185df8
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Mon Apr 18 01:19:14 2022 +0900
+
+    Merge branch 'sperr7489:master' into master
+
+[33mcommit a48124beb4e58a0f7e78247d8dc212057ebcbfee[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Mon Apr 18 01:18:54 2022 +0900
+
+    Add WritePost Page, FontFamily
+
+[33mcommit a0a11a94196352c2a63c6bdfbfa142d4fcbd9bf1[m
+Merge: 9724d2d f185df8
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Sun Apr 17 22:59:41 2022 +0900
+
+    Merge pull request #12 from sperr7489/master
+    
+    master => qro
+
+[33mcommit f185df8f327bf75bb32fee4a65109adbcf803ff4[m
+Merge: d82414e fb564d8
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sun Apr 17 18:59:44 2022 +0900
+
+    Merge pull request #11 from BY-juun/master
+    
+    Add PostWriteBtn, PostPage, PostsPage
+
+[33mcommit fb564d8248924f19a39852a64f6b4d3aea1e168f[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sun Apr 17 18:58:57 2022 +0900
+
+    Add PostWriteBtn, PostPage, PostsPage
+
+[33mcommit d82414e8fecf5286c113bbe03d87bb0b95a10f42[m
+Merge: 3d09491 e1c7a0f
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Apr 16 16:09:24 2022 +0900
+
+    Merge pull request #10 from BY-juun/master
+    
+    Fix LoginLogic, ADD PostCard CSS
+
+[33mcommit e1c7a0ff44fc853a6992d424ffe7595b73c85e92[m
+Merge: 61f2f62 3d09491
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Apr 16 16:08:53 2022 +0900
+
+    Merge branch 'sperr7489:master' into master
+
+[33mcommit 61f2f62d2764512a271d6eb7fafec2c9cf17899f[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 16 16:08:26 2022 +0900
+
+    Fix Login, Feat PostCard Css
+
+[33mcommit 3d0949188738464bad98c60ac1943324b3b8f49b[m
+Merge: 0d7ca46 9724d2d
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Sat Apr 16 15:22:41 2022 +0900
+
+    Merge pull request #9 from sperr7489/qro
+    
+    게시물 삭제는 해당 게시물을 작성한 사람만 지울 수 있도록
+
+[33mcommit 9724d2da06b7cdfc61f28dace1222b61e216ed2e[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sat Apr 16 15:22:13 2022 +0900
+
+    게시물 삭제는 해당 게시물을 작성한 사람만 지울 수 있도록
+
+[33mcommit 0d7ca466aea25e6a2c2a6e7ca6624edf6423ec18[m
+Merge: 396bfdd 8315f71
+Author: Code_Q_Tech <71534899+sperr7489@users.noreply.github.com>
+Date:   Sat Apr 16 15:10:58 2022 +0900
+
+    Merge pull request #8 from sperr7489/qro
+    
+    Qro
+
+[33mcommit 8315f71531736f4abe52b1b7f5b64807308819b7[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sat Apr 16 15:09:41 2022 +0900
+
+    게시물 등록 삭제 기능 구현
+
+[33mcommit 7870241aa6ed1ab0b5ba246e8d5f5f78daf76034[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sat Apr 16 14:25:50 2022 +0900
+
+    create: 게시물 입력에 대한 api
+
+[33mcommit 396bfdd45b39bbd0cfcf983c1fd7efefc0643ff3[m
+Merge: d5819bc 9e68cac
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Apr 16 02:57:14 2022 +0900
+
+    Merge pull request #7 from BY-juun/master
+    
+    Feat getUserInfoQuery
+
+[33mcommit 9e68cac94af841ddb8dc2f49eb4b52377cef8786[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 16 02:56:33 2022 +0900
+
+    Feat getUserInfoQuery
+
+[33mcommit f3f329d99cae0f2ca3ffc831fc67274520988f7b[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 16 02:56:21 2022 +0900
+
+    Feat getUserInfoQuery
+
+[33mcommit d5819bc33c9e4e27831ad2a12b49e8e4f6fdfa7a[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 23:35:13 2022 +0900
+
+     test
+
+[33mcommit 3459e7408df2242ae35842c21160b55ff69422e1[m
+Merge: efdbf42 6f5e3ad
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 15 23:13:59 2022 +0900
+
+    Merge pull request #6 from BY-juun/master
+    
+    Update Login Key
+
+[33mcommit 6f5e3ad9ebde72c1fe4ecc130dc3db5e4875dd59[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 15 23:13:23 2022 +0900
+
+    Update Login Key
+
+[33mcommit efdbf427375f5eed7cea3bf10dddd1a32a93d35e[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 23:10:22 2022 +0900
+
+     refreshtoken delete
+
+[33mcommit 0fbcb24bef193d97efad237b52e6344bf8d55b7d[m
+Merge: 8f2d606 0307240
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 15 22:15:04 2022 +0900
+
+    Merge pull request #5 from BY-juun/master
+    
+    Update PackagesVersion
+
+[33mcommit 03072407a468ee097bf78c6323ea4fefb3a9a1d1[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 15 22:14:11 2022 +0900
+
+    Fix Package Version
+
+[33mcommit 8f2d606416014d141382f14688960c303b1cce09[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 20:57:05 2022 +0900
+
+    Test
+
+[33mcommit 41d75108801b5529bd431ba6e83fb49d30c014a9[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 19:00:05 2022 +0900
+
+    refreshtoken 구현 완료
+
+[33mcommit f3d912f131f11735d1fd8c3c9506dbdbad988a4b[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 14:12:30 2022 +0900
+
+    gitignore
+
+[33mcommit a9ea2bc0d870c1d5bcd93455e4eb3a104c64961b[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 15 14:11:05 2022 +0900
+
+    ee
+
+[33mcommit 45da7f480646d5f8679e83de6693d9853ff0f770[m
+Author: BY-juun <neostgeart@gmail.com>
+Date:   Thu Apr 14 18:26:12 2022 +0900
+
+    Update Package Version
+
+[33mcommit 5d9a17d39bfcd68d2f125000dc439415fec62973[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Thu Apr 14 00:04:44 2022 +0900
+
+    accesstoken과 refreshtoken 검증
+
+[33mcommit 42a53cd54495d602f155954794be70e4ba4d4f2a[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Wed Apr 13 21:52:12 2022 +0900
+
+    로그인 기능 refreshtoken
+
+[33mcommit 60750c6fc5029b26c7a888e7c8b95cf8af5cf1c8[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Wed Apr 13 20:35:21 2022 +0900
+
+    로그인 기능 구현 완료
+
+[33mcommit 10ed5232d993843a5c7d1ea6f613e86581256f0d[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Tue Apr 12 19:01:36 2022 +0900
+
+     create : login 기능
+
+[33mcommit a226cff3377996e4fa268b3b9c0203c12d66303a[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Mon Apr 11 07:35:20 2022 +0900
+
+    access token + refresh token도 이용해보기
+
+[33mcommit 1d1744a22b7b905c9f3922cc447b1cf29874702e[m
+Merge: 9fb579d 590b8dc
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sun Apr 10 22:31:20 2022 +0900
+
+    Merge pull request #4 from BY-juun/master
+    
+    Update SignUp Object Key, Css
+
+[33mcommit 590b8dcb11a8de94d1265871ba11cabd30d36e6c[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sun Apr 10 22:30:41 2022 +0900
+
+    Update SignUp Object Key, Css
+
+[33mcommit 9fb579d70576725d6bd73a3c3607e85fbe8a460e[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Sun Apr 10 17:48:13 2022 +0900
+
+    create : 회원가입 기능 완료
+
+[33mcommit aea7444fb4618849d262ad0ca246637aa7b7e91b[m
+Merge: 24e6709 40ec130
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Sat Apr 9 21:12:19 2022 +0900
+
+    Merge pull request #3 from BY-juun/master
+    
+    Add Signup Login Mutation,API
+
+[33mcommit 40ec130f1f2ce4b38d9d1debdc0b19e8e5008a98[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 9 21:11:27 2022 +0900
+
+    Add Login,SignUp Mutation, API
+
+[33mcommit 05c54ac91b6fa992071f3c4f89e0a906e64fec3a[m
+Merge: 5db6427 24e6709
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 9 21:04:55 2022 +0900
+
+    Merge remote-tracking branch 'upstream/master'
+
+[33mcommit 24e6709f155fdc22ab28d46dfa0ccd9e7516ee34[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Sat Apr 9 18:04:51 2022 +0900
+
+     create 회원가입 db에 insert 구현
+
+[33mcommit 5db642734dde92ba97f67e73b1bd480c3d7caaf4[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Sat Apr 9 15:07:37 2022 +0900
+
+    Add SignupBLock
+
+[33mcommit 7f004cb3bcaf6e39aa26a0772d7b01f7a87df432[m
+Merge: 40d5227 71a56db
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 8 19:31:52 2022 +0900
+
+    Merge pull request #2 from BY-juun/master
+    
+    Home LayOut
+
+[33mcommit 71a56db24a3b343537cc4c023cf0a304ef0d6adb[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 8 19:31:18 2022 +0900
+
+    Home LayOut
+
+[33mcommit 40d52273d501ae177d998fe8a91148c65b5e5da8[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 8 19:03:15 2022 +0900
+
+    create : 서버 폴더 구조 정리
+
+[33mcommit 7e5adb8091284fbd9dde093ea364ac7df761acb7[m
+Author: sperr <sperr@ajou.ac.kr>
+Date:   Fri Apr 8 19:01:24 2022 +0900
+
+     create server directory 정리
+
+[33mcommit a9c2c77735e1aabf68e729cfb91faf983127ef61[m
+Merge: b7dbc2b b6ff039
+Author: By_juun <78716842+BY-juun@users.noreply.github.com>
+Date:   Fri Apr 8 17:45:10 2022 +0900
+
+    Merge pull request #1 from BY-juun/master
+    
+    SetUp
+
+[33mcommit b6ff039981eaa25d552e5795d4757c0adbf29767[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 8 17:44:22 2022 +0900
+
+    SetUp
+
+[33mcommit b7dbc2b534041347a27ae22c5e060ad6acdbe1d5[m
+Author: ByeongJun <neostgeart@ajou.ac.kr>
+Date:   Fri Apr 8 16:56:10 2022 +0900
+
+    Client Initial Commit
+
+[33mcommit e611e55877115085fee45cd1dd05e9989782f91d[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Fri Apr 8 16:48:19 2022 +0900
+
+    폴더 구조 변경
+
+[33mcommit 79811e59118d51bd65f6d6f300ae36b9df11d4c9[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Apr 7 15:01:28 2022 +0900
+
+    create : 기본 파일 구조 1step
+
+[33mcommit c890210df6eab536e7f0a1501b208d7c7d81ef0b[m
+Author: sperr7489 <sperr@ajou.ac.kr>
+Date:   Thu Apr 7 12:29:48 2022 +0900
+
+    create : 첫 리드미 제작

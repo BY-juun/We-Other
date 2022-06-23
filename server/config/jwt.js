@@ -36,9 +36,9 @@ exports.verifyAccessToken = async (req, res, next) => {
   const accessToken = req.headers["accesstoken"];
   try {
     // 클라이언트에서 토큰을 받아온다.
-
-    if (!accessToken)
+    if (!accessToken){
       return res.send(basicResponse(baseResponseStatus.TOKEN_NOT_EXIST));
+    }
     const access = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
 
     if (access) {
